@@ -33,9 +33,10 @@ class CellTest < Minitest::Test
   def test_it_can_be_fired_upon
     cell = Cell.new("B4")
 
-    cruiser = mock("Cruiser")
+    cruiser = mock("Cruiser", "3")
 
     cruiser.stubs(:health).returns(3)
+    cruiser.stubs(:fire_upon).returns(2)
 
     cell.place_ship(cruiser)
 
