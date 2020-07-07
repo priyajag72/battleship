@@ -35,7 +35,7 @@ class CellTest < Minitest::Test
 
     cruiser = mock("Cruiser")
 
-    cruiser.stubs(:health).returns(2)
+    cruiser.stubs(:health).returns(3)
 
     cell.place_ship(cruiser)
 
