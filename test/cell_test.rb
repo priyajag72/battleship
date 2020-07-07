@@ -4,6 +4,8 @@ require "mocha/minitest"
 require "./lib/cell"
 
 class CellTest < Minitest::Test
+  def setup
+  end
 
   def test_it_exists
     cell = Cell.new("B4")
@@ -15,6 +17,16 @@ class CellTest < Minitest::Test
     assert_equal "B4", cell.coordinate
     assert_nil cell.ship
     assert_equal true, cell.empty?
+  end
+
+  def test_it_can_place_a_ship
+    cell = Cell.new("B4")
+
+    crusier = mock("Cruiser")
+
+    cruiser.stubs(:place_ship).expects("Cruiser", 3)
+
+    cell.place_ship(cruiser)
   end
 
 end
