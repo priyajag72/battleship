@@ -11,7 +11,6 @@ class CellTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    skip
     cell = Cell.new("B4")
     assert_equal "B4", cell.coordinate
     assert_nil cell.ship

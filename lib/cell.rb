@@ -1,6 +1,7 @@
 class Cell
- #attr_reader
+ attr_reader  :coordinate
   def initialize(cell)
+
 
   end
 
