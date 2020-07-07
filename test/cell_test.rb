@@ -4,8 +4,6 @@ require "mocha/minitest"
 require "./lib/cell"
 
 class CellTest < Minitest::Test
-  def setup
-  end
 
   def test_it_exists
     cell = Cell.new("B4")
@@ -13,6 +11,7 @@ class CellTest < Minitest::Test
   end
 
   def test_it_has_attributes
+    skip
     cell = Cell.new("B4")
     assert_equal "B4", cell.coordinate
     assert_nil cell.ship
@@ -20,6 +19,7 @@ class CellTest < Minitest::Test
   end
 
   def test_it_can_place_a_ship
+    skip
     cell = Cell.new("B4")
 
     cruiser = mock("Cruiser")
