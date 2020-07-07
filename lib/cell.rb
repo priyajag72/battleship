@@ -8,6 +8,14 @@ class Cell
   end
 
   def empty?
-    @empty
+    if @ship == nil
+      @empty
+    else
+      @empty = false
+    end
+  end
+
+  def place_ship(cruiser)
+    @ship = cruiser
   end
 end
