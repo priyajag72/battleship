@@ -18,12 +18,11 @@ class CellTest < Minitest::Test
   end
 
   def test_it_can_place_a_ship
-    skip
     cell = Cell.new("B4")
 
     cruiser = mock("Cruiser")
 
-    cruiser.stubs(:place_ship).expects("Cruiser", 3)
+    cruiser.stubs(:place_ship).expects("Cruiser")
 
     cell.place_ship(cruiser)
     assert_equal cruiser, cell.ship
