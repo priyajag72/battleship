@@ -27,6 +27,7 @@ class CellTest < Minitest::Test
     cruiser.stubs(:place_ship).expects("Cruiser", 3)
 
     cell.place_ship(cruiser)
+    assert_equal cruiser, cell.ship
   end
 
 end

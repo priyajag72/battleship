@@ -1,7 +1,7 @@
 class Cell
  #attr_reader
-  #def initialize(*arg)
+  def initialize(cell)
 
-  #end
+  end
 
 end
