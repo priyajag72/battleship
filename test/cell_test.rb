@@ -22,12 +22,14 @@ class CellTest < Minitest::Test
   def test_it_can_place_a_ship
     cell = Cell.new("B4")
 
-    crusier = mock("Cruiser")
+    cruiser = mock("Cruiser")
 
     cruiser.stubs(:place_ship).expects("Cruiser", 3)
 
     cell.place_ship(cruiser)
     assert_equal cruiser, cell.ship
+
+    assert_equal false, cell.empty?
   end
 
 end
