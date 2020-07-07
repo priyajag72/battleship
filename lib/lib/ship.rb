@@ -1,4 +1,4 @@
-class Ship
+  class Ship
 
   attr_accessor :name, :length, :health
 
@@ -20,7 +20,15 @@ class Ship
   # end
 
   def hit
-    @health -= 1
+      @health -= 1
+  end
+
+  def sunk?
+    if health == 0
+      true
+    else
+      false
+    end
   end
 
 end
