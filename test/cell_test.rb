@@ -35,24 +35,22 @@ class CellTest < Minitest::Test
     skip
     cell = Cell.new("B4")
 
-    cruiser = mock("Cruiser", "3")
-
-    cruiser.stubs(:place_ship).returns(cruiser)
-    expect1 = cruiser.stubs(:health).returns(3)
-    cruiser.stubs(:fire_upon).returns(2)
+    cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
 
 
     assert_equal false, cell.fired_upon?
 
     cell.fire_upon
 
-    assert_equal expect1, cell.cruiser.health
+    assert_equal 2, cell.cruiser.health
 
     assert_equal true, cell.fired_upon?
 
   end
 
   def test_it_can_render
+    skip
     cell_1 = Cell.new("B4")
     assert_equal ".", cell_1.render
     cell_1.fire_upon
