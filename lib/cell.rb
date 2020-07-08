@@ -22,8 +22,10 @@ class Cell
   end
 
   def fire_upon
-    @ship.health -= 3
     @fired_upon = true
+    if @ship != nil
+      @ship.health -= 1
+    end
   end
 
   def fired_upon?
@@ -31,15 +33,14 @@ class Cell
   end
 
   def render(reveal=false)
-
     if @fired_upon == true && @ship == nil
       "M"
     elsif reveal == true && @ship != nil
       "S"
+    elsif @ship != nil && @ship.sunk?
+      "X"
     elsif @fired_upon == true && @ship != nil
       "H"
-    elsif @ship != nil && @ship.sunk
-      "X"
     else
       "."
     end
