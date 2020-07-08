@@ -22,9 +22,8 @@ class Cell
   end
 
   def fire_upon
-    @ship.health = @ship.health - 1
+    @ship.hit
     @fired_upon = true
-    require "pry"; binding.pry
   end
 
   def fired_upon?
