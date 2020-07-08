@@ -8,17 +8,6 @@
     @health = length
   end
 
-  # def health
-  #   # if hit occurs, length reduces by 1
-  #   # don't change length
-  #   # change health
-  #   # return 3
-  #   # call method hit
-  #   # return 2
-  #   # So... it looks like METHOD = hit
-  #   # And.... VARIABLE = health
-  # end
-
   def hit
       @health -= 1
   end
