@@ -22,7 +22,7 @@ class Cell
   end
 
   def fire_upon
-    @ship.hit
+    @ship.health -= 3
     @fired_upon = true
   end
 
@@ -38,7 +38,7 @@ class Cell
       "S"
     elsif @fired_upon == true && @ship != nil
       "H"
-    elsif @ship.sunk?
+    elsif @ship != nil && @ship.sunk
       "X"
     else
       "."
