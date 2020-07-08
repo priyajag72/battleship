@@ -7,6 +7,12 @@ class Board
   end
 
   def generate_cells
+    generate_local_coordinates.each do |coordinate|
+      @cells[coordinate] = Cell.new(coordinate)
+    end
+  end
+
+  def generate_local_coordinates
     numbers = ("1".."4").to_a
     letters = ("A".."D").to_a
 
@@ -16,10 +22,7 @@ class Board
         local_coordinates << letter+number
       end
     end
-
-    local_coordinates.each do |coordinate|
-      @cells[coordinate] = Cell.new(coordinate)
-    end
+    local_coordinates
   end
 
 end
