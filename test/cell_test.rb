@@ -36,7 +36,7 @@ class CellTest < Minitest::Test
 
     cruiser = mock("Cruiser", "3")
 
-    cruiser.stubs(:place_ship).returns("Cruiser", "3")
+    cruiser.stubs(:place_ship).returns(cruiser)
     expect1 = cruiser.stubs(:health).returns(3)
     cruiser.stubs(:fire_upon).returns(2)
 
@@ -56,6 +56,16 @@ class CellTest < Minitest::Test
     assert_equal ".", cell_1.render
     cell_1.fire_upon
     assert_equal "M", cell_1.render
+
+    cell_2 = Cell.new("C3")
+    cruiser = mock("Cruiser", "3")
+    cruiser.stubs(:place_ship).returns(cruiser)
+    cell_2.place_ship(cruiser)
+    assert_equal ".", cell_2.render
+    assert_equal "S", cell_2.render(true)
+    cell_2.fire_upon
+    assert_equal "H", cell_2.render
+
 
 
   end

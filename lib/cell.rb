@@ -30,7 +30,7 @@ class Cell
     @fired_upon
   end
 
-  def render
+  def render(reveal = true)
     if @fired_upon == true && @ship == nil
       "M"
     else
