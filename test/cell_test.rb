@@ -30,7 +30,7 @@ class CellTest < Minitest::Test
   end
 
   def test_it_can_be_fired_upon
-    skip
+    # skip
     cell = Cell.new("B4")
 
     cruiser = Ship.new("Cruiser", 3)
@@ -41,7 +41,7 @@ class CellTest < Minitest::Test
 
     cell.fire_upon
 
-    assert_equal 2, cell.cruiser.health
+    assert_equal 2, cell.ship.health
 
     assert_equal true, cell.fired_upon?
 

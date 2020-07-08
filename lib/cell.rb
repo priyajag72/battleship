@@ -17,13 +17,14 @@ class Cell
     end
   end
 
-  def place_ship(cruiser)
-    @ship = cruiser
+  def place_ship(ship)
+    @ship = ship
   end
 
   def fire_upon
-    # @ship.health -= 1
+    @ship.health = @ship.health - 1
     @fired_upon = true
+    require "pry"; binding.pry
   end
 
   def fired_upon?
