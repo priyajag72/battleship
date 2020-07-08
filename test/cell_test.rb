@@ -66,6 +66,12 @@ class CellTest < Minitest::Test
     cell_2.fire_upon
     assert_equal "H", cell_2.render
 
+    cruiser.stubs(:hit)
+    cruiser.stubs(:hit)
+    cruiser.stubs(:sunk?).returns(true)
+
+    assert_equal "X", cell_2.render
+
 
 
   end
