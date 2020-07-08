@@ -14,7 +14,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    skip
+    # skip
     expected = {
      "A1" => Cell.new("A1"),
      "A2" => Cell.new("A2"),
