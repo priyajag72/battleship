@@ -40,7 +40,7 @@ class CellTest < Minitest::Test
     assert_equal false, cell.fired_upon?
 
     cell.fire_upon
-  
+
     assert_equal 2, cell.ship.health
 
     assert_equal true, cell.fired_upon?
@@ -48,15 +48,13 @@ class CellTest < Minitest::Test
   end
 
   def test_it_can_render
-    skip
     cell_1 = Cell.new("B4")
     assert_equal ".", cell_1.render
     cell_1.fire_upon
     assert_equal "M", cell_1.render
 
     cell_2 = Cell.new("C3")
-    cruiser = mock("Cruiser", "3")
-    cruiser.stubs(:place_ship).returns(cruiser)
+    
     cell_2.place_ship(cruiser)
     assert_equal ".", cell_2.render
     assert_equal "S", cell_2.render(true)
