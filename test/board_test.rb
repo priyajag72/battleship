@@ -24,6 +24,7 @@ class BoardTest < Minitest::Test
 
 
   def test_it_can_place_a_ship
+    # skip
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
@@ -47,8 +48,9 @@ class BoardTest < Minitest::Test
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
-    board.place(cruiser, ["A1", "A2", "A3"])
     submarine = Ship.new("Submarine", 2)
+    assert_equal true, board.valid_placement?(cruiser, ["A1", "A2", "A3"])
+    board.place(cruiser, ["A1", "A2", "A3"])
     assert_equal false, board.valid_placement?(submarine, ["A1", "B2"])
   end
 
@@ -80,6 +82,7 @@ class BoardTest < Minitest::Test
 
 
   def test_it_has_equal_quantity_of_coordinates_to_length_of_ship
+    # skip
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
@@ -92,7 +95,6 @@ class BoardTest < Minitest::Test
 
 
   def test_it_has_consecutive_coordinates_to_place_ship
-    skip
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
@@ -113,7 +115,6 @@ class BoardTest < Minitest::Test
 
 
   def test_it_cannot_place_diagonal_coordinates
-    skip
     # skip
     board = Board.new
     board.generate_cells
@@ -127,7 +128,7 @@ class BoardTest < Minitest::Test
 
 
   def test_correct_placement_of_ships_in_coordinates
-    skip
+    # skip
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)

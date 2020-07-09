@@ -54,9 +54,14 @@ class Board
     coordinates_exist_on_board.all?(true)
   end
 
+#helper method - write test
+  def valid_coordinates_suite(ship)
+    valid_multi_coordinates?(@coordinates) && ship.length == @coordinates.count && placement_consecutive?
+  end
+
   def valid_placement?(ship, coordinates)
     @coordinates = coordinates
-    ship_overlap(ship, coordinates) && valid_multi_coordinates?(coordinates) && ship.length == coordinates.count && placement_consecutive?
+    valid_coordinates_suite(ship) && ship_overlap(ship, coordinates)
   end
 
   def placement_consecutive?
