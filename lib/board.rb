@@ -31,7 +31,7 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    # Ship Place Helper Method
+    # Ship Overlap Helper Method
     ship_overlap(ship, coordinates)
 
   end
@@ -45,6 +45,10 @@ class Board
     @cells[coordinate] == nil
     end
     cell_availability.all?(true)
+  end
+
+  def valid_coordinate?(coordinate)
+    generate_local_coordinates.include?(coordinate)
   end
 
 end
