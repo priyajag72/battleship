@@ -30,4 +30,6 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_coordinate?("A22")
   end
 
+
+
 end
