@@ -94,7 +94,7 @@ class Board
     if convert_coord_alpha[0] == "A" && convert_coord_alpha[1] == "B"
       convert_coord_alpha[2] == "C" && convert_coord_int.sort.each_cons(3).all? { |num1,num2,num3| (num1 == num2) && (num2 == num3) }
     elsif convert_coord_alpha[0] == "B" && convert_coord_alpha[1] == "C"
-      convert_coord_alpha[1] == "D" && convert_coord_int.sort.each_cons(3).all? { |num1,num2,num3| (num1 == num2) && (num2 == num3) }
+      convert_coord_alpha[2] == "D" && convert_coord_int.sort.each_cons(3).all? { |num1,num2,num3| (num1 == num2) && (num2 == num3) }
     else
       false
     end
