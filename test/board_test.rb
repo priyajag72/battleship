@@ -5,6 +5,12 @@ require "./lib/board"
 
 class BoardTest < Minitest::Test
 
+  def setup
+    @board = Board.new
+    @board.generate_cells
+    @cruiser = Ship.new("Cruiser", 3)
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+  end
 
   def test_it_exists
     board = Board.new
@@ -136,6 +142,15 @@ class BoardTest < Minitest::Test
 
     assert_equal true, board.valid_placement?(submarine, ["A1", "A2"])
     assert_equal true, board.valid_placement?(cruiser, ["B1", "C1", "D1"])
+  end
+
+  def test_it_can_rend_a_board
+    expected1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+
+    expected2 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+    
+    assert_equal expected1, @board.render
+    assert_equal expected2, @board.render(true)
   end
 
 end
