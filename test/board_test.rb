@@ -1,6 +1,6 @@
 require "minitest/autorun"
-require "minitest/pride"
-require "mocha/minitest"
+require "minitest/nyan_cat"
+# require "mocha/minitest"
 require "./lib/ship"
 require "./lib/cell"
 require "./lib/board"
@@ -13,7 +13,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_has_attributes
-
     board = Board.new
     board.generate_cells
 
@@ -22,4 +21,12 @@ class BoardTest < Minitest::Test
     assert_instance_of Cell, board.cells["A4"]
   end
 
+  def test_it_has_equal_quantity_of_coordinates_to_length_of_ship
+    board = Board.new
+    board.generate_cells
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    assert_equal false, board.valid_placement?(cruiser, ["A1", "A2"])
+    assert_equal false, board.valid_placement?(submarine, ["A2", "A3", "A4"])
+  end
 end
