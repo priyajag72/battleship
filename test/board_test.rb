@@ -38,6 +38,7 @@ class BoardTest < Minitest::Test
     submarine = Ship.new("Submarine", 2)
     assert_equal true, board.valid_multi_coordinates?(["A1", "A2", "A3"])
     assert_equal false, board.valid_multi_coordinates?(["A3", "A4", "A5"])
+    assert_equal false, board.valid_multi_coordinates?(["A3", "A4", "A5"])
   end
 
   def test_it_has_equal_quantity_of_coordinates_to_length_of_ship
@@ -57,37 +58,16 @@ class BoardTest < Minitest::Test
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
 
-    # CAN go horizontal for length 2
     assert_equal true, board.valid_placement?(submarine, ["A1", "A2"])
-
-    # CAN go horizontal for length 3
     assert_equal true, board.valid_placement?(cruiser, ["A1", "A2", "A3"])
-
-    # CAN go vertical for length 2
     assert_equal true, board.valid_placement?(submarine, ["A1", "B1"])
-
-    # CAN go vertical for length 3
     assert_equal true, board.valid_placement?(cruiser, ["A1", "B1", "C1"])
-
-    # can't skip 1 horizontally
     assert_equal false, board.valid_placement?(cruiser, ["A1", "A2", "A4"])
-
-    # can't skip 1 vertically
     assert_equal false, board.valid_placement?(submarine, ["A1", "C1"])
-
-    # can't go backwards horizontally
     assert_equal false, board.valid_placement?(cruiser, ["A3", "A2", "A1"])
-
-    # can't go backwards vertically
     assert_equal false, board.valid_placement?(submarine, ["C1", "B1"])
-
-    # Further edge case testing (off board - vertical)
     assert_equal false, board.valid_placement?(submarine, ["D1", "E1"])
-
-    # Further edge case testing (off board - horizontal)
     assert_equal false, board.valid_placement?(submarine, ["A4", "A5"])
-
-    # Further edge case testing (off board)
     assert_equal false, board.valid_placement?(cruiser, ["A1", "B2"])
 
   end

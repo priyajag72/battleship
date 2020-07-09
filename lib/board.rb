@@ -1,6 +1,9 @@
 require_relative './cell'
+
 class Board
+
  attr_reader  :cells
+
   def initialize
     @cells = Hash.new
   end
@@ -29,29 +32,28 @@ class Board
   end
 
   def valid_multi_coordinates?(coordinates)
-    x = coordinates.map do |coord|
+    coordinates_exist_on_board = coordinates.map do |coord|
       valid_coordinate?(coord)
     end
-
-    x.all?(true)
+    coordinates_exist_on_board.all?(true)
   end
 
   def valid_placement?(ship, coordinates)
-    valid_multi_coordinates?(coordinates) && ship.length == coordinates.count && placement_consecutive?(coordinates)
+    @coordinates = coordinates
+    valid_multi_coordinates?(coordinates) && ship.length == coordinates.count && placement_consecutive?
   end
 
-  def placement_consecutive?(coordinates)
-    @coordinates = coordinates
-    if coordinates.count == 2
-      helper_two_length_consecutive_integers || helper_two_length_consecutive_letters
+  def placement_consecutive?
+    if @coordinates.count == 2
+      valid_horizontal_placement_length_two? || valid_vertical_placement_length_two?
     elsif @coordinates.count == 3
-      helper_three_length_consecutive_integers || helper_three_length_consecutive_letters
+      valid_horizontal_placement_length_three? || valid_vertical_placement_length_three?
     else
       p "Ooops"
     end
   end
 
-  def convert_coord(coordinates)
+  def convert_coord_int
     integer_coord = []
     integer_coord = @coordinates.map do |coord|
       coord.gsub(/\D/, "").to_i
@@ -59,7 +61,7 @@ class Board
     integer_coord
   end
 
-  def convert_coord_alpha(coordinates)
+  def convert_coord_alpha
     alpha_coord = []
     alpha_coord = @coordinates.map do |coord|
       coord.gsub(/\d/, "")
@@ -67,40 +69,32 @@ class Board
     alpha_coord
   end
 
-# helper horizontal 2
-  def helper_two_length_consecutive_integers
-    convert_coord_alpha(@coordinates).sort.each_cons(2).all? { |a,b| a == b } && convert_coord(@coordinates).each_cons(2).all? { |x,y| y == x + 1 }
+  def valid_horizontal_placement_length_two?
+    convert_coord_alpha.sort.each_cons(2).all? { |alpha1,alpha2| alpha1 == alpha2 } && convert_coord_int.each_cons(2).all? { |num1,num2| num1.next == num2 }
   end
 
-# helper horizontal 3
-  def helper_three_length_consecutive_integers
-    convert_coord_alpha(@coordinates).sort.each_cons(3).all? { |a,b,c| (a == b) && (b == c) } &&
-    convert_coord(@coordinates).each_cons(3).all? { |x,y,z| (y == x + 1) && (z == y + 1) }
+  def valid_horizontal_placement_length_three?
+    convert_coord_alpha.sort.each_cons(3).all? { |alpha1,alpha2,alpha3| (alpha1 == alpha2) && (alpha2 == alpha3) } &&
+    convert_coord_int.each_cons(3).all? { |num1,num2,num3| (num1.next == num2) && (num2.next == num3) }
   end
 
-# helper vertical 2
-  def helper_two_length_consecutive_letters
-    if convert_coord_alpha(@coordinates)[0].downcase == "a"
-      convert_coord_alpha(@coordintes)[1].downcase == "b" && convert_coord(@coordinates).sort.each_cons(2).all? { |x,y| x == y }
-
-    elsif convert_coord_alpha(@coordinates)[0].downcase == "b"
-      convert_coord_alpha(@coordintes)[1].downcase == "c" && convert_coord(@coordinates).sort.each_cons(2).all? { |x,y| x == y }
-
-    elsif convert_coord_alpha(@coordinates)[0].downcase == "c"
-      convert_coord_alpha(@coordintes)[1].downcase == "d" && convert_coord(@coordinates).sort.each_cons(2).all? { |x,y| x == y }
+  def valid_vertical_placement_length_two?
+    if convert_coord_alpha[0] == "A"
+      convert_coord_alpha[1] == "B" && convert_coord_int.sort.each_cons(2).all? { |num1,num2| num1 == num2 }
+    elsif convert_coord_alpha[0] == "A"
+      convert_coord_alpha[1] == "C" && convert_coord_int.sort.each_cons(2).all? { |num1,num2| num1 == num2 }
+    elsif convert_coord_alpha[0] == "C"
+      convert_coord_alpha[1] == "D" && convert_coord_int.sort.each_cons(2).all? { |num1,num2| num1 == num2 }
     else
       false
     end
   end
 
-# helper vertical 3
-  def helper_three_length_consecutive_letters
-    if convert_coord_alpha(@coordinates)[0].downcase == "a" && convert_coord_alpha(@coordintes)[1].downcase == "b"
-      convert_coord_alpha(@coordintes)[2].downcase == "c" && convert_coord(@coordinates).sort.each_cons(3).all? { |x,y,z| (x == y) && (y == z) }
-
-    elsif convert_coord_alpha(@coordinates)[0].downcase == "b" && convert_coord_alpha(@coordintes)[1].downcase == "c"
-      convert_coord_alpha(@coordintes)[1].downcase == "d" && convert_coord(@coordinates).sort.each_cons(3).all? { |x,y,z| (x == y) && (y == z) }
-
+  def valid_vertical_placement_length_three?
+    if convert_coord_alpha[0] == "A" && convert_coord_alpha[1] == "B"
+      convert_coord_alpha[2] == "C" && convert_coord_int.sort.each_cons(3).all? { |num1,num2,num3| (num1 == num2) && (num2 == num3) }
+    elsif convert_coord_alpha[0] == "B" && convert_coord_alpha[1] == "C"
+      convert_coord_alpha[1] == "D" && convert_coord_int.sort.each_cons(3).all? { |num1,num2,num3| (num1 == num2) && (num2 == num3) }
     else
       false
     end
