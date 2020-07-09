@@ -29,4 +29,36 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_placement?(cruiser, ["A1", "A2"])
     assert_equal false, board.valid_placement?(submarine, ["A2", "A3", "A4"])
   end
+
+  def test_it_has_consecutive_coordinates_to_place_ship
+    board = Board.new
+    board.generate_cells
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+
+    # CAN go horizontal for length 2
+    assert_equal true, board.valid_placement?(submarine, ["A1", "A2"])
+
+    # CAN go horizontal for length 3
+    assert_equal true, board.valid_placement?(cruiser, ["A1", "A2", "A3"])
+
+    # CAN go vertical for length 2
+    assert_equal true, board.valid_placement?(submarine, ["A1", "B1"])
+
+    # CAN go vertical for length 3
+    assert_equal true, board.valid_placement?(cruiser, ["A1", "B1", "C1"])
+
+    # can't skip 1 horizontally
+    assert_equal false, board.valid_placement?(cruiser, ["A1", "A2", "A4"])
+
+    # # can't skip 1 vertically
+    assert_equal false, board.valid_placement?(submarine, ["A1", "C1"])
+    #
+    # # can't go backwards horizontally
+    assert_equal false, board.valid_placement?(cruiser, ["A3", "A2", "A1"])
+    #
+    # # can't go backwards vertically
+    assert_equal false, board.valid_placement?(submarine, ["C1", "B1"])
+
+  end
 end
