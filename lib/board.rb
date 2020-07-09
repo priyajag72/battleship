@@ -24,4 +24,10 @@ class Board
     local_coordinates
   end
 
+  def place(ship_param, coordinates)
+    coordinates.each do |coordinate|
+      @cells[coordinate].place_ship(ship_param)
+    end
+  end
+
 end
