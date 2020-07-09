@@ -15,7 +15,6 @@ class Board
   def generate_local_coordinates
     numbers = ("1".."4").to_a
     letters = ("A".."D").to_a
-
     local_coordinates = []
     letters.each do |letter|
       numbers.each do |number|
