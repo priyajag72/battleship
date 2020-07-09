@@ -30,6 +30,21 @@ class Board
     end
   end
 
+  def valid_placement?(ship, coordinates)
+    # Ship Place Helper Method
+    ship_overlap(ship, coordinates)
 
+  end
+
+  def ship_overlap(ship, coordinates)
+    desired_coordinates = Hash.new
+    coordinates.each do |coordinate|
+      desired_coordinates[coordinate] = ship
+    end
+    cell_availability = desired_coordinates.map do |coordinate, ship|
+    @cells[coordinate] == nil
+    end
+    cell_availability.all?(true)
+  end
 
 end
