@@ -147,8 +147,8 @@ class BoardTest < Minitest::Test
   def test_it_can_rend_a_board
     expected1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
 
-    expected2 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
-    
+    expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+
     assert_equal expected1, @board.render
     assert_equal expected2, @board.render(true)
   end

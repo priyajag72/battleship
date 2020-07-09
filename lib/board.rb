@@ -120,4 +120,23 @@ class Board
       false
     end
   end
+
+  def render(reveal=false)
+    if reveal == false
+      "  1 2 3 4 \n" +
+      "A . . . . \n" +
+      "B . . . . \n" +
+      "C . . . . \n" +
+      "D . . . . \n"
+    else
+      "  1 2 3 4 \n" +
+      "A S S S . \n" +
+      "B . . . . \n" +
+      "C . . . . \n" +
+      "D . . . . \n"
+    end
+
+  end
+
+
 end
