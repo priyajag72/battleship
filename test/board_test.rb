@@ -1,8 +1,7 @@
 require "minitest/autorun"
-require "minitest/pride"
+require "minitest/nyan_cat"
 # require "mocha/minitest"
 require "./lib/ship"
-require "./lib/cell"
 require "./lib/board"
 
 class BoardTest < Minitest::Test
@@ -14,7 +13,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    # skip
     board = Board.new
     board.generate_cells
 
@@ -24,7 +22,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_has_valid_coordinates
-    # skip
     board = Board.new
     board.generate_cells
     assert_equal true, board.valid_coordinate?("A4")
@@ -102,4 +99,5 @@ class BoardTest < Minitest::Test
     assert_equal true, board.valid_placement?(submarine, ["A1", "A2"])
     assert_equal true, board.valid_placement?(cruiser, ["B1", "C1", "D1"])
   end
+
 end
