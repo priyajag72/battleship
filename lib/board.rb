@@ -3,7 +3,6 @@ class Board
  attr_reader  :cells
   def initialize
     @cells = Hash.new
-
   end
 
   def generate_cells
@@ -25,13 +24,25 @@ class Board
     local_coordinates
   end
 
+  def valid_coordinate?(coordinate)
+     generate_local_coordinates.include?(coordinate)
+  end
+
+  def valid_multi_coordinates?(coordinates)
+    x = coordinates.map do |coord|
+      valid_coordinate?(coord)
+    end
+
+    x.all?(true)
+  end
+
   def valid_placement?(ship, coordinates)
-    ship.length == coordinates.count && placement_consecutive?(coordinates)
+    valid_multi_coordinates?(coordinates) && ship.length == coordinates.count && placement_consecutive?(coordinates)
   end
 
   def placement_consecutive?(coordinates)
     @coordinates = coordinates
-    if @coordinates.count == 2
+    if coordinates.count == 2
       helper_two_length_consecutive_integers || helper_two_length_consecutive_letters
     elsif @coordinates.count == 3
       helper_three_length_consecutive_integers || helper_three_length_consecutive_letters
@@ -71,12 +82,14 @@ class Board
   def helper_two_length_consecutive_letters
     if convert_coord_alpha(@coordinates)[0].downcase == "a"
       convert_coord_alpha(@coordintes)[1].downcase == "b" && convert_coord(@coordinates).sort.each_cons(2).all? { |x,y| x == y }
+
     elsif convert_coord_alpha(@coordinates)[0].downcase == "b"
       convert_coord_alpha(@coordintes)[1].downcase == "c" && convert_coord(@coordinates).sort.each_cons(2).all? { |x,y| x == y }
+
     elsif convert_coord_alpha(@coordinates)[0].downcase == "c"
       convert_coord_alpha(@coordintes)[1].downcase == "d" && convert_coord(@coordinates).sort.each_cons(2).all? { |x,y| x == y }
     else
-      p "Oops vertical 2"
+      false
     end
   end
 
@@ -84,10 +97,12 @@ class Board
   def helper_three_length_consecutive_letters
     if convert_coord_alpha(@coordinates)[0].downcase == "a" && convert_coord_alpha(@coordintes)[1].downcase == "b"
       convert_coord_alpha(@coordintes)[2].downcase == "c" && convert_coord(@coordinates).sort.each_cons(3).all? { |x,y,z| (x == y) && (y == z) }
+
     elsif convert_coord_alpha(@coordinates)[0].downcase == "b" && convert_coord_alpha(@coordintes)[1].downcase == "c"
       convert_coord_alpha(@coordintes)[1].downcase == "d" && convert_coord(@coordinates).sort.each_cons(3).all? { |x,y,z| (x == y) && (y == z) }
+
     else
-      helper_three_length_consecutive_integers
+      false
     end
   end
 
