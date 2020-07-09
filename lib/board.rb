@@ -38,7 +38,7 @@ class Board
       desired_coordinates[coordinate] = ship
     end
     cell_availability = desired_coordinates.map do |coordinate, ship|
-    @cells[coordinate] == nil
+    @cells[coordinate].ship == nil
     end
     cell_availability.all?(true)
   end
@@ -56,8 +56,7 @@ class Board
 
   def valid_placement?(ship, coordinates)
     @coordinates = coordinates
-    valid_multi_coordinates?(coordinates) && ship.length == coordinates.count && placement_consecutive?
-    ship_overlap(ship, coordinates)
+    ship_overlap(ship, coordinates) && valid_multi_coordinates?(coordinates) && ship.length == coordinates.count && placement_consecutive?
   end
 
   def placement_consecutive?
