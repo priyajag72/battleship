@@ -41,7 +41,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_has_equal_quantity_of_coordinates_to_length_of_ship
-    skip
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
@@ -53,7 +52,6 @@ class BoardTest < Minitest::Test
 
 
   def test_it_has_consecutive_coordinates_to_place_ship
-    skip
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
@@ -89,8 +87,8 @@ class BoardTest < Minitest::Test
     # Further edge case testing (off board - horizontal)
     assert_equal false, board.valid_placement?(submarine, ["A4", "A5"])
 
-    # # Further edge case testing (off board)
-    # assert_equal false, board.valid_placement?(cruiser, ["A1", "B2"])
+    # Further edge case testing (off board)
+    assert_equal false, board.valid_placement?(cruiser, ["A1", "B2"])
 
   end
 end
