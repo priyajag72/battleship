@@ -25,4 +25,9 @@ class Board
     local_coordinates
   end
 
+  def valid_coordinate?(coordinate)
+    generate_local_coordinates.include?(coordinate)
+  end
+
+
 end
