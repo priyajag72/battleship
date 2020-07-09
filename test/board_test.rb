@@ -40,4 +40,14 @@ class BoardTest < Minitest::Test
     assert_equal true, expected
   end
 
+  #Arique Helper Method for valid_placement?
+  def test_it_can_avoid_ship_overlap_placement
+    board = Board.new
+    board.generate_cells
+    cruiser = Ship.new("Cruiser", 3)
+    board.place(cruiser, ["A1", "A2", "A3"])
+    submarine = Ship.new("Submarine", 2)
+    assert_equal false, board.valid_placement?(submarine, ["A1", "B2"])
+  end
+
 end
