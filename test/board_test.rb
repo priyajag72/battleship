@@ -153,4 +153,26 @@ class BoardTest < Minitest::Test
     assert_equal expected2, @board.render(true)
   end
 
+  def test_validated_placement
+    board = Board.new
+    board.generate_cells
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+
+    assert_equal true, board.valid_placement?(cruiser, ["A1", "A2", "A3"])
+    board.validated_placement
+    assert_equal cruiser, board.cells["A1"].ship
+    assert_equal cruiser, board.cells["A2"].ship
+    assert_equal cruiser, board.cells["A3"].ship
+
+
+    assert_equal true, board.valid_placement?(submarine, ["B1", "B2"])
+    board.validated_placement
+    assert_equal submarine, board.cells["B1"].ship
+    assert_equal submarine, board.cells["B2"].ship
+
+    #a helper method that tests to see if a valid_placement is true and then proceeds to automatically place the ship in question.
+
+  end
+
 end

@@ -31,7 +31,7 @@ class Player
           puts "> "
         end
 
-        user_ship_coords = gets.chomp.split(/ /)
+        user_ship_coords = gets.chomp.upcase.split(/ /)
         # Consider loop for user error
         if @board.valid_placement?(ship, user_ship_coords) == true
           @board.place(ship, user_ship_coords)
@@ -39,7 +39,7 @@ class Player
           loop do
             puts "Those are invalid coordinates. Please try again:"
             puts "> "
-            user_ship_coords = gets.chomp.split(/ /)
+            user_ship_coords = gets.chomp.upcase.split(/ /)
 
             if @board.valid_placement?(ship, user_ship_coords) == true
               @board.place(ship, user_ship_coords)
@@ -63,7 +63,6 @@ class Player
       ships_placed_count
     end
     ships_count == ships_on_board
-    # require "pry"; binding.pry
   end
 
 end

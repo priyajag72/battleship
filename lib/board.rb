@@ -61,7 +61,14 @@ class Board
 
   def valid_placement?(ship, coordinates)
     @coordinates = coordinates
-    valid_coordinates_suite(ship) && ship_overlap(ship, coordinates)
+    @ship = ship
+    valid_coordinates_suite(ship) && ship_overlap(ship, @coordinates)
+  end
+
+  def validated_placement
+    if (valid_coordinates_suite(@ship) && ship_overlap(@ship, @coordinates)) == true
+      place(@ship, @coordinates)
+    end
   end
 
   def placement_consecutive?
