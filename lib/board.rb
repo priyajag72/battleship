@@ -129,39 +129,11 @@ class Board
     end
 
     render_hash_accessible.each do |letter, cell_array|
-      # "\n"
       print "#{letter}"
       cell_array.each { |rendered_cell| print " #{rendered_cell}"}
       puts " "
-      # "\n"
 
     end
-    require "pry"; binding.pry
-    # print "A" + "#{}"
-    # print "B"
-    # print "C"
-    # print "D"
-
-
-
-
-    #
-    # generate_local_coordinates
-    # @cells.each do |cell|
-    #   x = cell[0].split(//)
-    #   puts "#{x[0]}"
-    #   # i = 0
-      # @cells[generate_local_coordinates][i += 1]
-        # @cells.keys.each
-      # require "pry"; binding.pry
-    # end
-
-      #
-      # "  1 2 3 4 \n" +
-      # "A #{@cells["A1"].render(reveal)} #{@cells["A2"].render(reveal)} #{@cells["A3"].render(reveal)} #{@cells["A4"].render(reveal)} \n" +
-      # "B #{@cells["B1"].render(reveal)} #{@cells["B2"].render(reveal)} #{@cells["B3"].render(reveal)} #{@cells["B4"].render(reveal)} \n" +
-      # "C #{@cells["C1"].render(reveal)} #{@cells["C2"].render(reveal)} #{@cells["C3"].render(reveal)} #{@cells["C4"].render(reveal)} \n" +
-      # "D #{@cells["D1"].render(reveal)} #{@cells["D2"].render(reveal)} #{@cells["D3"].render(reveal)} #{@cells["D4"].render(reveal)} \n"
   end
 
 
