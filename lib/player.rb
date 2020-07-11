@@ -8,5 +8,8 @@ class Player
     @ships = []
   end
 
+  def add_ship(ship)
+  end
+
 
 end
