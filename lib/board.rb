@@ -39,7 +39,7 @@ class Board
       desired_coordinates[coordinate] = ship
     end
     cell_availability = desired_coordinates.map do |coordinate, ship|
-    @cells[coordinate] == nil
+    @cells[coordinate].ship == nil
     end
     cell_availability.all?(true)
   end
@@ -55,10 +55,14 @@ class Board
     coordinates_exist_on_board.all?(true)
   end
 
+#helper method - write test
+  def valid_coordinates_suite(ship)
+    valid_multi_coordinates?(@coordinates) && ship.length == @coordinates.count && placement_consecutive?
+  end
+
   def valid_placement?(ship, coordinates)
     @coordinates = coordinates
-    valid_multi_coordinates?(coordinates) && ship.length == coordinates.count && placement_consecutive?
-    ship_overlap(ship, coordinates)
+    valid_coordinates_suite(ship) && ship_overlap(ship, coordinates)
   end
 
   def placement_consecutive?
@@ -117,4 +121,23 @@ class Board
       false
     end
   end
+
+  def render(reveal=false)
+    if reveal == false
+      "  1 2 3 4 \n" +
+      "A . . . . \n" +
+      "B . . . . \n" +
+      "C . . . . \n" +
+      "D . . . . \n"
+    else
+      "  1 2 3 4 \n" +
+      "A S S S . \n" +
+      "B . . . . \n" +
+      "C . . . . \n" +
+      "D . . . . \n"
+    end
+
+  end
+
+
 end
