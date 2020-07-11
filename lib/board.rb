@@ -5,10 +5,11 @@ class Board
  attr_reader  :cells
 
   def initialize
-    @cells = Hash.new
+    generate_cells
   end
 
   def generate_cells
+    @cells = Hash.new
     generate_local_coordinates.each do |coordinate|
       @cells[coordinate] = Cell.new(coordinate)
     end
