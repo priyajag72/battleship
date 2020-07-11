@@ -20,8 +20,7 @@ class PlayerTest < Minitest::Test
   end
 
   def test_it_exists
-    player = Player.new
-    assert_instance_of Player, player
+    assert_instance_of Player, @player1
   end
 
   def test_it_has_attributes
