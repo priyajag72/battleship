@@ -24,8 +24,7 @@ class PlayerTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    # Characteristic 1: user v computer
-    # Characteristic 2: access to a board (preferably, a board that is dynamic)
+    assert_equal :auto, @player1.type
   end
 
 end
