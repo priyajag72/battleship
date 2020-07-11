@@ -27,6 +27,7 @@ class PlayerTest < Minitest::Test
     assert_equal :auto, @player1.type
     assert_equal :user, @player2.type
     assert_equal @board1, @player1.board
+    assert_equal @board2, @player2.board
   end
 
 end
