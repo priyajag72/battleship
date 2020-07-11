@@ -28,6 +28,11 @@ class PlayerTest < Minitest::Test
     assert_equal :user, @player2.type
     assert_equal @board1, @player1.board
     assert_equal @board2, @player2.board
+    assert_equal [], @player1.ships 
   end
+
+  # def test_player_can_place_ship
+  #   assert_equal , @player1.ship_setup
+  # end
 
 end

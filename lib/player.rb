@@ -6,4 +6,6 @@ class Player
     @type = type
     @board = board
   end
+
+  
 end
