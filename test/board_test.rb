@@ -1,15 +1,21 @@
 require "minitest/autorun"
-require "minitest/nyan_cat"
+require "minitest/pride"
 require "./lib/ship"
 require "./lib/board"
 
 class BoardTest < Minitest::Test
 
+  def setup
+    @board = Board.new
+    @board.generate_cells
+    @cruiser = Ship.new("Cruiser", 3)
+  end
+
   def test_it_exists
-    # skip
     board = Board.new
     assert_instance_of Board, board
   end
+
 
   def test_it_has_attributes
     board = Board.new
@@ -21,7 +27,9 @@ class BoardTest < Minitest::Test
   end
 
 
+
   def test_it_can_place_a_ship
+    # skip
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
@@ -39,15 +47,18 @@ class BoardTest < Minitest::Test
     assert_equal true, expected
   end
 
- 
+
+
   def test_it_can_avoid_ship_overlap_placement
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
-    board.place(cruiser, ["A1", "A2", "A3"])
     submarine = Ship.new("Submarine", 2)
+    assert_equal true, board.valid_placement?(cruiser, ["A1", "A2", "A3"])
+    board.place(cruiser, ["A1", "A2", "A3"])
     assert_equal false, board.valid_placement?(submarine, ["A1", "B2"])
   end
+
 
   def test_it_has_valid_coordinates
     board = Board.new
@@ -59,8 +70,8 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_coordinate?("A22")
   end
 
+
   def test_it_can_check_multiple_coordinates
-    # skip
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
@@ -74,6 +85,7 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_multi_coordinates?(["C3", "D4", "E5"])
   end
 
+
   def test_it_has_equal_quantity_of_coordinates_to_length_of_ship
     # skip
     board = Board.new
@@ -86,8 +98,8 @@ class BoardTest < Minitest::Test
   end
 
 
+
   def test_it_has_consecutive_coordinates_to_place_ship
-    # skip
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
@@ -106,6 +118,7 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_placement?(cruiser, ["A1", "B2"])
   end
 
+
   def test_it_cannot_place_diagonal_coordinates
     # skip
     board = Board.new
@@ -118,7 +131,9 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_placement?(cruiser, ["B2", "B2", "B3"])
   end
 
+
   def test_correct_placement_of_ships_in_coordinates
+    # skip
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
@@ -126,6 +141,16 @@ class BoardTest < Minitest::Test
 
     assert_equal true, board.valid_placement?(submarine, ["A1", "A2"])
     assert_equal true, board.valid_placement?(cruiser, ["B1", "C1", "D1"])
+  end
+
+  def test_it_can_render_a_board
+    expected1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+
+    expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+
+    assert_equal expected1, @board.render
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    assert_equal expected2, @board.render(true)
   end
 
 end
