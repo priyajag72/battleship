@@ -12,5 +12,8 @@ class Player
     @ships << ship
   end
 
+  def ship_setup
+  end
+
 
 end
