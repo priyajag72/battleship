@@ -15,7 +15,8 @@ class Board
     end
   end
 
-  def generate_local_coordinates
+  def generate_local_coordinates(user_input=false)
+    if user_input == false
     numbers = ("1".."4").to_a
     letters = ("A".."D").to_a
     local_coordinates = []
@@ -23,6 +24,20 @@ class Board
       numbers.each do |number|
         local_coordinates << letter+number
       end
+    else
+      print "What size board would you like?"
+      print "WIDTH > "
+      width_ui = gets.chomp.to_s
+      print "HEIGHT > "
+      height_ui = gets.chomp.to_s
+
+      numbers = ("1".."#{width_ui}").to_a
+
+      alphabetic_characters = (65.chr..90.chr).to_a
+      tbd_letters_perm1 = alphabetic_characters.repeated_combination(6).to_a
+      
+
+      letters = ("A".."#{number_ui.chr}")
     end
     local_coordinates
   end
@@ -123,20 +138,16 @@ class Board
   end
 
   def render(reveal=false)
-    if reveal == false
+      @cells.each do |cell|
+        if cell[0]
+          require "pry"; binding.pry
+        end
+      end
       "  1 2 3 4 \n" +
-      "A . . . . \n" +
-      "B . . . . \n" +
-      "C . . . . \n" +
-      "D . . . . \n"
-    else
-      "  1 2 3 4 \n" +
-      "A S S S . \n" +
-      "B . . . . \n" +
-      "C . . . . \n" +
-      "D . . . . \n"
-    end
-
+      "A #{cells["A1"].render(reveal)} #{cells["A2"].render(reveal)} #{cells["A3"].render(reveal)} #{cells["A4"].render(reveal)} \n" +
+      "B #{cells["B1"].render(reveal)} #{cells["B2"].render(reveal)} #{cells["B3"].render(reveal)} #{cells["B4"].render(reveal)} \n" +
+      "C #{cells["C1"].render(reveal)} #{cells["C2"].render(reveal)} #{cells["C3"].render(reveal)} #{cells["C4"].render(reveal)} \n" +
+      "D #{cells["D1"].render(reveal)} #{cells["D2"].render(reveal)} #{cells["D3"].render(reveal)} #{cells["D4"].render(reveal)} \n"
   end
 
 
