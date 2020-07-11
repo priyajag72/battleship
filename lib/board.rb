@@ -38,7 +38,7 @@ class Board
       desired_coordinates[coordinate] = ship
     end
     cell_availability = desired_coordinates.map do |coordinate, ship|
-    @cells[coordinate] == nil
+    @cells[coordinate].ship == nil
     end
     cell_availability.all?(true)
   end
@@ -54,10 +54,14 @@ class Board
     coordinates_exist_on_board.all?(true)
   end
 
+#helper method - write test
+  def valid_coordinates_suite(ship)
+    valid_multi_coordinates?(@coordinates) && ship.length == @coordinates.count && placement_consecutive?
+  end
+
   def valid_placement?(ship, coordinates)
     @coordinates = coordinates
-    valid_multi_coordinates?(coordinates) && ship.length == coordinates.count && placement_consecutive?
-    ship_overlap(ship, coordinates)
+    valid_coordinates_suite(ship) && ship_overlap(ship, coordinates)
   end
 
   def placement_consecutive?
@@ -116,4 +120,28 @@ class Board
       false
     end
   end
+
+  def render(reveal=false)
+
+    "  1 2 3 4 \n" +
+    "A #{cells["A1"].render(reveal)} #{cells["A2"].render(reveal)} #{cells["A3"].render(reveal)} #{cells["A4"].render(reveal)} \n" +
+    "B #{cells["B1"].render(reveal)} #{cells["B2"].render(reveal)} #{cells["B3"].render(reveal)} #{cells["B4"].render(reveal)} \n" +
+    "C #{cells["C1"].render(reveal)} #{cells["C2"].render(reveal)} #{cells["C3"].render(reveal)} #{cells["C4"].render(reveal)} \n" +
+    "D #{cells["D1"].render(reveal)} #{cells["D2"].render(reveal)} #{cells["D3"].render(reveal)} #{cells["D4"].render(reveal)} \n"
+
+#FOR REFACTOR SEASON
+    # render_hash_accessible = @cells.reduce(Hash.new {|h,k| h[k] = []}) do |render_hash, cell|
+    #   letter = cell[0].split(//)[0]
+    #   render_hash["#{letter}"] << "#{cell[1].render(reveal)}"
+    #   render_hash
+    # end
+    #
+    # render_hash_accessible.each do |letter, cell_array|
+    #   print "#{letter}"
+    #     cell_array.map { |rendered_cell| print " #{rendered_cell}"}
+    #       puts " "
+    # end
+  end
+
+
 end
