@@ -4,5 +4,6 @@ class Player
 
   def initialize(type, board)
     @type = type
+    @board = board
   end
 end
