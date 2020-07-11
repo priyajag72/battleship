@@ -57,7 +57,13 @@ class PlayerTest < Minitest::Test
     @player2.add_ship(@cruiser2)
     @player2.add_ship(@submarine2)
 
+    @player2.board.place(@cruiser2, ["A1","A2","A3"])
+    @player2.board.place(@submarine2, ["B1","B2"])
+
+
     assert_equal true, @player2.all_ships_placed?
+
+    assert_equal false, @player1.all_ships_placed?
 
   end
 

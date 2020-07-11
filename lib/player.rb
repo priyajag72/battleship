@@ -43,13 +43,27 @@ class Player
 
             if @board.valid_placement?(ship, user_ship_coords) == true
               @board.place(ship, user_ship_coords)
-              require "pry"; binding.pry
+              # require "pry"; binding.pry
               exit # Could be a helper-method
             end
           end
         end
       end
     end
+  end
+
+  def all_ships_placed?
+    ships_count = @ships.sum do |ship|
+      ship.length
+    end
+    ships_on_board = @board.cells.reduce(0) do |ships_placed_count, cell|
+      if cell[1].ship != nil
+        ships_placed_count += 1
+      end
+      ships_placed_count
+    end
+    ships_count == ships_on_board
+    # require "pry"; binding.pry
   end
 
 end
