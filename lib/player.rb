@@ -9,6 +9,7 @@ class Player
   end
 
   def add_ship(ship)
+    @ships << ship
   end
 
 
