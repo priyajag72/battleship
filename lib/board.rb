@@ -122,20 +122,12 @@ class Board
   end
 
   def render(reveal=false)
-    if reveal == false
-      "  1 2 3 4 \n" +
-      "A . . . . \n" +
-      "B . . . . \n" +
-      "C . . . . \n" +
-      "D . . . . \n"
-    else
-      "  1 2 3 4 \n" +
-      "A S S S . \n" +
-      "B . . . . \n" +
-      "C . . . . \n" +
-      "D . . . . \n"
-    end
 
+      "  1 2 3 4 \n" +
+      "A #{@cells["A1"].render(reveal)} #{@cells["A2"].render(reveal)} #{@cells["A3"].render(reveal)} #{@cells["A4"].render(reveal)} \n" +
+      "B #{@cells["B1"].render(reveal)} #{@cells["B2"].render(reveal)} #{@cells["B3"].render(reveal)} #{@cells["B4"].render(reveal)} \n" +
+      "C #{@cells["C1"].render(reveal)} #{@cells["C2"].render(reveal)} #{@cells["C3"].render(reveal)} #{@cells["C4"].render(reveal)} \n" +
+      "D #{@cells["D1"].render(reveal)} #{@cells["D2"].render(reveal)} #{@cells["D3"].render(reveal)} #{@cells["D4"].render(reveal)} \n"
   end
 
 

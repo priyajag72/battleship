@@ -9,7 +9,6 @@ class BoardTest < Minitest::Test
     @board = Board.new
     @board.generate_cells
     @cruiser = Ship.new("Cruiser", 3)
-    @board.place(@cruiser, ["A1", "A2", "A3"])
   end
 
   def test_it_exists
@@ -144,12 +143,13 @@ class BoardTest < Minitest::Test
     assert_equal true, board.valid_placement?(cruiser, ["B1", "C1", "D1"])
   end
 
-  def test_it_can_rend_a_board
+  def test_it_can_render_a_board
     expected1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
 
     expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
 
     assert_equal expected1, @board.render
+    @board.place(@cruiser, ["A1", "A2", "A3"])
     assert_equal expected2, @board.render(true)
   end
 
