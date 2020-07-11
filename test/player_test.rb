@@ -35,11 +35,15 @@ class PlayerTest < Minitest::Test
     assert_equal [], @player1.ships
     assert_equal [], @player2.ships
     @player1.add_ship(@cruiser1)
-    assert_equal [@cruiser1], @player1.ships
+    @player1.add_ship(@submarine1)
+    assert_equal [@cruiser1, @submarine1], @player1.ships
+    @player2.add_ship(@cruiser2)
+    @player2.add_ship(@submarine2)
+    assert_equal [@cruiser2, @submarine2], @player2.ships
   end
 
-  # def test_player_can_place_ship
-  #   assert_equal , @player1.ship_setup
-  # end
+  def test_player_can_place_ship
+    assert_equal [], @player1.ship_setup
+  end
 
 end
