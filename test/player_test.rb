@@ -51,4 +51,14 @@ class PlayerTest < Minitest::Test
     # Tested in pry. Is working currently before auto generation and user error.
   end
 
+  def test_it_can_tell_all_ships_are_placed
+    @player1.add_ship(@cruiser1)
+    @player1.add_ship(@submarine1)
+    @player2.add_ship(@cruiser2)
+    @player2.add_ship(@submarine2)
+
+    assert_equal true, @player2.all_ships_placed?
+
+  end
+
 end
