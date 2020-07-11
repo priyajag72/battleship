@@ -35,17 +35,21 @@ class Player
         # Consider loop for user error
         if @board.valid_placement?(ship, user_ship_coords) == true
           @board.place(ship, user_ship_coords)
+        elsif @board.valid_placement?(ship, user_ship_coords) == false
+          loop do
+            puts "Those are invalid coordinates. Please try again:"
+            puts "> "
+            user_ship_coords = gets.chomp.split(/ /)
+
+            if @board.valid_placement?(ship, user_ship_coords) == true
+              @board.place(ship, user_ship_coords)
+              require "pry"; binding.pry
+              exit # Could be a helper-method
+            end
+          end
         end
-        require "pry"; binding.pry
-        # this places a ship
       end
-      # board.valid_multi_coordinates?(coordinates)
-      # # this is for checking user/auto input of setup coords
-      # board.valid_coordinate?(coordinate)
-      # # this is for checking user/auto input of fire coords
     end
-
   end
-
 
 end
