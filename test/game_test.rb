@@ -21,6 +21,15 @@ class GameTest < Minitest::Test
     @auto = Player.new(:auto, @auto_board)
     @user = Player.new(:user, @user_board)
 
+    @auto.add_ship(@auto_cruiser)
+    @auto.add_ship(@auto_submarine)
+    @user.add_ship(@user_cruiser)
+    @user.add_ship(@user_submarine)
+
+    @auto.board.place(@user_cruiser, ["B1", "C1", "D1"])
+    @auto.board.place(@suser_submarine, ["A1", "A2"])
+    @user.board.place(@user_cruiser, ["A1", "A2", "A3"])
+    @user.board.place(@suser_submarine, ["C3", "D3"])
     @game = Game.new(@user, @auto)
   end
 
@@ -32,5 +41,10 @@ class GameTest < Minitest::Test
     assert_equal @user, @game.user
     assert_equal @auto, @game.auto
   end
+
+  def test_it_can_print_both_auto_and_user_boards_to_terminal
+    assert_equal "", @game.display_board
+  end
+
 
 end
