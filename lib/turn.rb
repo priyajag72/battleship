@@ -4,6 +4,7 @@ class Turn
 
   def initialize(player, opponent)
     @player = player
+    @opponent = opponent
   end
 
 
