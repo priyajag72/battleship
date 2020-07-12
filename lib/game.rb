@@ -45,5 +45,8 @@ class Game
 
   end
 
+  def fire_coordinate
+
+  end
 
 end
