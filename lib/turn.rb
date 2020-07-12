@@ -7,5 +7,13 @@ class Turn
   end
 
   def display_board
+    player.ship_setup
+    if player.type == :auto
+      player.board.render
+    else
+      player.board.render(true)
+    end
+    
   end
+
 end

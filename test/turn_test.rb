@@ -20,6 +20,7 @@ class TurnTest < Minitest::Test
     @submarine2 = Ship.new("Submarine", 2)
     @player1 = Player.new(:auto, @board1)
     @player2 = Player.new(:user, @board2)
+    @turn_auto = Turn.new(@player1)
     @turn_user = Turn.new(@player2)
   end
 
@@ -35,8 +36,9 @@ class TurnTest < Minitest::Test
   def test_auto_and_user_boards_print_to_terminal
     expected1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
     expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
-    @player1.ship_setup
-    assert_equal expected1, @turn_user.display_board
+    @player1.add_ship(@cruiser1) # Where does this get written in? Turn (do I need to write a helper method to add ships to player ship array? Seems lika bad place when making dynamic) What about in Player? or Game? If so, how do we make it dynamic for changing number and size of ships later (when board size becomes dynamic)
+    @player1.add_ship(@submarine1)
+    assert_equal expected1, @turn_auto.display_board
   end
 
 
