@@ -7,22 +7,6 @@ class Turn
     @opponent = opponent
   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   def display_board
     # if player.type == :auto
     #   player.board.render

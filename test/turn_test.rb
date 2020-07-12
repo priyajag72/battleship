@@ -37,7 +37,7 @@ class TurnTest < Minitest::Test
 
   # when turn called, it should print to terminal :auto board (render default false) and :user board (render parameter set to true)
   def test_auto_and_user_boards_print_to_terminal
-    skip
+    # skip
     expected1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
     expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
     @player1.add_ship(@cruiser1) # Where does this get written in? Turn (do I need to write a helper method to add ships to player ship array? Seems lika bad place when making dynamic) What about in Player? or Game? If so, how do we make it dynamic for changing number and size of ships later (when board size becomes dynamic)
