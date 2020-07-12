@@ -24,16 +24,12 @@ class Player
           user_ship_coords = gets.chomp.upcase.split(/ /)
           result = @board.valid_placement?(ship, user_ship_coords)
           if result == false
-            "Develop helper method that tests if this singular ship was placed."
-            # @result2 = false
-            # until @result2 != false
-            #   require "pry"; binding.pry
-            #   puts "Those are invalid coordinates. Please try again: "
-            #   user_ship_coords2 = gets.chomp.upcase.split(/ /)
-            # @result2 != @board.valid_placement?(ship, user_ship_coords2)
-            #make loop for validated_placement
-            # end
+            until this_ship_placed?(ship)
+              puts "Those are invalid coordinates. Please try again: "
+              user_ship_coords2 = gets.chomp.upcase.split(/ /)
+            @board.valid_placement?(ship, user_ship_coords2)
             @board.validated_placement
+            end
           else
             @board.validated_placement
           end
