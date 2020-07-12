@@ -36,11 +36,11 @@ class TurnTest < Minitest::Test
   end
 
   # when turn called, it should print to terminal :auto board (render default false) and :user board (render parameter set to true)
-  def test_auto_and_user_boards_print_to_terminal
+  def test_it_can_print_both_auto_and_user_boards_to_terminal
     # skip
     expected1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
     expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
-    expected3 = "=============COMPUTER BOARD=============\n 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n==============PLAYER BOARD==============\n 1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
+    expected3 = "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n=============COMPUTER BOARD=============\n 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n==============PLAYER BOARD==============\n 1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
     @player1.add_ship(@cruiser1) # Where does this get written in? Turn (do I need to write a helper method to add ships to player ship array? Seems lika bad place when making dynamic) What about in Player? or Game? If so, how do we make it dynamic for changing number and size of ships later (when board size becomes dynamic)
     @player1.add_ship(@submarine1)
     @player1.ship_setup
@@ -55,12 +55,21 @@ class TurnTest < Minitest::Test
     assert_equal expected3, @turn.display_board
   end
 
+  # NEED TO TEST HELPERS FOR DISPLAY
 
-  # AFTER print to terminal occurs (this looop behavior could occur in game "start" loop)
+
+  # AFTER print to terminal occurs
+    # this loop behavior WILL occur in game "start" method
 
   # user input of coord (singular)
+  def test_it_can_get_user_input_for_shot_coordinate
+    skip
+    # assert_equal , @turn.
+  end
     # GUARD: user error input of more than one coord or invalid coord
     # auto input of coord created from this?
+
+
 
   # shoot behavior (results in hit, miss, or sunk)
 
