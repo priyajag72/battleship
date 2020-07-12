@@ -1,6 +1,6 @@
 class Turn
 
-  attr_reader :player
+  attr_reader :player, :opponent
 
   def initialize(player, opponent)
     @player = player
