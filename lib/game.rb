@@ -33,4 +33,6 @@ class Game
     message_player_board + @user.board.render(true)
   end
   # ============================================
+
+  
 end

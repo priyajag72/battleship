@@ -47,5 +47,20 @@ class GameTest < Minitest::Test
     assert_equal expected1, @game.display_board
   end
 
+  def test_it_can_shoot
+    expected2 = "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n=============COMPUTER BOARD=============\n 1 2 3 4 \nA H . . . \nB . . . . \nC . . . . \nD . . . . \n==============PLAYER BOARD==============\n 1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
+
+    # attempt to fire on A1
+      # produce computer A1 = H
+    @game.user.board.fire("A1")
+    assert_equal true, @game.auto.board.cells["A1"].fired_upon?
+
+    # attempt to fire on C3
+    # produce computer C3 = M
+    # attempt to fire on B1, C1, D1
+    # produce computer B1, C1, D1 = X
+
+  end
+
 
 end
