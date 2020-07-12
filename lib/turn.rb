@@ -8,17 +8,25 @@ class Turn
   end
 
   def display_board
-    # if player.type == :auto
-    #   player.board.render
-    # else
-    #   player.board.render(true)
-    # end
-
-    "=============COMPUTER BOARD============="
-    # require "pry"; binding.pry
-    # player.board.render
-    "==============PLAYER BOARD=============="
-    player.board.render(true)
+    message_computer_display + message_player_display
   end
+  # ============ HELPERS FOR DISPLAY ============
+  def message_computer_board
+    "=============COMPUTER BOARD=============\n"
+  end
+
+  def message_computer_display
+    message_computer_board + opponent.board.render
+  end
+
+  def message_player_board
+    "==============PLAYER BOARD==============\n"
+  end
+
+  def message_player_display
+    message_player_board + player.board.render(true)
+  end
+  # ============================================
+
 
 end

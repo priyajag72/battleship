@@ -40,6 +40,7 @@ class TurnTest < Minitest::Test
     # skip
     expected1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
     expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
+    expected3 = "=============COMPUTER BOARD=============\n 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n==============PLAYER BOARD==============\n 1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
     @player1.add_ship(@cruiser1) # Where does this get written in? Turn (do I need to write a helper method to add ships to player ship array? Seems lika bad place when making dynamic) What about in Player? or Game? If so, how do we make it dynamic for changing number and size of ships later (when board size becomes dynamic)
     @player1.add_ship(@submarine1)
     @player1.ship_setup
@@ -51,7 +52,7 @@ class TurnTest < Minitest::Test
 
     # assert_equal expected1, @turn_auto.display_board
     # assert_equal expected2, @turn_user.display_board
-    assert_equal "", @turn_user.display_board
+    assert_equal expected3, @turn.display_board
   end
 
 
