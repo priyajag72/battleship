@@ -2,9 +2,25 @@ class Turn
 
   attr_reader :player
 
-  def initialize(player)
+  def initialize(player_1, player_2)
     @player = player
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   def display_board
     # if player.type == :auto
