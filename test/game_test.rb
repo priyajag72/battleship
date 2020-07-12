@@ -49,20 +49,20 @@ class GameTest < Minitest::Test
 
   def test_it_can_shoot_for_user
     # user attempt to fire on A1
-      # produce computer A1 = H
+      # produce auto A1 = H
     @game.fire(@user, "A1")
     assert_equal true, @game.auto.board.cells["A1"].fired_upon?
     assert_equal "H", @game.auto.board.cells["A1"].render
 
-    # attempt to fire on C3
-      # produce computer C3 = M
+    # user attempt to fire on C3
+      # produce auto C3 = M
     @game.fire(@user, "C3")
     assert_equal true, @game.auto.board.cells["C3"].fired_upon?
     assert_equal "M", @game.auto.board.cells["C3"].render
     assert_equal "H", @game.auto.board.cells["A1"].render
 
-    # attempt to fire on B1, C1, D1
-      # produce computer B1, C1, D1 = X
+    # user attempt to fire on B1, C1, D1
+      # produce auto B1, C1, D1 = X
     @game.fire(@user, "B1")
     assert_equal true, @game.auto.board.cells["B1"].fired_upon?
     assert_equal "H", @game.auto.board.cells["B1"].render
@@ -70,14 +70,52 @@ class GameTest < Minitest::Test
     @game.fire(@user, "C1")
     assert_equal true, @game.auto.board.cells["C1"].fired_upon?
     assert_equal "H", @game.auto.board.cells["C1"].render
-    
+
     @game.fire(@user, "D1")
     assert_equal true, @game.auto.board.cells["D1"].fired_upon?
     assert_equal "X", @game.auto.board.cells["D1"].render
     assert_equal "X", @game.auto.board.cells["C1"].render
     assert_equal "X", @game.auto.board.cells["B1"].render
+    assert_equal "M", @game.auto.board.cells["C3"].render
+    assert_equal "H", @game.auto.board.cells["A1"].render
 
   end
+
+  def test_it_can_shoot_for_auto
+    # auto attempt to fire on A1
+      # produce user A1 = H
+    @game.fire(@auto, "A1")
+    assert_equal true, @game.user.board.cells["A1"].fired_upon?
+    assert_equal "H", @game.user.board.cells["A1"].render
+
+    # auto attempt to fire on D4
+      # produce user D4 = M
+    @game.fire(@auto, "D4")
+    assert_equal true, @game.user.board.cells["D4"].fired_upon?
+    assert_equal "M", @game.user.board.cells["D4"].render
+    assert_equal "H", @game.user.board.cells["A1"].render
+
+    # auto attempt to fire on C2, C3, D3
+      # produce user C2, C3, D3 = X
+    @game.fire(@auto, "C2")
+    assert_equal true, @game.user.board.cells["C2"].fired_upon?
+    assert_equal "M", @game.user.board.cells["C2"].render
+
+    @game.fire(@auto, "C3")
+    assert_equal true, @game.user.board.cells["C3"].fired_upon?
+    assert_equal "H", @game.user.board.cells["C3"].render
+
+    @game.fire(@auto, "D3")
+    assert_equal true, @game.user.board.cells["D3"].fired_upon?
+    assert_equal "X", @game.user.board.cells["D3"].render
+    assert_equal "X", @game.user.board.cells["C3"].render
+    assert_equal "M", @game.user.board.cells["C2"].render
+    assert_equal "M", @game.user.board.cells["D4"].render
+    assert_equal "H", @game.user.board.cells["A1"].render
+
+  end
+
+
 
 
 
