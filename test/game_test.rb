@@ -116,7 +116,8 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_get_user_coordinates
-    assert_equal [], @game.fire_coordinate
+    @game.fire_coordinate(@user)
+    # assert_equal [], 
   end
 
 
