@@ -34,5 +34,15 @@ class Game
   end
   # ============================================
 
-  
+  def fire(declarer, coordinate)
+    if declarer == @user
+      # nested if for user error for firing on coordinate that has been fired on
+      @auto.board.cells[coordinate].fire_upon
+      # require "pry"; binding.pry
+    elsif declarer == @auto
+    end
+
+  end
+
+
 end

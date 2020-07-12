@@ -52,7 +52,7 @@ class GameTest < Minitest::Test
 
     # attempt to fire on A1
       # produce computer A1 = H
-    @game.user.board.fire("A1")
+    @game.fire(@user, "A1")
     assert_equal true, @game.auto.board.cells["A1"].fired_upon?
 
     # attempt to fire on C3
