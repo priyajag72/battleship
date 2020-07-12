@@ -47,8 +47,49 @@ class PlayerTest < Minitest::Test
     @player1.add_ship(@submarine1)
     @player2.add_ship(@cruiser2)
     @player2.add_ship(@submarine2)
-
     # Tested in pry. Is working currently before auto generation and user error.
+  end
+
+  def test_it_can_tell_all_ships_are_placed
+    @player1.add_ship(@cruiser1)
+    @player1.add_ship(@submarine1)
+    @player2.add_ship(@cruiser2)
+    @player2.add_ship(@submarine2)
+
+    @player2.board.place(@cruiser2, ["A1","A2","A3"])
+    @player2.board.place(@submarine2, ["B1","B2"])
+
+
+    assert_equal true, @player2.all_ships_placed?
+
+    assert_equal false, @player1.all_ships_placed?
+
+  end
+
+  def test_it_can_determine_if_one_ship_is_placed
+    @player1.add_ship(@cruiser1)
+    @player1.add_ship(@submarine1)
+    @player2.add_ship(@cruiser2)
+    @player2.add_ship(@submarine2)
+
+    @player2.board.place(@cruiser2, ["A1","A2","A3"])
+    @player2.board.place(@submarine2, ["B1","B2"])
+
+    assert_equal false, @player1.this_ship_placed?(@cruiser1)
+    assert_equal true, @player2.this_ship_placed?(@cruiser2)
+
+  end
+
+  def test_it_can_auto_generate_coordinates
+    @player1.add_ship(@cruiser1)
+    @player1.add_ship(@submarine1)
+    @player2.add_ship(@cruiser2)
+    @player2.add_ship(@submarine2)
+
+    @player1.ship_setup
+    assert_equal true, @player1.all_ships_placed?
+    assert_equal false, @player2.all_ships_placed?
+
   end
 
 end
