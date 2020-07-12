@@ -55,15 +55,27 @@ class GameTest < Minitest::Test
     assert_equal "H", @game.auto.board.cells["A1"].render
 
     # attempt to fire on C3
-    # produce computer C3 = M
+      # produce computer C3 = M
     @game.fire(@user, "C3")
     assert_equal true, @game.auto.board.cells["C3"].fired_upon?
     assert_equal "M", @game.auto.board.cells["C3"].render
     assert_equal "H", @game.auto.board.cells["A1"].render
 
-
     # attempt to fire on B1, C1, D1
-    # produce computer B1, C1, D1 = X
+      # produce computer B1, C1, D1 = X
+    @game.fire(@user, "B1")
+    assert_equal true, @game.auto.board.cells["B1"].fired_upon?
+    assert_equal "H", @game.auto.board.cells["B1"].render
+
+    @game.fire(@user, "C1")
+    assert_equal true, @game.auto.board.cells["C1"].fired_upon?
+    assert_equal "H", @game.auto.board.cells["C1"].render
+    
+    @game.fire(@user, "D1")
+    assert_equal true, @game.auto.board.cells["D1"].fired_upon?
+    assert_equal "X", @game.auto.board.cells["D1"].render
+    assert_equal "X", @game.auto.board.cells["C1"].render
+    assert_equal "X", @game.auto.board.cells["B1"].render
 
   end
 
