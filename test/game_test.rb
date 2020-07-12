@@ -27,4 +27,9 @@ class GameTest < Minitest::Test
   def test_it_exists
     assert_instance_of Game, @game
   end
+
+  def test_it_has_attributes
+    assert_equal @user, @game.user
+  end
+
 end
