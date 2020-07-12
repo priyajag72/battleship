@@ -48,8 +48,6 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_shoot
-    expected2 = "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n=============COMPUTER BOARD=============\n 1 2 3 4 \nA H . . . \nB . . . . \nC . . . . \nD . . . . \n==============PLAYER BOARD==============\n 1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
-
     # attempt to fire on A1
       # produce computer A1 = H
     @game.fire(@user, "A1")
@@ -62,5 +60,19 @@ class GameTest < Minitest::Test
 
   end
 
+  def test_DEBUG_board_renders_shot_behavior_for_testing
+    skip
+    expected2 = "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n=============COMPUTER BOARD=============\n 1 2 3 4 \nA H . . . \nB . . . . \nC . . . . \nD . . . . \n==============PLAYER BOARD==============\n 1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
+
+    # attempt to fire on A1
+      # produce computer A1 = H
+
+    # attempt to fire on C3
+      # produce computer C3 = M
+
+    # attempt to fire on B1, C1, D1
+      # produce computer B1, C1, D1 = X
+
+  end
 
 end
