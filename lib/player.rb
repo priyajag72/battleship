@@ -22,13 +22,17 @@ class Player
     else
       until all_ships_placed?
         @ships.each do |ship|
+          # Idea 1: The user message can be a helper method (lines 26/27)
           puts "Enter the squares for the #{ship.name} (#{ship.length} spaces)"
           puts "> "
+          # Idea 2: This can be a helper method that may be useful even in game (ln 29)
           user_ship_coords = gets.chomp.upcase.split(/ /)
           result = @board.valid_placement?(ship, user_ship_coords)
           if result == false
             until this_ship_placed?(ship)
+              # Idea 3: Another helper... thinking ahead of Game terminal outputs and what might be useful to call again (line 34)
               puts "Those are invalid coordinates. Please try again: "
+              # See helper method from ln 28... how can this be useful here?(line  36)
               user_ship_coords2 = gets.chomp.upcase.split(/ /)
             @board.valid_placement?(ship, user_ship_coords2)
             @board.validated_placement
@@ -56,7 +60,7 @@ class Player
     end
   end
 
-  
+
   def this_ship_placed?(ship)
     @board.cells.values.any? do |cell|
       cell.ship == ship
@@ -81,6 +85,8 @@ class Player
   def all_ships_placed?
     ship_count == ships_on_board
   end
+
+  # Are we ready to delete below?
 
 
   # def ship_setup

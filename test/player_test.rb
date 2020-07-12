@@ -92,4 +92,24 @@ class PlayerTest < Minitest::Test
 
   end
 
+  def test_helper_method_idea1
+  end
+
+  def test_helper_method_idea2
+  end
+
+  def test_helper_method_idea3
+  end
+
+  end
+  end
+
+  end
+
+  end
+  def test_it_can_user_place_coordinates_after_refactor
+  end
+
+  end
+
 end

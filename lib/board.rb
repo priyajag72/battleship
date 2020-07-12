@@ -54,7 +54,7 @@ class Board
     coordinates_exist_on_board.all?(true)
   end
 
-#helper method - write test
+#helper method - write test #IS THIS STILL NECESSARY?
   def valid_coordinates_suite(ship)
     valid_multi_coordinates?(@coordinates) && ship.length == @coordinates.count && placement_consecutive?
   end
@@ -77,7 +77,7 @@ class Board
     elsif @coordinates.count == 3
       valid_horizontal_placement_length_three? || valid_vertical_placement_length_three?
     else
-      p "Ooops"
+      p "Ooops" #This was for testing. What should I update with? (No else? I always worry about the nil...)
     end
   end
 
