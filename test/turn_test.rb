@@ -8,6 +8,8 @@ require "./lib/turn"
 class TurnTest < Minitest::Test
 
   def setup
+    # 1-s are auto
+    # 2-s are user input
     @board1 = Board.new
     @board1.generate_cells
     @board2 = Board.new
@@ -29,7 +31,14 @@ class TurnTest < Minitest::Test
     assert_equal @player2, @turn_user.player
   end
 
-  # when turn called, it should print to terminal :auto board (render default false) and :user (render paramater set to true)
+  # when turn called, it should print to terminal :auto board (render default false) and :user board (render parameter set to true)
+  def test_auto_and_user_boards_print_to_terminal
+    expected1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+    expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+    @player1.ship_setup
+    assert_equal expected1, @turn_user.display_board
+  end
+
 
   # AFTER print to terminal occurs (this looop behavior could occur in game "start" loop)
 
