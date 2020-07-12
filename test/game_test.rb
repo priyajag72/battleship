@@ -47,18 +47,52 @@ class GameTest < Minitest::Test
     assert_equal expected1, @game.display_board
   end
 
-  def test_it_can_shoot
+  def test_it_can_shoot_for_user
     # user attempt to fire on A1
       # produce computer A1 = H
     @game.fire(@user, "A1")
     assert_equal true, @game.auto.board.cells["A1"].fired_upon?
     assert_equal "H", @game.auto.board.cells["A1"].render
+
     # attempt to fire on C3
     # produce computer C3 = M
+    @game.fire(@user, "C3")
+    assert_equal true, @game.auto.board.cells["C3"].fired_upon?
+    assert_equal "M", @game.auto.board.cells["C3"].render
+    assert_equal "H", @game.auto.board.cells["A1"].render
+
+
     # attempt to fire on B1, C1, D1
     # produce computer B1, C1, D1 = X
 
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   def test_DEBUG_board_renders_shot_behavior_for_testing
     skip
