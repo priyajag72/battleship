@@ -15,7 +15,20 @@ class Player
 
   def ship_setup
     if @type == :auto
-      #auto generate coordinates
+      until all_ships_placed?
+        @ships.each do |ship|
+          until this_ship_placed?(ship)
+            auto_coords = []
+            possible = @board.cells.keys.shuffle
+            ship.length.times do
+              auto_coords << possible[0]
+              possible.rotate!
+            end
+            @board.valid_placement?(ship, auto_coords)
+            @board.validated_placement
+          end
+        end
+      end
     else
       until all_ships_placed?
         @ships.each do |ship|

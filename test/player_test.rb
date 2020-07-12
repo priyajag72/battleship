@@ -80,4 +80,15 @@ class PlayerTest < Minitest::Test
 
   end
 
+  def test_it_can_auto_generate_coordinates
+    @player1.add_ship(@cruiser1)
+    @player1.add_ship(@submarine1)
+    @player2.add_ship(@cruiser2)
+    @player2.add_ship(@submarine2)
+
+    @player1.ship_setup
+    assert_equal true, @player1.all_ships_placed?
+
+  end
+
 end
