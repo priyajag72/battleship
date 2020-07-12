@@ -26,6 +26,7 @@ class TurnTest < Minitest::Test
   end
 
   def test_it_exists
+    # skip
     assert_instance_of Turn, @turn
   end
 
@@ -63,8 +64,8 @@ class TurnTest < Minitest::Test
 
   # user input of coord (singular)
   def test_it_can_get_user_input_for_shot_coordinate
-    skip
-    # assert_equal , @turn.
+    # skip
+    assert_equal "", @turn.player_shot_input
   end
     # GUARD: user error input of more than one coord or invalid coord
     # auto input of coord created from this?
