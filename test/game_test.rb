@@ -21,7 +21,7 @@ class GameTest < Minitest::Test
     @auto = Player.new(:auto, @auto_board)
     @user = Player.new(:user, @user_board)
 
-    @game = Turn.new(@user, @auto)
+    @game = Game.new(@user, @auto)
   end
 
   def test_it_exists
