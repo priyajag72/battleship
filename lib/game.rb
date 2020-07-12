@@ -6,4 +6,7 @@ class Game
     @user = user
     @auto = auto
   end
+
+  def display_board
+  end
 end
