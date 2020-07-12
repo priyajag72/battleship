@@ -1,5 +1,5 @@
 class Game
 
-  def initialize
+  def initialize(user, auto)
   end
 end
