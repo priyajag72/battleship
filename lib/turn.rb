@@ -1,5 +1,5 @@
 class Turn
 
-  def initialize
+  def initialize(player)
   end
 end
