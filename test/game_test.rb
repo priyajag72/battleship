@@ -43,7 +43,8 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_print_both_auto_and_user_boards_to_terminal
-    assert_equal "", @game.display_board
+    expected1 = "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n=============COMPUTER BOARD=============\n 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n==============PLAYER BOARD==============\n 1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
+    assert_equal expected1, @game.display_board
   end
 
 
