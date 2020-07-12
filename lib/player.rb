@@ -56,7 +56,7 @@ class Player
     end
   end
 
-  
+
   def this_ship_placed?(ship)
     @board.cells.values.any? do |cell|
       cell.ship == ship

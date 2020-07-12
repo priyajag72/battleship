@@ -40,6 +40,7 @@ class Game
       @auto.board.cells[coordinate].fire_upon
       # require "pry"; binding.pry
     elsif declarer == @auto
+      @user.board.cells[coordinate].fire_upon
     end
 
   end

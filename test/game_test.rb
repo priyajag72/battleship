@@ -48,11 +48,11 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_shoot
-    # attempt to fire on A1
+    # user attempt to fire on A1
       # produce computer A1 = H
     @game.fire(@user, "A1")
     assert_equal true, @game.auto.board.cells["A1"].fired_upon?
-
+    assert_equal "H", @game.auto.board.cells["A1"].render
     # attempt to fire on C3
     # produce computer C3 = M
     # attempt to fire on B1, C1, D1
