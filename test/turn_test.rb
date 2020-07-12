@@ -18,14 +18,15 @@ class TurnTest < Minitest::Test
     @submarine2 = Ship.new("Submarine", 2)
     @player1 = Player.new(:auto, @board1)
     @player2 = Player.new(:user, @board2)
-    @turn_user = Turn.new(@player1)
+    @turn_user = Turn.new(@player2)
   end
 
   def test_it_exists
     assert_instance_of Turn, @turn_user
   end
 
-  #def test_it_has_attributes
-  #end
+  def test_it_has_attributes
+    assert_equal @player2, @turn_user.player
+  end
 
 end
