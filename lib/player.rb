@@ -57,6 +57,26 @@ class Player
     end
   end
 
+  def ship_count
+    @ships.sum do |ship|
+      ship.length
+    end
+  end
+
+  def ships_on_board
+    ships_on_board = @board.cells.reduce(0) do |ships_placed_count, cell|
+      if cell[1].ship != nil
+        ships_placed_count += 1
+      end
+      ships_placed_count
+    end
+  end
+
+  def all_ships_placed?
+    ship_count == ships_on_board
+  end
+
+
   # def ship_setup
   #   if @type == :auto
   #     # helper-method: auto_generation CALLS
@@ -97,17 +117,5 @@ class Player
   #   end
   # end
 
-  def all_ships_placed?
-    ships_count = @ships.sum do |ship|
-      ship.length
-    end
-    ships_on_board = @board.cells.reduce(0) do |ships_placed_count, cell|
-      if cell[1].ship != nil
-        ships_placed_count += 1
-      end
-      ships_placed_count
-    end
-    ships_count == ships_on_board
-  end
 
 end

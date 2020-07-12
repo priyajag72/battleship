@@ -88,6 +88,7 @@ class PlayerTest < Minitest::Test
 
     @player1.ship_setup
     assert_equal true, @player1.all_ships_placed?
+    assert_equal false, @player2.all_ships_placed?
 
   end
 
