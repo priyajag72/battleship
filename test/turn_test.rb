@@ -35,10 +35,18 @@ class TurnTest < Minitest::Test
   # when turn called, it should print to terminal :auto board (render default false) and :user board (render parameter set to true)
   def test_auto_and_user_boards_print_to_terminal
     expected1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
-    expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+    expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
     @player1.add_ship(@cruiser1) # Where does this get written in? Turn (do I need to write a helper method to add ships to player ship array? Seems lika bad place when making dynamic) What about in Player? or Game? If so, how do we make it dynamic for changing number and size of ships later (when board size becomes dynamic)
     @player1.add_ship(@submarine1)
+    @player1.ship_setup
+    @player2.add_ship(@cruiser2)
+    @player2.add_ship(@submarine2)
+    # @player2.ship_setup # For when testing user input
+    @player2.board.place(@cruiser2, ["A1", "A2", "A3"])
+    @player2.board.place(@submarine2, ["C3", "D3"])
+
     assert_equal expected1, @turn_auto.display_board
+    assert_equal expected2, @turn_user.display_board
   end
 
 
