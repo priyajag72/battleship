@@ -46,18 +46,21 @@ class Game
   end
 
   def fire_coordinate(declarer)
-    if declarer == @user
-      p "Enter the coordinate for your shot"
-      print "> "
-      turn_coord = gets.chomp.upcase
-      require "pry"; binding.pry # Current pause spot. Trying to use gets chomp to auto remove all characters except index0 and index1
-      result = user.board.valid_coordinate?(turn_coord)
-      if result == false
-        puts "Those are invalid coordinates. Please try again: "
-        turn_coord = gets.chomp.upcase
-      end
-    end
+    p "Enter the coordinate for your shot"
+    print "> "
 
+    p "Those are invalid coordinates. Please try again: "
+    print "> "
   end
+
+  # ============ HELPERS FOR FIRE COORDINATE ============
+  def fire_valid_coordinate?(coordinate)
+     @user.board.generate_local_coordinates.include?(coordinate)
+  end
+
+  def fire_valid?(coordinate)
+     @auto.board.generate_local_coordinates.include?(coordinate)
+   end
+  # ====================================================
 
 end
