@@ -2,7 +2,7 @@ class Turn
 
   attr_reader :player
 
-  def initialize(player_1, player_2)
+  def initialize(player, opponent)
     @player = player
   end
 

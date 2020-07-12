@@ -30,8 +30,9 @@ class TurnTest < Minitest::Test
   end
 
   def test_it_has_attributes
-    skip
-    assert_equal @player2, @turn_user.player
+    # skip
+    assert_equal @player2, @turn.player
+    assert_equal @player1, @turn.opponent
   end
 
   # when turn called, it should print to terminal :auto board (render default false) and :user board (render parameter set to true)
