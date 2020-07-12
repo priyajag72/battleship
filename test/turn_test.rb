@@ -77,5 +77,6 @@ class TurnTest < Minitest::Test
   # print result of both :auto and :user
 
   # MUST RECORD RESULT TO BOARD FOR NEW RENDER (in next turn)
+    # More like a Game test in "start" method
 
 end
