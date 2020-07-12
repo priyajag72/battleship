@@ -34,5 +34,8 @@ class Turn
   end
   # ============================================
 
+  def player_shot_input
+
+  end
 
 end
