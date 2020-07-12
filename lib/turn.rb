@@ -5,4 +5,7 @@ class Turn
   def initialize(player)
     @player = player
   end
+
+  def display_board
+  end
 end
