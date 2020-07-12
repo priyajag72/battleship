@@ -22,7 +22,7 @@ class Game
   end
 
   def message_computer_display
-    message_computer_board + auto.board.render
+    message_computer_board + @auto.board.render
   end
 
   def message_player_board
@@ -30,7 +30,7 @@ class Game
   end
 
   def message_player_display
-    message_player_board + user.board.render(true)
+    message_player_board + @user.board.render(true)
   end
   # ============================================
 end

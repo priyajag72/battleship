@@ -27,9 +27,9 @@ class GameTest < Minitest::Test
     @user.add_ship(@user_submarine)
 
     @auto.board.place(@user_cruiser, ["B1", "C1", "D1"])
-    @auto.board.place(@suser_submarine, ["A1", "A2"])
+    @auto.board.place(@user_submarine, ["A1", "A2"])
     @user.board.place(@user_cruiser, ["A1", "A2", "A3"])
-    @user.board.place(@suser_submarine, ["C3", "D3"])
+    @user.board.place(@user_submarine, ["C3", "D3"])
     @game = Game.new(@user, @auto)
   end
 
