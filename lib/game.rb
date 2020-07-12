@@ -4,5 +4,6 @@ class Game
 
   def initialize(user, auto)
     @user = user
+    @auto = auto
   end
 end
