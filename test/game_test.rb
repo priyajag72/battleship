@@ -34,20 +34,25 @@ class GameTest < Minitest::Test
   end
 
   def test_it_exists
+    # skip
     assert_instance_of Game, @game
   end
 
   def test_it_has_attributes
+    # skip
     assert_equal @user, @game.user
     assert_equal @auto, @game.auto
+    assert_equal 0, @game.turn_counter
   end
 
   def test_it_can_print_both_auto_and_user_boards_to_terminal
+    skip
     expected1 = "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n=============COMPUTER BOARD=============\n 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n==============PLAYER BOARD==============\n 1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
     assert_equal expected1, @game.display_board
   end
 
   def test_it_can_shoot_for_user
+    skip
     # user attempt to fire on A1
       # produce auto A1 = H
     @game.fire(@user, "A1")
@@ -82,6 +87,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_shoot_for_auto
+    skip
     # auto attempt to fire on A1
       # produce user A1 = H
     @game.fire(@auto, "A1")
@@ -116,9 +122,11 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_get_auto_coordinates
+    skip
     @game.fire(@user, "B2")
     @game.fire(@user, "C3")
-    @game.fire(@user, @game.fire_coordinate(@user))
+    # @game.fire(@user, @game.fire_coordinate(@user))
+
     # assert_equal true, @game.auto.board.cells["B2"].fired_upon?
     # assert_equal "M", @game.auto.board.cells["B2"].render
   end

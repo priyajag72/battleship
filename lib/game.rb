@@ -1,6 +1,6 @@
 class Game
 
-  attr_reader :user, :auto, :turn_coord
+  attr_reader :user, :auto, :turn_counter, :turn_coord
 
   def initialize(user, auto)
     @user = user
