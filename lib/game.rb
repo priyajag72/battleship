@@ -36,6 +36,10 @@ class Game
 
   def fire(declarer, coordinate)
     if declarer == @user
+      until @auto.board.cells.fired_upon
+        desired_coord_to_fire = gets.chomp.upcase
+
+        @auto.board.valid_coordinate?(desired_coord_to_fire)
       # nested if for user error for firing on coordinate that has been fired on
       @auto.board.cells[coordinate].fire_upon
       # require "pry"; binding.pry

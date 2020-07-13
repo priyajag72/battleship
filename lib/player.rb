@@ -56,7 +56,7 @@ class Player
     end
   end
 
-  
+
   def this_ship_placed?(ship)
     @board.cells.values.any? do |cell|
       cell.ship == ship
@@ -81,6 +81,8 @@ class Player
   def all_ships_placed?
     ship_count == ships_on_board
   end
+
+
 
 
   # def ship_setup
