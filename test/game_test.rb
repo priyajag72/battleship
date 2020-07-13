@@ -82,7 +82,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_shoot_for_user
-    skip
+    # skip
     # user attempt to fire on A1
       # produce auto A1 = H
     @game.fire(@user, "A1")
@@ -117,7 +117,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_shoot_for_auto
-    skip
+    # skip
     # auto attempt to fire on A1
       # produce user A1 = H
     @game.fire(@auto, "A1")
@@ -149,6 +149,11 @@ class GameTest < Minitest::Test
     assert_equal "M", @game.user.board.cells["D4"].render
     assert_equal "H", @game.user.board.cells["A1"].render
 
+  end
+
+  def test_user_input_automatically_removes_excess_characters_past_two
+    # In terminal, inputting "A1A2A3"
+    assert_equal "A1", @game.user_input
   end
 
   def test_it_can_get_auto_coordinates
