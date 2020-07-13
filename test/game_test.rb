@@ -191,9 +191,17 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_check_user_input_for_valid_coordinates
+    skip
+    @game.message_user_input
+    # In terminal, initial input is B6, then B1
+    # (which is off the current board size). Expected response is error message and opportunity to store appropriate coordinate.
+    assert_equal "B1", @game.turn_coord
+  end
+
+  def test_it_can_check_user_input_for_valid_coordinates_for_two_or_more_errors
     # skip
     @game.message_user_input
-    # In terminal, initial input is B6 (which is off the current board size). Expected response is error message and opportunity to store appropriate coordinate.
+    # In terminal, initial input is B6 and G9, then B1
     assert_equal "B1", @game.turn_coord
   end
 
