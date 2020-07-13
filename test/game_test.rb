@@ -161,8 +161,17 @@ class GameTest < Minitest::Test
   def test_it_checks_user_fire_coordinate_input_for_fired_upon_cell_value_is_true
     # skip
     @game.fire(@user, "B2")
+    # In terminal, inputting B2
+    @game.message_user_input
+    assert_equal true, @game.auto.board.cells["B2"].fired_upon?
+  end
+
+  def test_it_displays_fired_upon_error_message_and_resets_the_loop
+    skip
+    @game.fire(@user, "B2")
     # In terminal, inputting B2    @game.message_user_input
     assert_equal true, @auto.board.cells["B2"].fired_upon?
+
   end
 
   def test_it_can_get_auto_coordinates

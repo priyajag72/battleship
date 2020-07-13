@@ -65,11 +65,22 @@ class Game
     @turn_coord = gets.chomp.upcase[0..1]
     # if @auto.board.cells[@turn_coord].fired_upon?
     #   message_error_fired_upon
-    # else
-    #   checking_user_coordinates
+    # # else
+    # #   checking_user_coordinates
     # end
     # checking_user_coordinates
     @turn_coord
+  end
+
+  def message_error_fired_upon
+    until @auto.board.cells[@turn_coord].fired_upon? == false
+      p "MISFIRE! You are trying to fire on a cell that you have already fired upon!\nPlease try again!"
+      print "> "
+      @turn_coord = gets.chomp.upcase[0..1]
+      if @auto.board.cells[@turn_coord] == nil
+        message_error_user_input
+      end
+    end
   end
 
   def valid_user_coordinate?(coordinate)
@@ -92,16 +103,6 @@ class Game
     end
   end
 
-  def message_error_fired_upon
-    until @auto.board.cells[@turn_coord].fired_upon? == false
-      p "MISFIRE! You are trying to fire on a cell that you have already fired upon!\nPlease try again!"
-      print "> "
-      @turn_coord = gets.chomp.upcase[0..1]
-      if @auto.board.cells[@turn_coord] == nil
-        message_error_user_input
-      end
-    end
-  end
 
   def auto_generate_single_coordinate
     possible = @user.board.cells.keys.shuffle
