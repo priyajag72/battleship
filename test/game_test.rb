@@ -53,9 +53,14 @@ class GameTest < Minitest::Test
   end
 
   def test_first_print_to_terminal_line_is_turn_counter
+    # skip
     assert_equal "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n", @game.message_turn
     @turn_counter = 1
     assert_equal "~~~~~~~~~~~~~ TURN #2 ~~~~~~~~~~~~~\n", @game.message_turn
+  end
+
+  def test_second_print_to_termina
+    assert_equal "=============COMPUTER BOARD=============\n", @game.message_computer_board
   end
 
   def test_it_can_shoot_for_user
