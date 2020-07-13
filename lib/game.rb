@@ -14,7 +14,7 @@ class Game
   def display_board
     message_turn + message_computer_display + message_player_display
   end
-
+  # readability = ln 20 has a helper!!!!!!!!!
   def fire(declarer, coordinate)
     if declarer == @user
       @auto.board.cells[coordinate].fire_upon # Which objects actually use this

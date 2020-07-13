@@ -52,20 +52,26 @@ class GameTest < Minitest::Test
     assert_equal expected1, @game.display_board
   end
 
-  def test_first_print_to_terminal_line_is_turn_counter
+  def test_it_prints_first_line_to_user_as_turn_counter
     # skip
     assert_equal "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n", @game.message_turn
     @turn_counter = 1
     assert_equal "~~~~~~~~~~~~~ TURN #2 ~~~~~~~~~~~~~\n", @game.message_turn
   end
 
-  def test_second_print_to_termina
+  def test_it_will_label_computer_board_for_display
+    # skip
     assert_equal "=============COMPUTER BOARD=============\n", @game.message_computer_board
   end
 
-  def test_computer_board_displays_and_renders_with_hidden_ships_from_third_line
+  def test_it_will_display_the_computer_board_and_renders_with_hidden_ships
+    # skip
     expected = "=============COMPUTER BOARD=============\n 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
     assert_equal expected, @game.message_computer_display
+  end
+
+  def test_it_will_label_player_board_for_display
+    assert_equal "==============PLAYER BOARD==============\n", @game.message_player_board
   end
 
   def test_it_can_shoot_for_user
