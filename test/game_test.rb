@@ -151,9 +151,16 @@ class GameTest < Minitest::Test
 
   end
 
-  def test_user_input_automatically_removes_excess_characters_past_two
+  def test_it_will_automatically_remove_excess_characters_past_two_for_user_input
+    # skip
     # In terminal, inputting "A1A2A3"
-    assert_equal "A1", @game.user_input
+    @game.message_user_input
+    assert_equal "A1", @game.turn_coord
+  end
+
+  def test_it_displays_user_message_and_accesses_user_input_method
+    skip
+    assert_equal "", @game.message_user_input
   end
 
   def test_it_can_get_auto_coordinates

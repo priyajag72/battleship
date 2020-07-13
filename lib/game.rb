@@ -14,10 +14,10 @@ class Game
   def display_board
     message_turn + message_computer_display + message_player_display
   end
-  # readability = ln 20 has a helper!!!!!!!!!
+
   def fire(declarer, coordinate)
     if declarer == @user
-      @auto.board.cells[coordinate].fire_upon # Which objects actually use this
+      @auto.board.cells[coordinate].fire_upon
     elsif declarer == @auto
       @user.board.cells[coordinate].fire_upon
     end
@@ -59,49 +59,45 @@ class Game
 
 
   # ============ HELPERS FOR FIRE COORDINATE ============
-  def user_input
-    @turn_coord = gets.chomp.upcase[0..1]
-  end
-
   def message_user_input
     p "Enter the coordinate for your shot"
     print "> "
-    user_input
-    if @auto.board.cells[user_input].fired_upon?
+    @turn_coord = gets.chomp.upcase[0..1]
+    if @auto.board.cells[@turn_coord].fired_upon?
       message_error_fired_upon
     else
       checking_user_coordinates
     end
     checking_user_coordinates
-    puts user_input
+    @turn_coord
   end
 
   def valid_user_coordinate?(coordinate)
-    @user.board.valid_coordinate?(user_input)
+    @user.board.valid_coordinate?(@turn_coord)
   end
 
   def checking_user_coordinates
     loop do
       message_error_user_input
-      valid_user_coordinate?(user_input)
-    break if (valid_user_coordinate?(user_input) == true)
+      valid_user_coordinate?(@turn_coord)
+    break if (valid_user_coordinate?(@turn_coord) == true)
     end
   end
 
   def message_error_user_input
-    until valid_user_coordinate?(user_input)
+    until valid_user_coordinate?(@turn_coord)
       p "You have input invalid coordinates for your board. Please try again."
       print "> "
-      user_input
+      @turn_coord = gets.chomp.upcase[0..1]
     end
   end
 
   def message_error_fired_upon
-    until @auto.board.cells[user_input].fired_upon? == false
+    until @auto.board.cells[@turn_coord].fired_upon? == false
       p "MISFIRE! You are trying to fire on a cell that you have already fired upon!\nPlease try again!"
       print "> "
-      user_input
-      if @auto.board.cells[user_input] == nil
+      @turn_coord = gets.chomp.upcase[0..1]
+      if @auto.board.cells[@turn_coord] == nil
         message_error_user_input
       end
     end
