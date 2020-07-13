@@ -66,7 +66,7 @@ class Board
   end
 
   def validated_placement
-    if (valid_coordinates_suite(@ship) && ship_overlap(@ship, @coordinates)) == true
+    if (valid_coordinates_suite(@ship) && ship_overlap(@ship, @coordinates))
       place(@ship, @coordinates)
     end
   end
