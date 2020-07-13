@@ -82,7 +82,9 @@ class Player
     ship_count == ships_on_board
   end
 
+  def cell_fired_upon?
 
+  end
 
 
   # def ship_setup
