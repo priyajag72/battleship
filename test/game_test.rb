@@ -47,9 +47,13 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_print_both_auto_and_user_boards_to_terminal
-    skip
+    # skip
     expected1 = "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n=============COMPUTER BOARD=============\n 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n==============PLAYER BOARD==============\n 1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
     assert_equal expected1, @game.display_board
+  end
+
+  def test_first_print_to_terminal_line_is_turn_counter
+    assert_equal [], @game.message_turn
   end
 
   def test_it_can_shoot_for_user
