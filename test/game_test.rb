@@ -63,6 +63,11 @@ class GameTest < Minitest::Test
     assert_equal "=============COMPUTER BOARD=============\n", @game.message_computer_board
   end
 
+  def test_computer_board_displays_and_renders_with_hidden_ships_from_third_line
+    expected = "=============COMPUTER BOARD=============\n 1 2 3 4 \n . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+    assert_equal expected, @game.message_computer_display
+  end
+
   def test_it_can_shoot_for_user
     skip
     # user attempt to fire on A1
