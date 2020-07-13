@@ -199,10 +199,16 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_check_user_input_for_valid_coordinates_for_two_or_more_errors
-    # skip
+    skip
     @game.message_user_input
     # In terminal, initial input is B6 and G9, then B1
     assert_equal "B1", @game.turn_coord
+  end
+
+  def test_it_can_check_valid_firing_coordinate_based_off_player_board_cells
+    @game.message_user_input
+    # In terminal, input tests X9
+    assert_equal "D2", @game.turn_coord
   end
 
   def test_it_can_get_auto_coordinates
