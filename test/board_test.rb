@@ -144,9 +144,9 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_can_render_a_board
-    expected1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+    expected1 = " 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
 
-    expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+    expected2 = " 1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
 
     assert_equal expected1, @board.render
     @board.place(@cruiser, ["A1", "A2", "A3"])
