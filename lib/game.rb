@@ -63,12 +63,12 @@ class Game
     p "Enter the coordinate for your shot"
     print "> "
     @turn_coord = gets.chomp.upcase[0..1]
-    if @auto.board.cells[@turn_coord].fired_upon?
-      message_error_fired_upon
-    else
-      checking_user_coordinates
-    end
-    checking_user_coordinates
+    # if @auto.board.cells[@turn_coord].fired_upon?
+    #   message_error_fired_upon
+    # else
+    #   checking_user_coordinates
+    # end
+    # checking_user_coordinates
     @turn_coord
   end
 
