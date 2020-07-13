@@ -83,6 +83,14 @@ class Game
     end
   end
 
+  def message_error_user_input
+    until valid_user_coordinate?(@turn_coord)
+      p "You have input invalid coordinates for your board. Please try again."
+      print "> "
+      @turn_coord = gets.chomp.upcase[0..1]
+    end
+  end
+  
   def valid_user_coordinate?(coordinate)
     @user.board.valid_coordinate?(@turn_coord)
   end
@@ -95,13 +103,6 @@ class Game
     end
   end
 
-  def message_error_user_input
-    until valid_user_coordinate?(@turn_coord)
-      p "You have input invalid coordinates for your board. Please try again."
-      print "> "
-      @turn_coord = gets.chomp.upcase[0..1]
-    end
-  end
 
 
   def auto_generate_single_coordinate

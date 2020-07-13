@@ -167,7 +167,6 @@ class GameTest < Minitest::Test
   end
 
   def test_it_displays_fired_upon_error_message_and_resets_the_loop
-    expected = "MISFIRE! You are trying to fire on a cell that you have already fired upon!\nPlease try again!"
     # skip
     @game.fire(@user, "B2")
     # In terminal, inputting B2
@@ -175,6 +174,18 @@ class GameTest < Minitest::Test
     assert_equal true, @game.auto.board.cells["B2"].fired_upon?
     # In terminal, inputting C4 when error message appears
     assert_equal "C4", @game.turn_coord
+  end
+
+  def test_it_displays_fired_upon_error_message_and_resets_the_loop_if_user_enters_two_or_more_cells_that_have_been_fired_on
+    # skip
+    @game.fire(@user, "B2")
+    @game.fire(@user, "C4")
+    # In terminal, inputting B2
+    # In terminal, inputting C4
+    @game.message_user_input
+    assert_equal true, @game.auto.board.cells["B2"].fired_upon?
+    # In terminal, inputting D1 when error message appears
+    assert_equal "D1", @game.turn_coord
 
   end
 
