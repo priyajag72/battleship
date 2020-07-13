@@ -153,4 +153,9 @@ Enter p to play. Enter q to quit."
     #update with game.fire method to fully test functionality
   end
 
+  def test_end_game_returns_to_main_menu
+    #this prints to the terminal
+    # assert_equal "", @game.end_game
+  end
+
 end

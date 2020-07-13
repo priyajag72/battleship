@@ -37,9 +37,11 @@ class Game
   def start
     main_menu
     players_setup_ships
-    # winner?
+    until winner != nil
     # results of winner
-    # end_game
+    #fire
+    end
+    end_game
   end
 
   def main_menu
@@ -87,9 +89,12 @@ class Game
     else
       nil
     end
-
   end
 
+  def end_game
+    print "=============PRINT WINNER RESULTS HERE=============\n"
+    main_menu
+  end
 
 
 end
