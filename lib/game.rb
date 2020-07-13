@@ -6,7 +6,7 @@ class Game
     @user = user
     @auto = auto
     @turn_counter = 0
-    @turn_coord = turn_coord
+    @turn_coord = nil
   end
 
   def display_board
@@ -24,10 +24,10 @@ class Game
 
   def fire_coordinate(declarer)
     case declarer
-    when @user
-      message_user_input
-    when @auto
-      auto_generate_single_coordinate
+      when @user
+        message_user_input
+      when @auto
+        auto_generate_single_coordinate
     end
 
   end
@@ -60,12 +60,13 @@ class Game
   def message_user_input
     p "Enter the coordinate for your shot"
     print "> "
-    @turn_coord = gets.chomp[0..1]
-    loop do
-      message_error_user_input
-      valid_user_coordinate?(@turn_coord)
-    break if (valid_user_coordinate?(@turn_coord) == true)
+    @turn_coord = gets.chomp.upcase[0..1]
+    if @auto.board.cells[@turn_coord].fired_upon?
+      message_error_fired_upon
+    else
+      checking_user_coordinates
     end
+    checking_user_coordinates
     @turn_coord
   end
 
@@ -73,26 +74,30 @@ class Game
     @user.board.valid_coordinate?(@turn_coord)
   end
 
+  def checking_user_coordinates
+    loop do
+      message_error_user_input
+      valid_user_coordinate?(@turn_coord)
+    break if (valid_user_coordinate?(@turn_coord) == true)
+    end
+  end
+
   def message_error_user_input
     until valid_user_coordinate?(@turn_coord)
       p "You have input invalid coordinates for your board. Please try again."
       print "> "
-      @turn_coord = gets.chomp[0..1]
-    end
-
-    until valid_coord_fired_upon?(@turn_coord)
+      @turn_coord = gets.chomp.upcase[0..1]
     end
   end
 
-  def valid_coord_fired_upon?(coordinate)
-    if @user.board.cells[@turn_coord].fired_upon? == true
-      p "MISFIRE! You are trying to fire on a cell that you have already fired upon!\nThe enemy is alerted => YOU HAVE ONE CHANCE TO CHECK YOUR BOARD AND FIRE AGAIN."
+  def message_error_fired_upon
+    until @auto.board.cells[@turn_coord].fired_upon? == false
+      p "MISFIRE! You are trying to fire on a cell that you have already fired upon!\nPlease try again!"
       print "> "
-      @turn_coord = gets.chomp[0..1]
-      require "pry"; binding.pry
-      valid_user_coordinate?(@turn_coord)
-    else
-      true
+      @turn_coord = gets.chomp.upcase[0..1]
+      if @auto.board.cells[@turn_coord] == nil
+        message_error_user_input
+      end
     end
   end
 
