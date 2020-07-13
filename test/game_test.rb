@@ -78,7 +78,7 @@ class GameTest < Minitest::Test
   def test_it_will_display_the_player_board_and_renders_with_revealed_ships
     # skip
     expected = "==============PLAYER BOARD==============\n 1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
-    assert_equal expected, @game.message_computer_display
+    assert_equal expected, @game.message_player_display
   end
 
   def test_it_can_shoot_for_user
