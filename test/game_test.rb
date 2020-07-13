@@ -152,14 +152,14 @@ class GameTest < Minitest::Test
   end
 
   def test_it_will_automatically_remove_excess_characters_past_two_for_user_input
-    # skip
+    skip
     # In terminal, inputting "A1A2A3"
     @game.message_user_input
     assert_equal "A1", @game.turn_coord
   end
 
   def test_it_checks_user_fire_coordinate_input_for_fired_upon_cell_value_is_true
-    # skip
+    skip
     @game.fire(@user, "B2")
     # In terminal, inputting B2
     @game.message_user_input
@@ -167,10 +167,14 @@ class GameTest < Minitest::Test
   end
 
   def test_it_displays_fired_upon_error_message_and_resets_the_loop
-    skip
+    expected = "MISFIRE! You are trying to fire on a cell that you have already fired upon!\nPlease try again!"
+    # skip
     @game.fire(@user, "B2")
-    # In terminal, inputting B2    @game.message_user_input
-    assert_equal true, @auto.board.cells["B2"].fired_upon?
+    # In terminal, inputting B2
+    @game.message_user_input
+    assert_equal true, @game.auto.board.cells["B2"].fired_upon?
+    # In terminal, inputting C4 when error message appears
+    assert_equal "C4", @game.turn_coord
 
   end
 
