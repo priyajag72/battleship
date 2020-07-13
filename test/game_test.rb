@@ -64,7 +64,7 @@ class GameTest < Minitest::Test
   end
 
   def test_computer_board_displays_and_renders_with_hidden_ships_from_third_line
-    expected = "=============COMPUTER BOARD=============\n 1 2 3 4 \n . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+    expected = "=============COMPUTER BOARD=============\n 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
     assert_equal expected, @game.message_computer_display
   end
 
