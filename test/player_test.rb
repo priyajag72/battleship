@@ -95,7 +95,7 @@ class PlayerTest < Minitest::Test
   def test_if_the_cell_was_fired_upon
   @player1.board.cells["A1"].fire_upon
 
-  assert_equal true, @player1.fired_upon?("A1")  
+  assert_equal true, @player1.cell_fired_upon?("A1")  
   end
 
 end

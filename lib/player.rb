@@ -82,8 +82,8 @@ class Player
     ship_count == ships_on_board
   end
 
-  def cell_fired_upon?
-
+  def cell_fired_upon?(coord)
+    @board.cells[coord].fired_upon?
   end
 
 
