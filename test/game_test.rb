@@ -48,6 +48,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_shoot
+    skip
     # attempt to fire on A1
       # produce computer A1 = H
     @game.fire(@user, "A1")
@@ -73,6 +74,39 @@ class GameTest < Minitest::Test
     # attempt to fire on B1, C1, D1
       # produce computer B1, C1, D1 = X
 
+  end
+
+  def test_it_has_a_main_menu
+    skip
+    #does print to the screen as expected
+    expected = "Welcome to BATTLESHIP
+Enter p to play. Enter q to quit."
+
+    assert_equal expected, @game.main_menu
+
+  end
+
+  def it_has_a_set_up_ships
+    auto_cruiser = Ship.new("Cruiser", 3)
+    auto_submarine = Ship.new("Submarine", 2)
+    user_cruiser = Ship.new("Cruiser", 3)
+    user_submarine = Ship.new("Submarine", 2)
+
+    auto_board = Board.new
+    auto_board.generate_cells
+    user_board = Board.new
+    user_board.generate_cells
+
+    auto = Player.new(:auto, auto_board)
+    user = Player.new(:user, user_board)
+
+    auto.add_ship(auto_cruiser)
+    auto.add_ship(auto_submarine)
+    user.add_ship(user_cruiser)
+    user.add_ship(user_submarine)
+
+    game.start
+    assert_equal "", game.players_setup_ships
   end
 
 end
