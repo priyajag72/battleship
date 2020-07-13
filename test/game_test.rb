@@ -116,8 +116,10 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_get_auto_coordinates
-    @game.fire_coordinate(@auto)
-    # assert_equal [],
+    @game.fire(@user, "B2")
+    @game.fire(@user, @game.fire_coordinate(@user))
+    # assert_equal true, @game.auto.board.cells["B2"].fired_upon?
+    # assert_equal "M", @game.auto.board.cells["B2"].render
   end
 
 
