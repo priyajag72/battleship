@@ -77,16 +77,17 @@ class Game
     @user.ship_setup
   end
 
-  def check_ships_sunk?(player)
-    x = player.ships
-    z = 0
-    x.all?(true) do |ship|
-      z == ship.health
-    end
-  end
 
-  def winner?
-    check_ships_sunk?(@auto) || check_ships_sunk?(@user)
+
+  def winner
+    if @auto.ships.sum {|ship| ship.health } == 0
+      @user
+    elsif @user.ships.sum { |ship| ship.health } == 0
+      @auto
+    else
+      nil
+    end
+
   end
 
 

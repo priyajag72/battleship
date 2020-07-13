@@ -34,18 +34,15 @@ class GameTest < Minitest::Test
   end
 
   def test_it_exists
-    skip
     assert_instance_of Game, @game
   end
 
   def test_it_has_attributes
-    skip
     assert_equal @user, @game.user
     assert_equal @auto, @game.auto
   end
 
   def test_it_can_print_both_auto_and_user_boards_to_terminal
-    skip
     expected1 = "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n=============COMPUTER BOARD=============\n 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n==============PLAYER BOARD==============\n 1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
     assert_equal expected1, @game.display_board
   end
@@ -65,8 +62,6 @@ class GameTest < Minitest::Test
   end
 
   def test_DEBUG_board_renders_shot_behavior_for_testing
-    skip
-    skip
     expected2 = "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n=============COMPUTER BOARD=============\n 1 2 3 4 \nA H . . . \nB . . . . \nC . . . . \nD . . . . \n==============PLAYER BOARD==============\n 1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
 
     # attempt to fire on A1
@@ -139,10 +134,7 @@ Enter p to play. Enter q to quit."
     user.board.place(user_cruiser, ["A1", "A2", "A3"])
     user.board.place(user_submarine, ["C3", "D3"])
 
-
-    assert_equal false, game.check_ships_sunk?(user)
-    assert_equal false, game.check_ships_sunk?(auto)
-    assert_equal false, game.winner?
+    assert_nil game.winner
 
     game.user.ships[0].hit
     game.user.ships[0].hit
@@ -152,12 +144,11 @@ Enter p to play. Enter q to quit."
 
     game.user.ships[1].hit
     game.user.ships[1].hit
-    
+
     assert_equal 0, user.ships[1].health
 
-    assert_equal true, game.check_ships_sunk?(user)
-    assert_equal false, game.check_ships_sunk?(auto)
-    assert_equal true, game.winner?
+    # assert_equal true, game.all_ships_sunk?(user)
+    assert_equal auto, game.winner
 
     #update with game.fire method to fully test functionality
   end
