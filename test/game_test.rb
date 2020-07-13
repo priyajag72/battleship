@@ -43,7 +43,7 @@ class GameTest < Minitest::Test
     assert_equal @user, @game.user
     assert_equal @auto, @game.auto
     assert_equal 0, @game.turn_counter
-    assert_equal nil, @game.turn_coord
+    assert_nil @game.turn_coord
   end
 
   def test_it_can_print_both_auto_and_user_boards_to_terminal
@@ -53,7 +53,9 @@ class GameTest < Minitest::Test
   end
 
   def test_first_print_to_terminal_line_is_turn_counter
-    assert_equal [], @game.message_turn
+    assert_equal "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n", @game.message_turn
+    @turn_counter = 1
+    assert_equal "~~~~~~~~~~~~~ TURN #2 ~~~~~~~~~~~~~\n", @game.message_turn
   end
 
   def test_it_can_shoot_for_user
