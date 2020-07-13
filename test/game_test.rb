@@ -206,13 +206,14 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_check_valid_firing_coordinate_based_off_player_board_cells
+    skip
     @game.message_user_input
     # In terminal, input tests X9
     assert_equal "D2", @game.turn_coord
   end
 
   def test_it_can_get_auto_coordinates
-    skip
+    # skip
     @game.fire(@user, "B2")
     @game.fire(@user, "C3")
     # @game.fire(@user, @game.fire_coordinate(@user))
