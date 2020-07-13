@@ -43,6 +43,7 @@ class GameTest < Minitest::Test
     assert_equal @user, @game.user
     assert_equal @auto, @game.auto
     assert_equal 0, @game.turn_counter
+    assert_equal nil, @game.turn_coord
   end
 
   def test_it_can_print_both_auto_and_user_boards_to_terminal
