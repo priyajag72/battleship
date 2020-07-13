@@ -87,6 +87,8 @@ class Player
   end
 
 
+
+
   # def ship_setup
   #   if @type == :auto
   #     # helper-method: auto_generation CALLS
