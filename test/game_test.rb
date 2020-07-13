@@ -167,7 +167,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_displays_fired_upon_error_message_and_resets_the_loop
-    # skip
+    skip
     @game.fire(@user, "B2")
     # In terminal, inputting B2
     @game.message_user_input
@@ -177,7 +177,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_displays_fired_upon_error_message_and_resets_the_loop_if_user_enters_two_or_more_cells_that_have_been_fired_on
-    # skip
+    skip
     @game.fire(@user, "B2")
     @game.fire(@user, "C4")
     # In terminal, inputting B2
@@ -187,6 +187,14 @@ class GameTest < Minitest::Test
     # In terminal, inputting D1 when error message appears
     assert_equal "D1", @game.turn_coord
 
+    # Come back to this test when helper methods are finished and tested.
+  end
+
+  def test_it_can_check_user_input_for_valid_coordinates
+    # skip
+    @game.message_user_input
+    # In terminal, initial input is B6 (which is off the current board size). Expected response is error message and opportunity to store appropriate coordinate.
+    assert_equal "B1", @game.turn_coord
   end
 
   def test_it_can_get_auto_coordinates
