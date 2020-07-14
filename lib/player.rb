@@ -28,7 +28,7 @@ class Player
           result = @board.valid_placement?(ship, user_ship_coords)
           if result == false
             until this_ship_placed?(ship)
-              puts "Those are invalid coordinates. Please try again: "
+              puts "Those are invalid coordinates. Please try again: \n Please put #{ship.length} coordinates with spaces in between."
               user_ship_coords2 = gets.chomp.upcase.split(/ /)
             @board.valid_placement?(ship, user_ship_coords2)
             @board.validated_placement
