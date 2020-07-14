@@ -1,19 +1,6 @@
 class Game
-#  start needs to include:
-#
-#  main menu
-#  players.setup_ships
-# start loop
-#  winner
-#  fire_coordinate(@auto)
-#  fire_coordinate(@user)
-# end loop
-# message player/computer
-# display
 
   attr_reader :user, :auto, :turn_counter, :turn_coord
-
-  attr_writer
 
   def initialize(user, auto)
     @user = user
@@ -38,20 +25,21 @@ class Game
   def fire_coordinate(declarer)
     case declarer
       when @user
-        message_user_input
+        # message_user_input
+        fire(@user, message_user_input)
       when @auto
-        auto_generate_single_coordinate
+        fire(@auto, auto_generate_single_coordinate)
     end
   end
 
   # ============ HELPERS FOR DISPLAY ============
   def message_turn
     @turn_counter += 1
-    print "~~~~~~~~~~~~~ TURN ##{@turn_counter} ~~~~~~~~~~~~~\n"
+    "~~~~~~~~~~~~~ TURN ##{@turn_counter} ~~~~~~~~~~~~~\n"
   end
 
   def message_computer_board
-    print "=============COMPUTER BOARD=============\n"
+    "=============COMPUTER BOARD=============\n"
   end
 
   def message_computer_display
@@ -59,7 +47,7 @@ class Game
   end
 
   def message_player_board
-    print "==============PLAYER BOARD==============\n"
+    "==============PLAYER BOARD==============\n"
   end
 
   def message_player_display
@@ -71,12 +59,13 @@ class Game
   def start
     main_menu
     players_setup_ships
+    # require "pry"; binding.pry
     until winner != nil
-      message_computer_display
+      print display_board
       fire_coordinate(@auto)
-      message_player_display
       fire_coordinate(@user)
     end
+
     end_game
   end
 
@@ -110,7 +99,7 @@ class Game
 
   def message_error_fired_upon
     until @auto.board.cells[@turn_coord].fired_upon? == false
-      p "MISFIRE! You are trying to fire on a cell that you have already fired upon!\nPlease try again!"
+      p "MISFIRE! You are trying to fire on a cell that you have already fired upon! Please try again!"
       print "> "
       @turn_coord = gets.chomp.upcase[0..1]
       if @auto.board.cells[@turn_coord] == nil
@@ -125,7 +114,10 @@ class Game
   end
 
   def players_setup_ships
+    print message_computer_display
+    print message_player_display
     @auto.ship_setup
+    print "I have laid out my ships on the grid.\nYou now need to lay out your two ships.\nThe Cruiser is three units long\n and the Submarine is two units long."
     @user.ship_setup
   end
 
@@ -172,6 +164,7 @@ class Game
     auto_cord = possible[0].to_s
     possible.rotate!
     auto_cord
+    #already hit guard
   end
   # ====================================================
 
