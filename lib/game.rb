@@ -121,7 +121,7 @@ class Game
     print message_computer_display
     print message_player_display
     @auto.ship_setup
-    print "I have laid out my ships on the grid.\nYou now need to lay out your two ships.\nThe Cruiser is three units long\n and the Submarine is two units long."
+    print "\nI have laid out my ships on the grid.\nYou now need to lay out your two ships.\nThe Cruiser is three units long\n and the Submarine is two units long."
     @user.ship_setup
   end
 
@@ -129,16 +129,17 @@ class Game
 
   def winner
     if @auto.ships.sum {|ship| ship.health } == 0
-      print "You won!"
+      print  "=============You won!=============\n"
+      end_game
     elsif @user.ships.sum { |ship| ship.health } == 0
-      print "I won!"
+      print  "=============I won!=============\n"
+      end_game
     else
       nil
     end
   end
 
   def end_game
-    print "=============#{winner}=============\n"
     main_menu
   end
 

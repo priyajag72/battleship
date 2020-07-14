@@ -150,12 +150,13 @@ class Board
       render_hash["#{letter}"] << "#{cell[1].render(reveal)}"
       render_hash
     end
-    render_hash_accessible.each do |letter, cell_array|
+    render_hash_accessible.map do |letter, cell_array|
       print "#{letter}"
         cell_array.map { |rendered_cell| print " #{rendered_cell}"}
-          puts " "
+          puts " \n"
       # we can have dimensions be
     end
+    print "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
   end
 
 

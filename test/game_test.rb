@@ -258,6 +258,7 @@ class GameTest < Minitest::Test
     auto = Player.new(:auto, auto_board)
     user = Player.new(:user, user_board)
 
+
     auto.add_ship(auto_cruiser)
     auto.add_ship(auto_submarine)
     user.add_ship(user_cruiser)
