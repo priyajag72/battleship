@@ -37,24 +37,24 @@ class Game
   # ============ HELPERS FOR DISPLAY ============
   def message_turn
     @turn_counter += 1
-    "~~~~~~~~~~~~~ TURN ##{@turn_counter} ~~~~~~~~~~~~~\n"
+    print "~~~~~~~~~~~~~ TURN ##{@turn_counter} ~~~~~~~~~~~~~\n"
   end
 
   def message_computer_board
-    "=============COMPUTER BOARD=============\n"
   end
 
   def message_computer_display
-    message_computer_board
+    print "=============COMPUTER BOARD=============\n"
+    # message_computer_board
     @auto.board.render
   end
 
   def message_player_board
-    "==============PLAYER BOARD==============\n"
   end
 
   def message_player_display
-    message_player_board
+    print "==============PLAYER BOARD==============\n"
+    # message_player_board
     @user.board.render(true)
   end
   # ============================================
@@ -63,7 +63,6 @@ class Game
   def start
     main_menu
     players_setup_ships
-    # require "pry"; binding.pry
     until winner != nil
       print display_board
       fire_coordinate(@auto)

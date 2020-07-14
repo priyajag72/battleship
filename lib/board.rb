@@ -156,7 +156,8 @@ class Board
           puts " \n"
       # we can have dimensions be
     end
-    print "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+
+    print "\n"
   end
 
 
