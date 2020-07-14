@@ -290,7 +290,9 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_print_results
-    assert_equal "", @game.results(@auto, "A1")
+    #fire upon it
+    @user.board.cells["A1"].fire_upon
+    assert_equal "My shot on A1 was a H", @game.results(@auto, "A1")
 
   end
 

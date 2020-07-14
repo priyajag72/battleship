@@ -18,14 +18,19 @@ class Game
   def fire(declarer, coordinate)
     if declarer == @user
       @auto.board.cells[coordinate].fire_upon
+      results(declarer, coordinate)
     elsif declarer == @auto
       @user.board.cells[coordinate].fire_upon
+      results(declarer, coordinate)
     end
-    results(declarer, coordinate)
   end
 
   def results(declarer, coordinate)
-    
+    if declarer == @user
+      "Your shot on #{coordinate} was a #{@auto.board.cells[coordinate].render}"
+    else
+      "My shot on #{coordinate} was a #{@user.board.cells[coordinate].render}"
+    end
   end
 
   def fire_coordinate(declarer)
