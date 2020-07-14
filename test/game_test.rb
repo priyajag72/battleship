@@ -40,6 +40,8 @@ class GameTest < Minitest::Test
   def test_it_has_attributes
     assert_equal @user, @game.user
     assert_equal @auto, @game.auto
+    assert_equal 0, @game.turn_counter
+    assert_nil @game.turn_coord
   end
 
   def test_it_can_print_both_auto_and_user_boards_to_terminal
@@ -47,19 +49,161 @@ class GameTest < Minitest::Test
     assert_equal expected1, @game.display_board
   end
 
-  def test_it_can_shoot
-    skip
-      # attempt to fire on A1
-      # produce computer A1 = H
+  def test_it_prints_first_line_to_user_as_turn_counter
+    assert_equal "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n", @game.message_turn
+    @turn_counter = 1
+    assert_equal "~~~~~~~~~~~~~ TURN #2 ~~~~~~~~~~~~~\n", @game.message_turn
+  end
+
+  def test_it_will_label_computer_board_for_display
+    assert_equal "=============COMPUTER BOARD=============\n", @game.message_computer_board
+  end
+
+  def test_it_will_display_the_computer_board_and_renders_with_hidden_ships
+    expected = "=============COMPUTER BOARD=============\n 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+    assert_equal expected, @game.message_computer_display
+  end
+
+  def test_it_will_label_player_board_for_display
+    assert_equal "==============PLAYER BOARD==============\n", @game.message_player_board
+  end
+
+  def test_it_will_display_the_player_board_and_renders_with_revealed_ships
+    expected = "==============PLAYER BOARD==============\n 1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
+    assert_equal expected, @game.message_player_display
+  end
+
+  def test_it_can_shoot_for_user
+    # user attempt to fire on A1
+      # produce auto A1 = H
     @game.fire(@user, "A1")
     assert_equal true, @game.auto.board.cells["A1"].fired_upon?
+    assert_equal "H", @game.auto.board.cells["A1"].render
 
-    # attempt to fire on C3
-    # produce computer C3 = M
-    # attempt to fire on B1, C1, D1
-    # produce computer B1, C1, D1 = X
+    # user attempt to fire on C3
+      # produce auto C3 = M
+    @game.fire(@user, "C3")
+    assert_equal true, @game.auto.board.cells["C3"].fired_upon?
+    assert_equal "M", @game.auto.board.cells["C3"].render
+    assert_equal "H", @game.auto.board.cells["A1"].render
+
+    # user attempt to fire on B1, C1, D1
+      # produce auto B1, C1, D1 = X
+    @game.fire(@user, "B1")
+    assert_equal true, @game.auto.board.cells["B1"].fired_upon?
+    assert_equal "H", @game.auto.board.cells["B1"].render
+
+    @game.fire(@user, "C1")
+    assert_equal true, @game.auto.board.cells["C1"].fired_upon?
+    assert_equal "H", @game.auto.board.cells["C1"].render
+
+    @game.fire(@user, "D1")
+    assert_equal true, @game.auto.board.cells["D1"].fired_upon?
+    assert_equal "X", @game.auto.board.cells["D1"].render
+    assert_equal "X", @game.auto.board.cells["C1"].render
+    assert_equal "X", @game.auto.board.cells["B1"].render
+    assert_equal "M", @game.auto.board.cells["C3"].render
+    assert_equal "H", @game.auto.board.cells["A1"].render
 
   end
+
+  def test_it_can_shoot_for_auto
+    # auto attempt to fire on A1
+      # produce user A1 = H
+    @game.fire(@auto, "A1")
+    assert_equal true, @game.user.board.cells["A1"].fired_upon?
+    assert_equal "H", @game.user.board.cells["A1"].render
+
+    # auto attempt to fire on D4
+      # produce user D4 = M
+    @game.fire(@auto, "D4")
+    assert_equal true, @game.user.board.cells["D4"].fired_upon?
+    assert_equal "M", @game.user.board.cells["D4"].render
+    assert_equal "H", @game.user.board.cells["A1"].render
+
+    # auto attempt to fire on C2, C3, D3
+      # produce user C2, C3, D3 = X
+    @game.fire(@auto, "C2")
+    assert_equal true, @game.user.board.cells["C2"].fired_upon?
+    assert_equal "M", @game.user.board.cells["C2"].render
+
+    @game.fire(@auto, "C3")
+    assert_equal true, @game.user.board.cells["C3"].fired_upon?
+    assert_equal "H", @game.user.board.cells["C3"].render
+
+    @game.fire(@auto, "D3")
+    assert_equal true, @game.user.board.cells["D3"].fired_upon?
+    assert_equal "X", @game.user.board.cells["D3"].render
+    assert_equal "X", @game.user.board.cells["C3"].render
+    assert_equal "M", @game.user.board.cells["C2"].render
+    assert_equal "M", @game.user.board.cells["D4"].render
+    assert_equal "H", @game.user.board.cells["A1"].render
+
+  end
+
+  def test_it_will_automatically_remove_excess_characters_past_two_for_user_input
+    # In terminal, inputting "A1A2A3"
+    @game.message_user_input
+    assert_equal "A1", @game.turn_coord
+  end
+
+  def test_it_checks_user_fire_coordinate_input_for_fired_upon_cell_value_is_true
+    @game.fire(@user, "B2")
+    # In terminal, inputting B2
+    @game.message_user_input
+    assert_equal true, @game.auto.board.cells["B2"].fired_upon?
+  end
+
+  def test_it_displays_fired_upon_error_message_and_resets_the_loop
+    @game.fire(@user, "B2")
+    # In terminal, inputting B2
+    @game.message_user_input
+    assert_equal true, @game.auto.board.cells["B2"].fired_upon?
+    # In terminal, inputting C4 when error message appears
+    assert_equal "C4", @game.turn_coord
+  end
+
+  def test_it_displays_fired_upon_error_message_and_resets_the_loop_if_user_enters_two_or_more_cells_that_have_been_fired_on
+    @game.fire(@user, "B2")
+    @game.fire(@user, "C4")
+    # In terminal, inputting B2
+    # In terminal, inputting C4
+    @game.message_user_input
+    assert_equal true, @game.auto.board.cells["B2"].fired_upon?
+    # In terminal, inputting D1 when error message appears
+    assert_equal "D1", @game.turn_coord
+
+    # Come back to this test when helper methods are finished and tested.
+  end
+
+  def test_it_can_check_user_input_for_valid_coordinates
+    @game.message_user_input
+    # In terminal, initial input is B6, then B1
+    # (which is off the current board size). Expected response is error message and opportunity to store appropriate coordinate.
+    assert_equal "B1", @game.turn_coord
+  end
+
+  def test_it_can_check_user_input_for_valid_coordinates_for_two_or_more_errors
+    @game.message_user_input
+    # In terminal, initial input is B6 and G9, then B1
+    assert_equal "B1", @game.turn_coord
+  end
+
+  def test_it_can_check_valid_firing_coordinate_based_off_player_board_cells
+    @game.message_user_input
+    # In terminal, input tests X9
+    assert_equal "D2", @game.turn_coord
+  end
+
+  def test_it_can_get_auto_coordinates
+    @game.fire(@user, "B2")
+    @game.fire(@user, "C3")
+    # @game.fire(@user, @game.fire_coordinate(@user))
+
+    # assert_equal true, @game.auto.board.cells["B2"].fired_upon?
+    # assert_equal "M", @game.auto.board.cells["B2"].render
+  end
+
 
   def test_DEBUG_board_renders_shot_behavior_for_testing
     expected2 = "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n=============COMPUTER BOARD=============\n 1 2 3 4 \nA H . . . \nB . . . . \nC . . . . \nD . . . . \n==============PLAYER BOARD==============\n 1 2 3 4 \nA S S S . \nB . . . . \nC . . S . \nD . . S . \n"
@@ -78,7 +222,6 @@ class GameTest < Minitest::Test
 
 
   def test_it_has_a_set_up_ships
-    skip
     auto_cruiser = Ship.new("Cruiser", 3)
     auto_submarine = Ship.new("Submarine", 2)
     user_cruiser = Ship.new("Cruiser", 3)
@@ -98,7 +241,7 @@ class GameTest < Minitest::Test
     user.add_ship(user_submarine)
     game = Game.new(user, auto)
 
-    assert_equal nil, game.players_setup_ships
+    assert_nil game.players_setup_ships
   end
 
   def test_it_can_determine_winner
