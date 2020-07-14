@@ -121,7 +121,7 @@ class Game
     print message_computer_display
     print message_player_display
     @auto.ship_setup
-    print "\nI have laid out my ships on the grid.\nYou now need to lay out your two ships.\nThe Cruiser is three units long\n and the Submarine is two units long."
+    print "\nI have laid out my ships on the grid.\nYou now need to lay out your two ships.\nThe Cruiser is three coordinates long.\n The Submarine is two coordinates long.\n"
     @user.ship_setup
   end
 

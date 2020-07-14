@@ -12,8 +12,6 @@ class Player
     @ships << ship
   end
 
-
-
   def ship_setup
     if @type == :auto
       until all_ships_placed?
@@ -54,7 +52,6 @@ class Player
       end
     end
   end
-
 
   def this_ship_placed?(ship)
     @board.cells.values.any? do |cell|
