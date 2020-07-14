@@ -38,34 +38,24 @@ class Game
     main_menu
     players_setup_ships
     until winner != nil
-    # results of winner
+    winner
     #fire
+
     end
     end_game
   end
 
   def main_menu
-    print "Welcome to BATTLESHIP Enter p to play. Enter q to quit. > "
-
+    print "Welcome to BATTLESHIP\n Enter p to play. Enter q to quit. > "
     response = gets.chomp.downcase[0]
-
-    if response == "q"
-      print "Good Bye!"
+    if response == "p"
+      puts "Let's play!"
+    elsif response == "q"
+      puts "See you next time!"
       leave_game
-    elsif response == "p"
-      print "Let's play!"
-    else response != "p" || "q"
-      print "Invalid entry, please enter p to play or q to quit. > "
-      response2 = gets.chomp.downcase[0]
-      if response2 == "p"
-        print "Let's play!"
-      elsif response2 == "q"
-        print "Good- bye!"
-        leave_game
-      else response2 != "p" || "q"
-        print "Good- bye!"
-        leave_game
-      end
+    else
+      puts "Invalid entry. Bye!"
+      leave_game
     end
 
   end
@@ -83,9 +73,9 @@ class Game
 
   def winner
     if @auto.ships.sum {|ship| ship.health } == 0
-      @user
+      print "You won!"
     elsif @user.ships.sum { |ship| ship.health } == 0
-      @auto
+      print "I won!"
     else
       nil
     end

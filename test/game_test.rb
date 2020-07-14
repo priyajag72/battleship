@@ -75,15 +75,7 @@ class GameTest < Minitest::Test
 
   end
 
-  def test_it_has_a_main_menu
-    skip
-    #does print to the screen as expected
-    expected = "Welcome to BATTLESHIP
-Enter p to play. Enter q to quit."
 
-    assert_equal expected, @game.main_menu
-
-  end
 
   def test_it_has_a_set_up_ships
     skip
@@ -148,14 +140,9 @@ Enter p to play. Enter q to quit."
     assert_equal 0, user.ships[1].health
 
     # assert_equal true, game.all_ships_sunk?(user)
-    assert_equal auto, game.winner
+    assert_equal "I won!", game.winner
 
     #update with game.fire method to fully test functionality
-  end
-
-  def test_end_game_returns_to_main_menu
-    #this prints to the terminal
-    # assert_equal "", @game.end_game
   end
 
 end
