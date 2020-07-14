@@ -18,18 +18,10 @@ class Game
   def fire(declarer, coordinate)
     if declarer == @user
       @auto.board.cells[coordinate].fire_upon
-      results(declarer, coordinate)
+      print "Your shot on #{coordinate} was a #{@auto.board.cells[coordinate].render}\n"
     elsif declarer == @auto
       @user.board.cells[coordinate].fire_upon
-      results(declarer, coordinate)
-    end
-  end
-
-  def results(declarer, coordinate)
-    if declarer == @user
-      print "Your shot on #{coordinate} was a #{@auto.board.cells[coordinate].render}"
-    else
-      print "My shot on #{coordinate} was a #{@user.board.cells[coordinate].render}"
+      print "Mac C. Puter's shot on #{coordinate} was a #{@user.board.cells[coordinate].render}\n"
     end
   end
 
@@ -137,10 +129,10 @@ class Game
 
   def winner
     if @auto.ships.sum {|ship| ship.health } == 0
-      print  "=============You won!=============\n"
+      print  "=============*~~~~~~* You  won! *~~~~~~*=============\n"
       end_game
     elsif @user.ships.sum { |ship| ship.health } == 0
-      print  "=============I won!=============\n"
+      print  "=============~~~~~~* I won! *~~~~~~*=============\n"
       end_game
     else
       nil
