@@ -27,9 +27,9 @@ class Game
 
   def results(declarer, coordinate)
     if declarer == @user
-      "Your shot on #{coordinate} was a #{@auto.board.cells[coordinate].render}"
+      print "Your shot on #{coordinate} was a #{@auto.board.cells[coordinate].render}"
     else
-      "My shot on #{coordinate} was a #{@user.board.cells[coordinate].render}"
+      print "My shot on #{coordinate} was a #{@user.board.cells[coordinate].render}"
     end
   end
 
