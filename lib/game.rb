@@ -21,7 +21,11 @@ class Game
     elsif declarer == @auto
       @user.board.cells[coordinate].fire_upon
     end
+    results(declarer, coordinate)
+  end
 
+  def results(declarer, coordinate)
+    
   end
 
   def fire_coordinate(declarer)

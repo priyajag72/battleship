@@ -289,4 +289,9 @@ class GameTest < Minitest::Test
     #update with game.fire method to fully test functionality
   end
 
+  def test_it_can_print_results
+    assert_equal "", @game.results(@auto, "A1")
+
+  end
+
 end
