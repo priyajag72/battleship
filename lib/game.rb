@@ -1,4 +1,15 @@
 class Game
+#  start needs to include:
+#
+#  main menu
+#  players.setup_ships
+# start loop
+#  winner
+#  fire_coordinate(@auto)
+#  fire_coordinate(@user)
+# end loop
+# message player/computer
+# display
 
   attr_reader :user, :auto, :turn_counter, :turn_coord
 
