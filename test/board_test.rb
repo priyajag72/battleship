@@ -29,6 +29,7 @@ class BoardTest < Minitest::Test
   def test_it_can_generate_cells
     board = Board.new
     assert_equal Array, board.generate_cells.class
+    assert_instance_of Cell, board.cells["D3"]
   end
 
 
