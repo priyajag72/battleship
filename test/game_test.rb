@@ -310,7 +310,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_auto_generate_single_coordinate
-    skip
+    # skip
     auto_cruiser = Ship.new("Cruiser", 3)
     auto_submarine = Ship.new("Submarine", 2)
     user_cruiser = Ship.new("Cruiser", 3)

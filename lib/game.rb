@@ -1,3 +1,4 @@
+require_relative "./battleship"
 class Game
 
   attr_reader :user, :auto, :turn_counter, :turn_coord
@@ -69,7 +70,6 @@ class Game
       fire_coordinate(@user)
       fire_coordinate(@auto)
     end
-
     end_game
   end
 
@@ -140,6 +140,7 @@ class Game
   end
 
   def end_game
+    battleship = Battleship.new
     main_menu
   end
 
@@ -165,10 +166,10 @@ class Game
   end
 
   def auto_generate_single_coordinate
-    next_hit = @user.board.cells.find do |cell|
+    next_hit = @user.board.cells.find_all do |cell|
       cell[1].fired_upon? == false
     end
-    next_hit[0]
+    next_hit.shuffle[0][0]
   end
   # ====================================================
 
