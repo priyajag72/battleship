@@ -66,8 +66,8 @@ class Game
     players_setup_ships
     until winner != nil
       print display_board
-      fire_coordinate(@auto)
       fire_coordinate(@user)
+      fire_coordinate(@auto)
     end
 
     end_game
