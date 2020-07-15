@@ -107,7 +107,6 @@ class BoardTest < Minitest::Test
 
 
   def test_it_has_equal_quantity_of_coordinates_to_length_of_ship
-    # skip
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)

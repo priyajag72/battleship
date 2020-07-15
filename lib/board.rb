@@ -73,15 +73,10 @@ class Board
   def placement_consecutive?
     if @coordinates.count == 2
       valid_horizontal_placement_length_two? || valid_vertical_placement_length_two?
-    elsif @coordinates.count == 3
+    else @coordinates.count == 3
       valid_horizontal_placement_length_three? || valid_vertical_placement_length_three?
-    else
-      p "Ooops"
     end
   end
-# DIAGONAL METHOD HERE
-
-
 
   def convert_coord_int
     integer_coord = []
