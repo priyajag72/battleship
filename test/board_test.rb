@@ -202,5 +202,11 @@ class BoardTest < Minitest::Test
     assert_equal expected2, @board.render(true)
   end
 
+  def test_it_can_create_header_row
+    board = Board.new
+    board.generate_cells
+    assert_nil board.create_header_row
+  end
+
 
 end

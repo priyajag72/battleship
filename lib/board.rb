@@ -132,6 +132,7 @@ class Board
 
   def create_header_row
     dimensions = @cells.keys.last[1].to_i
+
     numbers = ("1".."#{dimensions}").to_a.join(" ")
 
     header_row = "  #{numbers}\n"
