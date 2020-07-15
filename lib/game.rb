@@ -1,4 +1,6 @@
 require_relative "./battleship"
+require "colorize"
+
 class Game
 
   attr_reader :user, :auto, :turn_counter, :turn_coord
@@ -73,8 +75,25 @@ class Game
     end_game
   end
 
+  def print_welcome_to_battleship
+      puts "                                                                                 ".magenta
+      puts "  _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____  ".magenta
+      puts "                                                                                 ".magenta
+      puts "                                                                                 ".magenta
+      puts "                                                                                 ".magenta
+      puts "        *******************~~~~~~~~~~~~~~~~~~~~~~~~~~~~*******************       ".magenta
+      puts "  ************~~~~~~~~~~~~~~~ WELCOME TO BATTLESHIP ~~~~~~~~~~~~~~~************  ".magenta
+      puts "        *******************~~~~~~~~~~~~~~~~~~~~~~~~~~~~*******************       ".magenta
+      puts "                                                                                 ".magenta
+      puts "                                BY ARIQUE & PRIYA                                ".magenta
+      puts "                                                                                 ".magenta
+      puts " _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____   ".magenta
+      puts "                                                                                 ".magenta
+  end
+
   def main_menu
-    print "Welcome to BATTLESHIP\n Enter p to play. Enter q to quit. > "
+    print_welcome_to_battleship
+    print "Enter p to play. Enter q to quit. > "
     response = gets.chomp.downcase[0]
     if response == "p"
       puts "Let's play!"
@@ -129,14 +148,47 @@ class Game
 
   def winner
     if @auto.ships.sum {|ship| ship.health } == 0
-      print  "=============*~~~~~~* You  won! *~~~~~~*=============\n"
+      you_won_banner
       end_game
     elsif @user.ships.sum { |ship| ship.health } == 0
-      print  "=============*~~~~~~* I won! *~~~~~~*=============\n"
+      i_won_banner
       end_game
     else
       nil
     end
+  end
+
+  def you_won_banner
+    puts "                                                                                 ".magenta
+    puts "  _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____  ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts "            **************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**************            ".magenta
+    puts "        ************~~~~~~~~~~~~~~~ YOU WON! ~~~~~~~~~~~~~~~************         ".magenta
+    puts "            **************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**************            ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts " _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____   ".magenta
+    puts "                                                                                 ".magenta
+  end
+
+  def i_won_banner
+    puts "                                                                                 ".magenta
+    puts "  _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____  ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts "            **************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**************            ".magenta
+    puts "        ************~~~~~~~~~~~~~~~  I WON!  ~~~~~~~~~~~~~~~************         ".magenta
+    puts "            **************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**************            ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts " _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____   ".magenta
+    puts "                                                                                 ".magenta
+
   end
 
   def end_game
