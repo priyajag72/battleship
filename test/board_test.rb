@@ -215,6 +215,16 @@ class BoardTest < Minitest::Test
     expected = {"A"=>[".", ".", ".", "."], "B"=>[".", ".", ".", "."], "C"=>[".", ".", ".", "."], "D"=>[".", ".", ".", "."]}
     assert_equal expected, board.render_alphabetic_hash
 
+    cruiser = Ship.new("Cruiser", 3)
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    assert_equal expected, board.render_alphabetic_hash
+
+    expected2 = {"A"=>["S", "S", "S", "."], "B"=>[".", ".", ".", "."], "C"=>[".", ".", ".", "."], "D"=>[".", ".", ".", "."]}
+    
+    assert_equal expected2, board.render_alphabetic_hash(true)
+
+
   end
 
 
