@@ -17,12 +17,10 @@ class BoardTest < Minitest::Test
 
 
   def test_it_has_attributes
-    board = Board.new
-    board.generate_cells
 
-    assert_instance_of Hash, board.cells
-    assert_equal 16, board.cells.keys.count
-    assert_instance_of Cell, board.cells["A4"]
+    assert_instance_of Hash, @board.cells
+    assert_equal 16, @board.cells.keys.count
+    assert_instance_of Cell, @board.cells["A4"]
   end
 
   def test_it_can_generate_cells
