@@ -132,7 +132,7 @@ class Game
       print  "=============*~~~~~~* You  won! *~~~~~~*=============\n"
       end_game
     elsif @user.ships.sum { |ship| ship.health } == 0
-      print  "=============~~~~~~* I won! *~~~~~~*=============\n"
+      print  "=============*~~~~~~* I won! *~~~~~~*=============\n"
       end_game
     else
       nil
