@@ -34,10 +34,12 @@ class GameTest < Minitest::Test
   end
 
   def test_it_exists
+    skip
     assert_instance_of Game, @game
   end
 
   def test_it_has_attributes
+    skip
     assert_equal @user, @game.user
     assert_equal @auto, @game.auto
     assert_equal 0, @game.turn_counter
@@ -45,33 +47,40 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_call_correct_render_board
+    skip
 
     assert_equal nil, @game.display_board
   end
 
   def test_it_prints_first_line_to_user_as_turn_counter
+    skip
     assert_equal "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n", @game.message_turn
     @turn_counter = 1
     assert_equal "~~~~~~~~~~~~~ TURN #2 ~~~~~~~~~~~~~\n", @game.message_turn
   end
 
   def test_it_will_label_computer_board_for_display
+    skip
     assert_equal "=============COMPUTER BOARD=============\n", @game.message_computer_board
   end
 
   def test_it_will_display_the_computer_board_renders_with_hidden_ships
+    skip
     assert_equal Hash, @game.message_computer_display.class
   end
 
   def test_it_will_label_player_board_for_display
+    skip
     assert_equal "==============PLAYER BOARD==============\n", @game.message_player_board
   end
 
   def test_it_will_display_the_player_board_renders_with_revealed_ships
+    skip
     assert_equal Hash, @game.message_player_display.class
   end
 
   def test_it_can_shoot_for_user
+    skip
     # user attempt to fire on A1
       # produce auto A1 = H
     @game.fire(@user, "A1")
@@ -106,6 +115,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_shoot_for_auto
+    skip
 
     # auto attempt to fire on A1
       # produce user A1 = H
@@ -147,12 +157,14 @@ class GameTest < Minitest::Test
   end
 
   def test_it_will_automatically_remove_excess_characters_past_two_for_user_input
+    skip
     # In terminal, inputting "A1A2A3"
     @game.message_user_input
     assert_equal 2, @game.turn_coord.length
   end
 
   # def test_it_checks_user_fire_coordinate_input_for_fired_upon_cell_value_is_true
+  # skip
   #   @game.fire(@user, "B2")
   #   # In terminal, inputting B2
   #   @game.message_user_input
@@ -160,6 +172,7 @@ class GameTest < Minitest::Test
   # end
 
   def test_it_displays_fired_upon_error_message_and_resets_the_loop
+    skip
 
     assert_equal false, @game.auto.board.cells["B2"].fired_upon?
 
@@ -173,6 +186,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_displays_fired_upon_error_message_and_resets_the_loop_if_user_enters_two_or_more_cells_that_have_been_fired_on
+    skip
 
     @game.fire(@user, "B2")
     @game.fire(@user, "C4")
@@ -187,6 +201,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_check_user_input_for_valid_coordinates
+    skip
 
     @game.message_user_input
     # In terminal, initial input is B6, then B1
@@ -195,6 +210,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_check_user_input_for_valid_coordinates_for_two_or_more_errors
+    skip
 
     @game.message_user_input
     # In terminal, initial input is B6 and G9, then B1
@@ -202,6 +218,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_check_valid_firing_coordinate_based_off_player_board_cells
+    skip
 
     @game.message_user_input
     # In terminal, input tests X9
@@ -209,6 +226,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_get_auto_coordinates
+    skip
 
     @game.fire(@user, "B2")
     @game.fire(@user, "C3")
@@ -219,6 +237,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_setup_ships
+    skip
 
     # HERE
     auto_cruiser = Ship.new("Cruiser", 3)
@@ -244,6 +263,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_determine_winner
+    skip
 
     auto_cruiser = Ship.new("Cruiser", 3)
     auto_submarine = Ship.new("Submarine", 2)
@@ -287,6 +307,32 @@ class GameTest < Minitest::Test
     assert_equal "I won!", game.winner
 
     #update with game.fire method to fully test functionality
+  end
+
+  def test_it_can_auto_generate_single_coordinate
+    auto_cruiser = Ship.new("Cruiser", 3)
+    auto_submarine = Ship.new("Submarine", 2)
+    user_cruiser = Ship.new("Cruiser", 3)
+    user_submarine = Ship.new("Submarine", 2)
+
+    auto_board = Board.new
+    auto_board.generate_cells
+    user_board = Board.new
+    user_board.generate_cells
+
+    auto = Player.new(:auto, auto_board)
+    user = Player.new(:user, user_board)
+
+
+    auto.add_ship(auto_cruiser)
+    auto.add_ship(auto_submarine)
+    user.add_ship(user_cruiser)
+    user.add_ship(user_submarine)
+    game = Game.new(user, auto)
+
+    assert_equal "", game.auto_generate_single_coordinate
+
+
   end
 
 

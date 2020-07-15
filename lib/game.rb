@@ -165,8 +165,9 @@ class Game
   end
 
   def auto_generate_single_coordinate
+    require "pry"; binding.pry
     possible = @user.board.cells.keys.shuffle
-    auto_cord = possible[0].to_s
+    auto_cord = possible[0]
     possible.rotate!
     auto_cord
     #already hit guard
