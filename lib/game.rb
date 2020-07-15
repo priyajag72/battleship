@@ -1,5 +1,6 @@
 require_relative "./battleship"
 require "colorize"
+
 class Game
 
   attr_reader :user, :auto, :turn_counter, :turn_coord
@@ -39,23 +40,6 @@ class Game
   end
 
   # ============ HELPERS FOR START ============
-  def main_menu
-    print "Welcome to BATTLESHIP\nEnter p to play. Enter q to quit. > "
-    response = gets.chomp.downcase[0]
-    if response == "p"
-      puts "Let's play!"
-    elsif response == "q"
-      puts "See you next time!"
-      leave_game
-    else
-      puts "Invalid entry. Bye!"
-      leave_game
-    end
-  end
-
-  def leave_game
-    exit
-  end
 
   def players_setup_ships
     print message_computer_display
@@ -65,22 +49,7 @@ class Game
     @user.ship_setup
   end
 
-  def winner
-    if @auto.ships.sum {|ship| ship.health } == 0
-      print  "=============*~~~~~~* You  won! *~~~~~~*=============\n"
-      end_game
-    elsif @user.ships.sum { |ship| ship.health } == 0
-      print  "=============*~~~~~~* I won! *~~~~~~*=============\n"
-      end_game
-    else
-      nil
-    end
-  end
 
-  def end_game
-    battleship = Battleship.new
-    main_menu
-  end
   # ============================================
 
   # ============ HELPERS FOR DISPLAY ============
@@ -102,13 +71,46 @@ class Game
 
   # ============ HELPERS FOR FIRE COORDINATE ============
 
+
   def fire(declarer, coordinate)
     if declarer == @user
       @auto.board.cells[coordinate].fire_upon
       print "Your shot on #{coordinate} was a #{@auto.board.cells[coordinate].render}\n"
     elsif declarer == @auto
       @user.board.cells[coordinate].fire_upon
-      print "Mac C. Puter's shot on #{coordinate} was a #{@user.board.cells[coordinate].render}\n"
+      print "May C. Puter's shot on #{coordinate} was a #{@user.board.cells[coordinate].render}\n"
+    end
+  end
+
+
+  def print_welcome_to_battleship
+      puts "                                                                                 ".magenta
+      puts "  _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____  ".magenta
+      puts "                                                                                 ".magenta
+      puts "                                                                                 ".magenta
+      puts "                                                                                 ".magenta
+      puts "        *******************~~~~~~~~~~~~~~~~~~~~~~~~~~~~*******************       ".magenta
+      puts "  ************~~~~~~~~~~~~~~~ WELCOME TO BATTLESHIP ~~~~~~~~~~~~~~~************  ".magenta
+      puts "        *******************~~~~~~~~~~~~~~~~~~~~~~~~~~~~*******************       ".magenta
+      puts "                                                                                 ".magenta
+      puts "                                BY ARIQUE & PRIYA                                ".magenta
+      puts "                                                                                 ".magenta
+      puts " _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____   ".magenta
+      puts "                                                                                 ".magenta
+  end
+
+  def main_menu
+    print_welcome_to_battleship
+    print "Enter p to play. Enter q to quit. > "
+    response = gets.chomp.downcase[0]
+    if response == "p"
+      puts "Let's play!"
+    elsif response == "q"
+      puts "See you next time!"
+      leave_game
+    else
+      puts "Invalid entry. Bye!"
+      leave_game
     end
   end
 
@@ -134,6 +136,59 @@ class Game
         message_error_user_input
       end
     end
+  end
+
+  def leave_game
+    exit
+  end
+
+  def winner
+    if @auto.ships.sum {|ship| ship.health } == 0
+      you_won_banner
+      end_game
+    elsif @user.ships.sum { |ship| ship.health } == 0
+      i_won_banner
+      end_game
+    else
+      nil
+    end
+  end
+
+  def you_won_banner
+    puts "                                                                                 ".magenta
+    puts "  _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____  ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts "            **************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**************            ".magenta
+    puts "        ************~~~~~~~~~~~~~~~ YOU WON! ~~~~~~~~~~~~~~~************         ".magenta
+    puts "            **************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**************            ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts " _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____   ".magenta
+    puts "                                                                                 ".magenta
+  end
+
+  def i_won_banner
+    puts "                                                                                 ".magenta
+    puts "  _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____  ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts "            **************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**************            ".magenta
+    puts "        ************~~~~~~~~~~~~~~~  I WON!  ~~~~~~~~~~~~~~~************         ".magenta
+    puts "            **************~~~~~~~~~~~~~~~~~~~~~~~~~~~~~**************            ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts "                                                                                 ".magenta
+    puts " _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____ _____   ".magenta
+    puts "                                                                                 ".magenta
+  end
+
+  def end_game
+    battleship = Battleship.new
+    main_menu
   end
 
   def checking_user_coordinates
