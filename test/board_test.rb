@@ -208,5 +208,14 @@ class BoardTest < Minitest::Test
     assert_nil board.create_header_row
   end
 
+  def test_it_can_render_alphabetic_hash
+    board = Board.new
+    board.generate_cells
+
+    expected = {"A"=>[".", ".", ".", "."], "B"=>[".", ".", ".", "."], "C"=>[".", ".", ".", "."], "D"=>[".", ".", ".", "."]}
+    assert_equal expected, board.render_alphabetic_hash
+
+  end
+
 
 end
