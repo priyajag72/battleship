@@ -149,14 +149,11 @@ class Board
 
   def render(reveal=false)
     create_header_row
-    render_alphabetic_hash(reveal)
-
-    render_alphabetic_hash.map do |letter, cell_array|
+    render_alphabetic_hash(reveal).map do |letter, cell_array|
       print "#{letter}"
-      cell_array.map { |rendered_cell| print " #{rendered_cell}"}
-          puts " \n"
+        cell_array.map { |rendered_cell| print " #{rendered_cell}"}
     end
-    print "\n"
+    print "\n\n"
   end
 
 
