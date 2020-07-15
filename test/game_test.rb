@@ -1,5 +1,6 @@
 require "minitest/autorun"
 require "minitest/pride"
+require "mocha/minitest"
 require "./lib/ship"
 require "./lib/board"
 require "./lib/player"
@@ -330,8 +331,9 @@ class GameTest < Minitest::Test
     user.add_ship(user_cruiser)
     user.add_ship(user_submarine)
     game = Game.new(user, auto)
-
-    assert_equal "", game.auto_generate_single_coordinate
+    game.stubs(:auto_generate_single_coordinate).returns("A1")
+    
+    assert_equal "A1", game.auto_generate_single_coordinate
 
 
   end
