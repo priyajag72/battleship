@@ -26,10 +26,20 @@ class BoardTest < Minitest::Test
     assert_instance_of Cell, board.cells["A4"]
   end
 
+  def test_it_can_generate_cells
+    board = Board.new
+    assert_equal Array, board.generate_cells.class
+    assert_instance_of Cell, board.cells["D3"]
+  end
 
+  def test_it_can_generate_local_coordinates
+    board = Board.new
+    assert_equal Array, board.generate_local_coordinates.class
+    assert_equal 2, board.generate_local_coordinates[8].length
+    assert_equal String, board.generate_local_coordinates.last.class
+  end
 
   def test_it_can_place_a_ship
-    # skip
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
@@ -38,25 +48,26 @@ class BoardTest < Minitest::Test
     cell_1 = board.cells["A1"]
     cell_2 = board.cells["A2"]
     cell_3 = board.cells["A3"]
+    cell_4 = board.cells["A4"]
     assert_equal cruiser, cell_1.ship
     assert_equal cruiser, cell_2.ship
     assert_equal cruiser, cell_3.ship
-
-    expected = (cell_3.ship == cell_2.ship)
-
-    assert_equal true, expected
+    assert_equal nil, cell_4.ship
   end
-
-
 
   def test_it_can_avoid_ship_overlap_placement
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+
     assert_equal true, board.valid_placement?(cruiser, ["A1", "A2", "A3"])
+
     board.place(cruiser, ["A1", "A2", "A3"])
+
     assert_equal false, board.valid_placement?(submarine, ["A1", "B2"])
+
+    assert_equal true, board.valid_placement?(submarine, ["B3", "B4"])
   end
 
 
@@ -85,6 +96,18 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_multi_coordinates?(["C3", "D4", "E5"])
   end
 
+  def test_it_can_run_a_valid_coordinates_suite
+    board = Board.new
+    board.generate_cells
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    board.valid_placement?(submarine, ["A2", "A3"])
+    assert_equal true, board.valid_coordinates_suite(submarine)
+
+    board.valid_placement?(cruiser, ["A3", "A4", "A5"])
+    assert_equal false, board.valid_coordinates_suite(cruiser)
+  end
+
 
   def test_it_has_equal_quantity_of_coordinates_to_length_of_ship
     # skip
@@ -97,6 +120,31 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_placement?(submarine, ["A2", "A3", "A4"])
   end
 
+  def test_validated_placement
+    board = Board.new
+    board.generate_cells
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+
+    assert_nil board.cells["A1"].ship
+    assert_nil board.cells["A2"].ship
+    assert_nil board.cells["A3"].ship
+
+    assert_equal true, board.valid_placement?(cruiser, ["A1", "A2", "A3"])
+    board.validated_placement
+    assert_equal cruiser, board.cells["A1"].ship
+    assert_equal cruiser, board.cells["A2"].ship
+    assert_equal cruiser, board.cells["A3"].ship
+
+
+    assert_nil board.cells["B1"].ship
+    assert_nil board.cells["B2"].ship
+    assert_equal true, board.valid_placement?(submarine, ["B1", "B2"])
+    board.validated_placement
+    assert_equal submarine, board.cells["B1"].ship
+    assert_equal submarine, board.cells["B2"].ship
+
+  end
 
 
   def test_it_has_consecutive_coordinates_to_place_ship
@@ -143,36 +191,39 @@ class BoardTest < Minitest::Test
     assert_equal true, board.valid_placement?(cruiser, ["B1", "C1", "D1"])
   end
 
-  def test_it_can_render_a_board
-    expected1 = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
 
-    expected2 = "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
-
-    assert_equal expected1, @board.render
-    @board.place(@cruiser, ["A1", "A2", "A3"])
-    assert_equal expected2, @board.render(true)
-  end
-
-  def test_validated_placement
+  def test_it_can_create_header_row
     board = Board.new
     board.generate_cells
+    assert_nil board.create_header_row
+  end
+
+  def test_it_can_render_alphabetic_hash
+    board = Board.new
+    board.generate_cells
+
+    expected = {"A"=>[".", ".", ".", "."], "B"=>[".", ".", ".", "."], "C"=>[".", ".", ".", "."], "D"=>[".", ".", ".", "."]}
+    assert_equal expected, board.render_alphabetic_hash
+
     cruiser = Ship.new("Cruiser", 3)
-    submarine = Ship.new("Submarine", 2)
+    board.place(cruiser, ["A1", "A2", "A3"])
 
-    assert_equal true, board.valid_placement?(cruiser, ["A1", "A2", "A3"])
-    board.validated_placement
-    assert_equal cruiser, board.cells["A1"].ship
-    assert_equal cruiser, board.cells["A2"].ship
-    assert_equal cruiser, board.cells["A3"].ship
+    assert_equal expected, board.render_alphabetic_hash
 
+    expected2 = {"A"=>["S", "S", "S", "."], "B"=>[".", ".", ".", "."], "C"=>[".", ".", ".", "."], "D"=>[".", ".", ".", "."]}
 
-    assert_equal true, board.valid_placement?(submarine, ["B1", "B2"])
-    board.validated_placement
-    assert_equal submarine, board.cells["B1"].ship
-    assert_equal submarine, board.cells["B2"].ship
+    assert_equal expected2, board.render_alphabetic_hash(true)
+  end
 
-    #a helper method that tests to see if a valid_placement is true and then proceeds to automatically place the ship in question.
+  def test_it_can_render_a_board
+    # skip
+    expected1 = print " 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
 
+    expected2 = print " 1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    assert_equal expected1, @board.render
+    assert_equal expected2, @board.render(true)
   end
 
 end

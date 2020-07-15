@@ -54,7 +54,6 @@ class Board
     coordinates_exist_on_board.all?(true)
   end
 
-#helper method - write test
   def valid_coordinates_suite(ship)
     valid_multi_coordinates?(@coordinates) && ship.length == @coordinates.count && placement_consecutive?
   end
@@ -66,7 +65,7 @@ class Board
   end
 
   def validated_placement
-    if (valid_coordinates_suite(@ship) && ship_overlap(@ship, @coordinates)) == true
+    if (valid_coordinates_suite(@ship) && ship_overlap(@ship, @coordinates))
       place(@ship, @coordinates)
     end
   end
@@ -80,6 +79,9 @@ class Board
       p "Ooops"
     end
   end
+# DIAGONAL METHOD HERE
+
+
 
   def convert_coord_int
     integer_coord = []
@@ -128,26 +130,32 @@ class Board
     end
   end
 
+  def create_header_row
+    dimensions = @cells.keys.last[1].to_i
+
+    numbers = ("1".."#{dimensions}").to_a.join(" ")
+
+    header_row = "  #{numbers}\n"
+    print header_row
+  end
+
+  def render_alphabetic_hash(reveal=false)
+    render_hash_accessible =
+    @cells.reduce(Hash.new {|h,k| h[k] = []}) do |render_hash, cell|
+      letter = cell[0].split(//)[0]
+      render_hash["#{letter}"] << "#{cell[1].render(reveal)}"
+      render_hash
+    end
+  end
+
   def render(reveal=false)
-
-    " 1 2 3 4 \n" +
-    "A #{cells["A1"].render(reveal)} #{cells["A2"].render(reveal)} #{cells["A3"].render(reveal)} #{cells["A4"].render(reveal)} \n" +
-    "B #{cells["B1"].render(reveal)} #{cells["B2"].render(reveal)} #{cells["B3"].render(reveal)} #{cells["B4"].render(reveal)} \n" +
-    "C #{cells["C1"].render(reveal)} #{cells["C2"].render(reveal)} #{cells["C3"].render(reveal)} #{cells["C4"].render(reveal)} \n" +
-    "D #{cells["D1"].render(reveal)} #{cells["D2"].render(reveal)} #{cells["D3"].render(reveal)} #{cells["D4"].render(reveal)} \n"
-
-#FOR REFACTOR SEASON
-    # render_hash_accessible = @cells.reduce(Hash.new {|h,k| h[k] = []}) do |render_hash, cell|
-    #   letter = cell[0].split(//)[0]
-    #   render_hash["#{letter}"] << "#{cell[1].render(reveal)}"
-    #   render_hash
-    # end
-    #
-    # render_hash_accessible.each do |letter, cell_array|
-    #   print "#{letter}"
-    #     cell_array.map { |rendered_cell| print " #{rendered_cell}"}
-    #       puts " "
-    # end
+    create_header_row
+    render_alphabetic_hash(reveal).map do |letter, cell_array|
+      print "#{letter}"
+        cell_array.map { |rendered_cell| print " #{rendered_cell}"}
+        puts "\n"
+    end
+    print "\n\n"
   end
 
 

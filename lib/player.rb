@@ -12,8 +12,6 @@ class Player
     @ships << ship
   end
 
-
-
   def ship_setup
     if @type == :auto
       until all_ships_placed?
@@ -21,38 +19,54 @@ class Player
       end
     else
       until all_ships_placed?
-        @ships.each do |ship|
-          puts "Enter the squares for the #{ship.name} (#{ship.length} spaces)"
-          puts "> "
-          user_ship_coords = gets.chomp.upcase.split(/ /)
-          result = @board.valid_placement?(ship, user_ship_coords)
-          if result == false
-            until this_ship_placed?(ship)
-              puts "Those are invalid coordinates. Please try again: "
-              user_ship_coords2 = gets.chomp.upcase.split(/ /)
+        collect_user_input_for_ships
+      end
+  end
+
+  def collect_user_input_for_ships
+    @ships.each do |ship|
+      puts "\nEnter the squares for the #{ship.name} (#{ship.length} spaces) > "
+      user_ship_coords = gets.chomp.upcase.split(/ /)
+      result = @board.valid_placement?(ship, user_ship_coords)
+        if result == false
+          until this_ship_placed?(ship)
+            puts "Those are invalid coordinates. Please try again: \n Please put #{ship.length} coordinates with spaces in between."
+
+            user_ship_coords2 = gets.chomp.upcase.split(/ /)
+
             @board.valid_placement?(ship, user_ship_coords2)
-            @board.validated_placement
-            end
-          else
+
             @board.validated_placement
           end
+        else
+          @board.validated_placement
         end
       end
     end
   end
 
+
+  # 
+  # def user_error_message_loop(ship)
+  #
+  # end
+
   def auto_generate_coordinates
     @ships.each do |ship|
       until this_ship_placed?(ship)
-        auto_coords = []
-        possible = @board.cells.keys.shuffle
-        ship.length.times do
-          auto_coords << possible[0]
-          possible.rotate!
-        end
-        @board.valid_placement?(ship, auto_coords)
+        coords_by_ship_length(ship)
+        @board.valid_placement?(ship, @auto_coords)
         @board.validated_placement
       end
+    end
+  end
+
+  def coords_by_ship_length(ship)
+    @auto_coords = []
+    possible = @board.cells.keys.shuffle
+    ship.length.times do
+      @auto_coords << possible[0]
+      possible.rotate!
     end
   end
 
@@ -82,46 +96,7 @@ class Player
     ship_count == ships_on_board
   end
 
-
-  # def ship_setup
-  #   if @type == :auto
-  #     # helper-method: auto_generation CALLS
-  #     # helper-method: player_place_ships
-  #     # auto generation
-  #     p "type auto"
-  #   elsif @type == :user
-  #     # Put in a guard for user error
-  #
-  #     # helper-method: player_place_ships
-  #     @ships.each do |ship|
-  #       if ship.length == 3
-  #         puts "Enter the squares for the Cruiser (3 spaces):"
-  #         puts "> "
-  #       elsif ship.length == 2
-  #         puts "Enter the squares for the Submarine (2 spaces):"
-  #         puts "> "
-  #       end
-  #
-  #       user_ship_coords = gets.chomp.upcase.split(/ /)
-  #       # Consider loop for user error
-  #       if @board.valid_placement?(ship, user_ship_coords) == true
-  #         @board.place(ship, user_ship_coords)
-  #       elsif @board.valid_placement?(ship, user_ship_coords) == false
-  #         loop do
-  #           puts "Those are invalid coordinates. Please try again:"
-  #           puts "> "
-  #           user_ship_coords = gets.chomp.upcase.split(/ /)
-  #
-  #           if @board.valid_placement?(ship, user_ship_coords) == true
-  #             @board.place(ship, user_ship_coords)
-  #             # require "pry"; binding.pry
-  #             exit # Could be a helper-method
-  #           end
-  #         end
-  #       end
-  #     end
-  #   end
-  # end
-
-
+  def cell_fired_upon?(coord)
+    @board.cells[coord].fired_upon?
+  end
 end
