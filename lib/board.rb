@@ -54,7 +54,6 @@ class Board
     coordinates_exist_on_board.all?(true)
   end
 
-#helper method - write test
   def valid_coordinates_suite(ship)
     valid_multi_coordinates?(@coordinates) && ship.length == @coordinates.count && placement_consecutive?
   end
