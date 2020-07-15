@@ -73,8 +73,12 @@ class Game
     end_game
   end
 
+  def print_welcome_to_battleship
+    "Welcome to BATTLESHIP\n"
+  end
   def main_menu
-    print "Welcome to BATTLESHIP\n Enter p to play. Enter q to quit. > "
+    print_welcome_to_battleship
+    print "Enter p to play. Enter q to quit. > "
     response = gets.chomp.downcase[0]
     if response == "p"
       puts "Let's play!"
