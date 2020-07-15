@@ -36,6 +36,7 @@ class BoardTest < Minitest::Test
     board = Board.new
     assert_equal Array, board.generate_local_coordinates.class
     assert_equal 2, board.generate_local_coordinates[8].length
+    assert_equal String, board.generate_local_coordinates.last.class
   end
 
 
