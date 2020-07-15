@@ -240,13 +240,13 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_setup_ships
-    skip
+    # skip
 
     # HERE
     auto_cruiser = Ship.new("Cruiser", 3)
     auto_submarine = Ship.new("Submarine", 2)
-    user_cruiser = Ship.new("Cruiser", 3)
-    user_submarine = Ship.new("Submarine", 2)
+    user_cruiser = Ship.new("CruiserBruiser", 3)
+    user_submarine = Ship.new("SubmarineBubmarine", 2)
 
     auto_board = Board.new
     auto_board.generate_cells

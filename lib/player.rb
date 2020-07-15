@@ -25,10 +25,12 @@ class Player
 
   def collect_user_input_for_ships
     @ships.each do |ship|
-      puts "\nEnter the squares for the #{ship.name} (#{ship.length} spaces) > "
+      puts "\nPlease input your coordinates as letter + number.\nFor example, if I wanted to place my SUBMARINE, I might try B2 C2.\n\nRemember: your ship must be placed HORIZONTALLY or VERTICALLY in consecutive spaces."
+      print "\n\nEnter the squares for the #{ship.name} (#{ship.length} spaces). > "
       user_ship_coords = gets.chomp.upcase.split(/ /)
       result = @board.valid_placement?(ship, user_ship_coords)
         if result == false
+          require "pry"; binding.pry
           until this_ship_placed?(ship)
             puts "Those are invalid coordinates. Please try again: \n Please put #{ship.length} coordinates with spaces in between."
 
