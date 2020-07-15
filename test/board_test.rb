@@ -32,6 +32,11 @@ class BoardTest < Minitest::Test
     assert_instance_of Cell, board.cells["D3"]
   end
 
+  def test_it_can_generate_local_coordinates
+    board = Board.new
+    assert_equal Array, board.generate_local_coordinates.class
+  end
+
 
 
   def test_it_can_place_a_ship
