@@ -39,10 +39,7 @@ class BoardTest < Minitest::Test
     assert_equal String, board.generate_local_coordinates.last.class
   end
 
-
-
   def test_it_can_place_a_ship
-    # skip
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
@@ -51,13 +48,11 @@ class BoardTest < Minitest::Test
     cell_1 = board.cells["A1"]
     cell_2 = board.cells["A2"]
     cell_3 = board.cells["A3"]
+    cell_4 = board.cells["A4"]
     assert_equal cruiser, cell_1.ship
     assert_equal cruiser, cell_2.ship
     assert_equal cruiser, cell_3.ship
-
-    expected = (cell_3.ship == cell_2.ship)
-
-    assert_equal true, expected
+    assert_equal nil, cell_4.ship
   end
 
 
