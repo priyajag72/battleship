@@ -29,7 +29,6 @@ class CellTest < Minitest::Test
   end
 
   def test_it_can_be_fired_upon
-    # skip
     cell = Cell.new("B4")
 
     cruiser = Ship.new("Cruiser", 3)
@@ -70,8 +69,6 @@ class CellTest < Minitest::Test
 
     assert_equal "X", cell_2.render
     assert_equal true, cruiser.sunk?
-
-
   end
 
 
