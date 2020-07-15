@@ -74,7 +74,16 @@ class Game
   end
 
   def print_welcome_to_battleship
-    "Welcome to BATTLESHIP\n"
+    puts "                                                                                  \n"
+    puts "  _  _  _ _______        _______  _____  _______ _______      _______  _____      \n"
+    puts "  |  |  | |______ |      |       |     | |  |  | |______         |    |     |     \n"
+    puts "  |__|__| |______ |_____ |_____  |_____| |  |  | |______         |    |_____|     \n"
+    puts "                                                                                  \n"
+    puts "______  _______ _______ _______        _______ _______ _     _ _____  _____       \n"
+    puts "|_____] |_____|    |       |    |      |______ |______ |_____|   |   |_____]      \n"
+    puts "|_____] |     |    |       |    |_____ |______ ______| |     | __|__ |            \n"
+    puts "                                                                                  \n"
+    puts "                                                                                  \n"
   end
   def main_menu
     print_welcome_to_battleship
