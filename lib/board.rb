@@ -152,6 +152,7 @@ class Board
     render_alphabetic_hash(reveal).map do |letter, cell_array|
       print "#{letter}"
         cell_array.map { |rendered_cell| print " #{rendered_cell}"}
+        puts "\n"
     end
     print "\n\n"
   end
