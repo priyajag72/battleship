@@ -46,7 +46,7 @@ class Player
   end
 
 
-  # 
+  #
   # def user_error_message_loop(ship)
   #
   # end

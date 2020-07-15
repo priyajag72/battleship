@@ -10,58 +10,6 @@ class Game
     @turn_coord = nil
   end
 
-  def display_board
-    message_turn
-    message_computer_display
-    message_player_display
-  end
-
-  def fire(declarer, coordinate)
-    if declarer == @user
-      @auto.board.cells[coordinate].fire_upon
-      print "Your shot on #{coordinate} was a #{@auto.board.cells[coordinate].render}\n"
-    elsif declarer == @auto
-      @user.board.cells[coordinate].fire_upon
-      print "Mac C. Puter's shot on #{coordinate} was a #{@user.board.cells[coordinate].render}\n"
-    end
-  end
-
-  def fire_coordinate(declarer)
-    case declarer
-      when @user
-        # message_user_input
-        fire(@user, message_user_input)
-      when @auto
-        fire(@auto, auto_generate_single_coordinate)
-    end
-  end
-
-  # ============ HELPERS FOR DISPLAY ============
-  def message_turn
-    @turn_counter += 1
-    print "~~~~~~~~~~~~~ TURN ##{@turn_counter} ~~~~~~~~~~~~~\n"
-  end
-
-  def message_computer_board
-  end
-
-  def message_computer_display
-    print "=============COMPUTER BOARD=============\n"
-    # message_computer_board
-    @auto.board.render
-  end
-
-  def message_player_board
-  end
-
-  def message_player_display
-    print "==============PLAYER BOARD==============\n"
-    # message_player_board
-    @user.board.render(true)
-  end
-  # ============================================
-
-
   def start
     main_menu
     players_setup_ships
@@ -73,6 +21,23 @@ class Game
     end_game
   end
 
+  def display_board
+    message_turn
+    message_computer_display
+    message_player_display
+  end
+
+  def fire_coordinate(declarer)
+    case declarer
+    when @user
+      # message_user_input
+      fire(@user, message_user_input)
+    when @auto
+      fire(@auto, auto_generate_single_coordinate)
+    end
+  end
+
+  # ============ HELPERS FOR START ============
   def main_menu
     print "Welcome to BATTLESHIP\n Enter p to play. Enter q to quit. > "
     response = gets.chomp.downcase[0]
@@ -87,7 +52,65 @@ class Game
     end
   end
 
+  def leave_game
+    exit
+  end
+
+  def players_setup_ships
+    print message_computer_display
+    print message_player_display
+    @auto.ship_setup
+    print "\nI have laid out my ships on the grid.\nYou now need to lay out your two ships.\nThe Cruiser is three coordinates long.\n The Submarine is two coordinates long.\n"
+    @user.ship_setup
+  end
+
+  def winner
+    if @auto.ships.sum {|ship| ship.health } == 0
+      print  "=============*~~~~~~* You  won! *~~~~~~*=============\n"
+      end_game
+    elsif @user.ships.sum { |ship| ship.health } == 0
+      print  "=============*~~~~~~* I won! *~~~~~~*=============\n"
+      end_game
+    else
+      nil
+    end
+  end
+
+  def end_game
+    battleship = Battleship.new
+    main_menu
+  end
+  # ============================================
+
+  # ============ HELPERS FOR DISPLAY ============
+  def message_turn
+    @turn_counter += 1
+    print "~~~~~~~~~~~~~ TURN ##{@turn_counter} ~~~~~~~~~~~~~\n"
+  end
+
+  def message_computer_display
+    print "=============COMPUTER BOARD=============\n"
+    @auto.board.render
+  end
+
+  def message_player_display
+    print "==============PLAYER BOARD==============\n"
+    @user.board.render(true)
+  end
+  # ============================================
+
   # ============ HELPERS FOR FIRE COORDINATE ============
+
+  def fire(declarer, coordinate)
+    if declarer == @user
+      @auto.board.cells[coordinate].fire_upon
+      print "Your shot on #{coordinate} was a #{@auto.board.cells[coordinate].render}\n"
+    elsif declarer == @auto
+      @user.board.cells[coordinate].fire_upon
+      print "Mac C. Puter's shot on #{coordinate} was a #{@user.board.cells[coordinate].render}\n"
+    end
+  end
+
   def message_user_input
     p "Enter the coordinate for your shot"
     print "> "
@@ -111,39 +134,6 @@ class Game
       end
     end
   end
-
-
-  def leave_game
-    exit
-  end
-
-  def players_setup_ships
-    print message_computer_display
-    print message_player_display
-    @auto.ship_setup
-    print "\nI have laid out my ships on the grid.\nYou now need to lay out your two ships.\nThe Cruiser is three coordinates long.\n The Submarine is two coordinates long.\n"
-    @user.ship_setup
-  end
-
-
-
-  def winner
-    if @auto.ships.sum {|ship| ship.health } == 0
-      print  "=============*~~~~~~* You  won! *~~~~~~*=============\n"
-      end_game
-    elsif @user.ships.sum { |ship| ship.health } == 0
-      print  "=============*~~~~~~* I won! *~~~~~~*=============\n"
-      end_game
-    else
-      nil
-    end
-  end
-
-  def end_game
-    battleship = Battleship.new
-    main_menu
-  end
-
 
   def checking_user_coordinates
     loop do
@@ -172,6 +162,5 @@ class Game
     next_hit.shuffle[0][0]
   end
   # ====================================================
-
 
 end
