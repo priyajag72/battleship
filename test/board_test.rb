@@ -96,6 +96,18 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_multi_coordinates?(["C3", "D4", "E5"])
   end
 
+  def test_it_can_run_a_valid_coordinates_suite
+    board = Board.new
+    board.generate_cells
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    board.valid_placement?(submarine, ["A2", "A3"])
+    assert_equal true, board.valid_coordinates_suite(submarine)
+
+    board.valid_placement?(cruiser, ["A3", "A4", "A5"])
+    assert_equal false, board.valid_coordinates_suite(cruiser)
+  end
+
 
   def test_it_has_equal_quantity_of_coordinates_to_length_of_ship
     # skip
