@@ -147,7 +147,6 @@ class BoardTest < Minitest::Test
   end
 
 
-
   def test_it_has_consecutive_coordinates_to_place_ship
     board = Board.new
     board.generate_cells
