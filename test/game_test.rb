@@ -46,7 +46,7 @@ class GameTest < Minitest::Test
 
   def test_it_can_call_correct_render_board
 
-    assert_equal Hash, @game.display_board.class
+    assert_equal nil, @game.display_board
   end
 
   def test_it_prints_first_line_to_user_as_turn_counter
@@ -106,7 +106,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_shoot_for_auto
-    skip
+
     # auto attempt to fire on A1
       # produce user A1 = H
     assert_equal false, @game.user.board.cells["A1"].fired_upon?
@@ -160,7 +160,7 @@ class GameTest < Minitest::Test
   # end
 
   def test_it_displays_fired_upon_error_message_and_resets_the_loop
-    skip
+
     assert_equal false, @game.auto.board.cells["B2"].fired_upon?
 
     @game.fire(@user, "B2")
@@ -173,7 +173,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_displays_fired_upon_error_message_and_resets_the_loop_if_user_enters_two_or_more_cells_that_have_been_fired_on
-    skip
+
     @game.fire(@user, "B2")
     @game.fire(@user, "C4")
     # In terminal, inputting B2
@@ -187,7 +187,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_check_user_input_for_valid_coordinates
-    skip
+
     @game.message_user_input
     # In terminal, initial input is B6, then B1
     # (which is off the current board size). Expected response is error message and opportunity to store appropriate coordinate.
@@ -195,21 +195,21 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_check_user_input_for_valid_coordinates_for_two_or_more_errors
-    skip
+
     @game.message_user_input
     # In terminal, initial input is B6 and G9, then B1
     assert_equal "B1", @game.turn_coord
   end
 
   def test_it_can_check_valid_firing_coordinate_based_off_player_board_cells
-    skip
+
     @game.message_user_input
     # In terminal, input tests X9
     assert_equal "D2", @game.turn_coord
   end
 
   def test_it_can_get_auto_coordinates
-    skip
+
     @game.fire(@user, "B2")
     @game.fire(@user, "C3")
     # @game.fire(@user, @game.fire_coordinate(@user))
@@ -219,7 +219,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_setup_ships
-    skip
+
     # HERE
     auto_cruiser = Ship.new("Cruiser", 3)
     auto_submarine = Ship.new("Submarine", 2)
@@ -244,7 +244,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_determine_winner
-    skip
+
     auto_cruiser = Ship.new("Cruiser", 3)
     auto_submarine = Ship.new("Submarine", 2)
     user_cruiser = Ship.new("Cruiser", 3)
