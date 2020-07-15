@@ -165,12 +165,10 @@ class Game
   end
 
   def auto_generate_single_coordinate
-    require "pry"; binding.pry
-    possible = @user.board.cells.keys.shuffle
-    auto_cord = possible[0]
-    possible.rotate!
-    auto_cord
-    #already hit guard
+    next_hit = @user.board.cells.find do |cell|
+      cell[1].fired_upon? == false
+    end
+    next_hit[0]
   end
   # ====================================================
 
