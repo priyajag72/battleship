@@ -237,8 +237,15 @@ class GameTest < Minitest::Test
     # assert_equal "M", @game.auto.board.cells["B2"].render
   end
 
+  def test_it_can_print_banners
+
+    assert_equal " ", @game.you_won_banner
+    # assert_equal " ", @game.i_won_banner
+
+  end
+
   def test_it_can_setup_ships
-    # skip
+    skip
 
     # HERE
     auto_cruiser = Ship.new("Cruiser", 3)
@@ -266,7 +273,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_determine_winner
-
+    skip
     auto_cruiser = Ship.new("Cruiser", 3)
     auto_submarine = Ship.new("Submarine", 2)
     user_cruiser = Ship.new("Cruiser", 3)
