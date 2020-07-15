@@ -261,8 +261,8 @@ class GameTest < Minitest::Test
     user_board = Board.new
     user_board.generate_cells
 
-    auto = mock("Auto Player", auto_board)
-    user = mock("User Player", user_board)
+    auto = Player.new(:auto, auto_board)
+    user = Player.new(:user, user_board)
 
     auto.add_ship(auto_cruiser)
     auto.add_ship(auto_submarine)
@@ -275,7 +275,7 @@ class GameTest < Minitest::Test
 
   def test_it_can_determine_winner
     skip
-  
+
     # THIS TEST DOES NOT CURRENTLY RUN CORRECTLY
 
     auto_cruiser = Ship.new("Cruiser", 3)
