@@ -21,7 +21,7 @@ class CellTest < Minitest::Test
     cell = Cell.new("B4")
 
     cruiser = Ship.new("Cruiser", 3)
-
+    assert_equal true, cell.empty?
     cell.place_ship(cruiser)
     assert_equal cruiser, cell.ship
 
