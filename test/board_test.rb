@@ -35,6 +35,7 @@ class BoardTest < Minitest::Test
   def test_it_can_generate_local_coordinates
     board = Board.new
     assert_equal Array, board.generate_local_coordinates.class
+    assert_equal 2, board.generate_local_coordinates[8].length
   end
 
 
