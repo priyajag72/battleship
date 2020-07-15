@@ -148,7 +148,7 @@ class Game
 
   def winner
     if @auto.ships.sum {|ship| ship.health } == 0
-      print  "=============*~~~~~~* You  won! *~~~~~~*=============\n"
+      you_won_banner
       end_game
     elsif @user.ships.sum { |ship| ship.health } == 0
       i_won_banner
