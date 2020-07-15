@@ -47,7 +47,17 @@ class PlayerTest < Minitest::Test
     @player1.add_ship(@submarine1)
     @player2.add_ship(@cruiser2)
     @player2.add_ship(@submarine2)
+
+
     # Tested in pry. Is working currently before auto generation and user error.
+  end
+
+  def test_it_can_auto_generate_coordinates_by_ship_length
+    board = Board.new
+    board.generate_cells
+    auto = Player.new(:auto, board)
+    cruiser = Ship.new("Cruiser", 3)
+    assert_equal 3, auto.coords_by_ship_length(cruiser)
   end
 
   def test_it_can_tell_all_ships_are_placed

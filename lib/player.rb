@@ -41,17 +41,22 @@ class Player
   def auto_generate_coordinates
     @ships.each do |ship|
       until this_ship_placed?(ship)
-        auto_coords = []
-        possible = @board.cells.keys.shuffle
-        ship.length.times do
-          auto_coords << possible[0]
-          possible.rotate!
-        end
-        @board.valid_placement?(ship, auto_coords)
+        coords_by_ship_length(ship)
+        @board.valid_placement?(ship, @auto_coords)
         @board.validated_placement
       end
     end
   end
+
+  def coords_by_ship_length(ship)
+    @auto_coords = []
+    possible = @board.cells.keys.shuffle
+    ship.length.times do
+      @auto_coords << possible[0]
+      possible.rotate!
+    end
+  end
+
 
   def this_ship_placed?(ship)
     @board.cells.values.any? do |cell|
