@@ -26,6 +26,11 @@ class BoardTest < Minitest::Test
     assert_instance_of Cell, board.cells["A4"]
   end
 
+  def test_it_can_generate_cells
+    board = Board.new
+    assert_equal Array, board.generate_cells.class
+  end
+
 
 
   def test_it_can_place_a_ship
@@ -144,13 +149,13 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_can_render_a_board
-    skip
-    expected1 = " 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+    # skip
+    expected1 = print " 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
 
-    expected2 = " 1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+    expected2 = print " 1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
 
-    assert_equal expected1, @board.render
     @board.place(@cruiser, ["A1", "A2", "A3"])
+    assert_equal expected1, @board.render
     assert_equal expected2, @board.render(true)
   end
 
