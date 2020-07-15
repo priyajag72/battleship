@@ -240,13 +240,6 @@ class GameTest < Minitest::Test
     # assert_equal "M", @game.auto.board.cells["B2"].render
   end
 
-  def test_it_can_print_banners
-    #
-    # assert_equal " ", @game.you_won_banner
-    assert_equal "", @game.print_welcome_to_battleship
-
-  end
-
   def test_it_can_setup_ships
     # skip
 
