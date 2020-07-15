@@ -12,8 +12,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_exists
-    board = Board.new
-    assert_instance_of Board, board
+    assert_instance_of Board, @board
   end
 
 
