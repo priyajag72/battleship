@@ -238,9 +238,9 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_print_banners
-
-    assert_equal " ", @game.you_won_banner
-    # assert_equal " ", @game.i_won_banner
+    #
+    # assert_equal " ", @game.you_won_banner
+    assert_equal "", @game.print_welcome_to_battleship
 
   end
 
