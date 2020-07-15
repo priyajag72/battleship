@@ -191,16 +191,6 @@ class BoardTest < Minitest::Test
     assert_equal true, board.valid_placement?(cruiser, ["B1", "C1", "D1"])
   end
 
-  def test_it_can_render_a_board
-    # skip
-    expected1 = print " 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
-
-    expected2 = print " 1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
-
-    @board.place(@cruiser, ["A1", "A2", "A3"])
-    assert_equal expected1, @board.render
-    assert_equal expected2, @board.render(true)
-  end
 
   def test_it_can_create_header_row
     board = Board.new
@@ -221,11 +211,19 @@ class BoardTest < Minitest::Test
     assert_equal expected, board.render_alphabetic_hash
 
     expected2 = {"A"=>["S", "S", "S", "."], "B"=>[".", ".", ".", "."], "C"=>[".", ".", ".", "."], "D"=>[".", ".", ".", "."]}
-    
+
     assert_equal expected2, board.render_alphabetic_hash(true)
-
-
   end
 
+  def test_it_can_render_a_board
+    # skip
+    expected1 = print " 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+
+    expected2 = print " 1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
+
+    @board.place(@cruiser, ["A1", "A2", "A3"])
+    assert_equal expected1, @board.render
+    assert_equal expected2, @board.render(true)
+  end
 
 end
