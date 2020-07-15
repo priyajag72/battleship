@@ -30,7 +30,6 @@ class Player
       user_ship_coords = gets.chomp.upcase.split(/ /)
       result = @board.valid_placement?(ship, user_ship_coords)
         if result == false
-          require "pry"; binding.pry
           until this_ship_placed?(ship)
             puts "Those are invalid coordinates. Please try again: \n Please put #{ship.length} coordinates with spaces in between."
 
@@ -39,9 +38,11 @@ class Player
             @board.valid_placement?(ship, user_ship_coords2)
 
             @board.validated_placement
+            @board.render(true)
           end
         else
           @board.validated_placement
+          @board.render(true)
         end
       end
     end

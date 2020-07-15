@@ -1,4 +1,5 @@
 require_relative "./battleship"
+require "colorize"
 class Game
 
   attr_reader :user, :auto, :turn_counter, :turn_coord
@@ -39,7 +40,7 @@ class Game
 
   # ============ HELPERS FOR START ============
   def main_menu
-    print "Welcome to BATTLESHIP\n Enter p to play. Enter q to quit. > "
+    print "Welcome to BATTLESHIP\nEnter p to play. Enter q to quit. > "
     response = gets.chomp.downcase[0]
     if response == "p"
       puts "Let's play!"
@@ -60,7 +61,7 @@ class Game
     print message_computer_display
     print message_player_display
     @auto.ship_setup
-    print "\nI have laid out my ships on the grid.\nYou now need to lay out your two ships.\n\nThe Cruiser is three coordinates long.\nThe Submarine is two coordinates long.\n"
+    puts "\nI have laid out my ships on the grid.\n" + "You".magenta + " now need to lay out your two ships.\n\nThe" + " Cruiser ".red + "is " + "three ".red + "coordinates long.\nThe " + "Submarine ".blue + "is " + "two ".blue + "coordinates long."
     @user.ship_setup
   end
 
