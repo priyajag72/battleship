@@ -28,20 +28,28 @@ class Player
       puts "\nEnter the squares for the #{ship.name} (#{ship.length} spaces) > "
       user_ship_coords = gets.chomp.upcase.split(/ /)
       result = @board.valid_placement?(ship, user_ship_coords)
-    if result == false
-      until this_ship_placed?(ship)
-        puts "Those are invalid coordinates. Please try again: \n Please put #{ship.length} coordinates with spaces in between."
-        user_ship_coords2 = gets.chomp.upcase.split(/ /)
-      @board.valid_placement?(ship, user_ship_coords2)
-      @board.validated_placement
+        if result == false
+          until this_ship_placed?(ship)
+            user_error_message_loop
+          end
+        else
+          @board.validated_placement
+        end
       end
-    else
-      @board.validated_placement
     end
   end
-end
-  end
 
+  
+
+  def user_error_message_loop
+    puts "Those are invalid coordinates. Please try again: \n Please put #{ship.length} coordinates with spaces in between."
+
+    user_ship_coords2 = gets.chomp.upcase.split(/ /)
+
+    @board.valid_placement?(ship, user_ship_coords2)
+
+    @board.validated_placement
+  end
   def auto_generate_coordinates
     @ships.each do |ship|
       until this_ship_placed?(ship)
