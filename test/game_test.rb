@@ -262,7 +262,7 @@ class GameTest < Minitest::Test
     user.add_ship(user_submarine)
     game = Game.new(user, auto)
 
-    assert_nil game.players_setup_ships
+    assert_equal :collect_user_input_for_ships, game.players_setup_ships
   end
 
   def test_it_can_determine_winner
@@ -290,7 +290,7 @@ class GameTest < Minitest::Test
     user.add_ship(user_submarine)
     game = Game.new(user, auto)
 
-        auto.board.place(user_cruiser, ["B1", "C1", "D1"])
+    auto.board.place(user_cruiser, ["B1", "C1", "D1"])
     auto.board.place(user_submarine, ["A1", "A2"])
     user.board.place(user_cruiser, ["A1", "A2", "A3"])
     user.board.place(user_submarine, ["C3", "D3"])

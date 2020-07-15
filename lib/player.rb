@@ -25,18 +25,15 @@ class Player
 
   def collect_user_input_for_ships
     @ships.each do |ship|
-      puts "\nPlease input your coordinates as letter + number.\nFor example, if I wanted to place my SUBMARINE, I might try B2 C2.\n\nRemember: your ship must be placed HORIZONTALLY or VERTICALLY in consecutive spaces."
-      print "\n\nEnter the squares for the #{ship.name} (#{ship.length} spaces). > "
+      puts "\nPlease input your coordinates as " + " letter + number".magenta + ".\nFor example, if I wanted to place my SUBMARINE, I might try " + "B2 C2".magenta + ". \nRemember: your ship must be placed HORIZONTALLY or VERTICALLY in consecutive spaces."
+      print "\n\nEnter the squares for the #{ship.name} (" + "#{ship.length}".magenta + " spaces). > "
       user_ship_coords = gets.chomp.upcase.split(/ /)
       result = @board.valid_placement?(ship, user_ship_coords)
         if result == false
           until this_ship_placed?(ship)
-            puts "Those are invalid coordinates. Please try again: \n Please put #{ship.length} coordinates with spaces in between."
-
+            puts "\nThose are " + "invalid".red + " coordinates. Please try again: \n Please put #{ship.length} coordinates with spaces in between."
             user_ship_coords2 = gets.chomp.upcase.split(/ /)
-
             @board.valid_placement?(ship, user_ship_coords2)
-
             @board.validated_placement
             @board.render(true)
           end
@@ -47,12 +44,6 @@ class Player
       end
     end
   end
-
-
-  #
-  # def user_error_message_loop(ship)
-  #
-  # end
 
   def auto_generate_coordinates
     @ships.each do |ship|
