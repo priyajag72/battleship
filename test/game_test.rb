@@ -46,25 +46,31 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_shoot_for_user
-
-    @game.stubs(:fire).returns(@user, "A1")
+    skip
+    # user attempt to fire on A1
+      # produce auto A1 = H
+    @game.fire(@user, "A1")
     assert_equal true, @game.auto.board.cells["A1"].fired_upon?
     assert_equal "H", @game.auto.board.cells["A1"].render
 
-    @game.stubs(:fire).returns(@user, "C3")
+    # user attempt to fire on C3
+      # produce auto C3 = M
+    @game.fire(@user, "C3")
     assert_equal true, @game.auto.board.cells["C3"].fired_upon?
     assert_equal "M", @game.auto.board.cells["C3"].render
     assert_equal "H", @game.auto.board.cells["A1"].render
 
-    @game.stubs(:fire).returns(@user, "B1")
+    # user attempt to fire on B1, C1, D1
+      # produce auto B1, C1, D1 = X
+    @game.fire(@user, "B1")
     assert_equal true, @game.auto.board.cells["B1"].fired_upon?
     assert_equal "H", @game.auto.board.cells["B1"].render
 
-    @game.stubs(:fire).returns(@user, "C1")
+    @game.fire(@user, "C1")
     assert_equal true, @game.auto.board.cells["C1"].fired_upon?
     assert_equal "H", @game.auto.board.cells["C1"].render
 
-    @game.stubs(:fire).returns(@user, "D1")
+    @game.fire(@user, "D1")
     assert_equal true, @game.auto.board.cells["D1"].fired_upon?
     assert_equal "X", @game.auto.board.cells["D1"].render
     assert_equal "X", @game.auto.board.cells["C1"].render
@@ -75,7 +81,7 @@ class GameTest < Minitest::Test
   end
 
   def test_it_can_shoot_for_auto
-    # skip
+    skip
 
     # auto attempt to fire on A1
       # produce user A1 = H
@@ -117,22 +123,10 @@ class GameTest < Minitest::Test
   end
 
   def test_it_will_automatically_remove_excess_characters_past_two_for_user_input
-    skip
-    # Needs update with Mocks/Stubs
-    # In terminal, inputting "A1A2A3"
+    print "Debug: In terminal, inputting A1A2A3"
     @game.message_user_input
     assert_equal 2, @game.turn_coord.length
   end
-
-  # def test_it_checks_user_fire_coordinate_input_for_fired_upon_cell_value_is_true
-  # skip
-  # Needs update with Mocks/Stubs
-
-  #   @game.fire(@user, "B2")
-  #   # In terminal, inputting B2
-  #   @game.message_user_input
-  #   assert_equal true, @game.auto.board.cells["B2"].fired_upon?
-  # end
 
   def test_it_displays_fired_upon_error_message_and_resets_the_loop
     skip
