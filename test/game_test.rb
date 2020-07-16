@@ -35,70 +35,36 @@ class GameTest < Minitest::Test
   end
 
   def test_it_exists
-    # skip
     assert_instance_of Game, @game
   end
 
   def test_it_has_attributes
-    # skip
     assert_equal @user, @game.user
     assert_equal @auto, @game.auto
     assert_equal 0, @game.turn_counter
     assert_nil @game.turn_coord
   end
 
-  def test_it_can_call_correct_render_board
-    skip
-    # Needs update with Mocks/Stubs
-    assert_equal nil, @game.display_board
-  end
-
-  def test_it_prints_first_line_to_user_as_turn_counter
-    skip
-    # Needs update with Mocks/Stubs
-    assert_equal "~~~~~~~~~~~~~ TURN #1 ~~~~~~~~~~~~~\n", @game.message_turn
-    @turn_counter = 1
-    assert_equal "~~~~~~~~~~~~~ TURN #2 ~~~~~~~~~~~~~\n", @game.message_turn
-  end
-
-  def test_it_will_display_the_computer_board_renders_with_hidden_ships
-    skip
-    # Needs update with Mocks/Stubs
-    assert_equal Hash, @game.message_computer_display.class
-  end
-
-  def test_it_will_display_the_player_board_renders_with_revealed_ships
-    skip
-    # Needs update with Mocks/Stubs
-    assert_equal Hash, @game.message_player_display.class
-  end
-
   def test_it_can_shoot_for_user
-    # skip
-    # user attempt to fire on A1
-      # produce auto A1 = H
-    @game.fire(@user, "A1")
+
+    @game.stubs(:fire).returns(@user, "A1")
     assert_equal true, @game.auto.board.cells["A1"].fired_upon?
     assert_equal "H", @game.auto.board.cells["A1"].render
 
-    # user attempt to fire on C3
-      # produce auto C3 = M
-    @game.fire(@user, "C3")
+    @game.stubs(:fire).returns(@user, "C3")
     assert_equal true, @game.auto.board.cells["C3"].fired_upon?
     assert_equal "M", @game.auto.board.cells["C3"].render
     assert_equal "H", @game.auto.board.cells["A1"].render
 
-    # user attempt to fire on B1, C1, D1
-      # produce auto B1, C1, D1 = X
-    @game.fire(@user, "B1")
+    @game.stubs(:fire).returns(@user, "B1")
     assert_equal true, @game.auto.board.cells["B1"].fired_upon?
     assert_equal "H", @game.auto.board.cells["B1"].render
 
-    @game.fire(@user, "C1")
+    @game.stubs(:fire).returns(@user, "C1")
     assert_equal true, @game.auto.board.cells["C1"].fired_upon?
     assert_equal "H", @game.auto.board.cells["C1"].render
 
-    @game.fire(@user, "D1")
+    @game.stubs(:fire).returns(@user, "D1")
     assert_equal true, @game.auto.board.cells["D1"].fired_upon?
     assert_equal "X", @game.auto.board.cells["D1"].render
     assert_equal "X", @game.auto.board.cells["C1"].render
