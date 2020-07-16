@@ -4,7 +4,6 @@ require "./lib/player"
 require "./lib/game"
 
 class Battleship
- #attr_reader
   def initialize
     @auto_cruiser = Ship.new("Cruiser", 3)
     @auto_submarine = Ship.new("Submarine", 2)
