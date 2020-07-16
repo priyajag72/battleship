@@ -183,6 +183,7 @@ class BoardTest < Minitest::Test
 
     assert_equal true, board.valid_placement?(submarine, ["A1", "A2"])
     assert_equal true, board.valid_placement?(cruiser, ["B1", "C1", "D1"])
+
   end
 
 
@@ -210,7 +211,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_can_render_a_board
-    # skip
     expected1 = print " 1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
 
     expected2 = print " 1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
@@ -218,16 +218,6 @@ class BoardTest < Minitest::Test
     @board.place(@cruiser, ["A1", "A2", "A3"])
     assert_equal expected1, @board.render
     assert_equal expected2, @board.render(true)
-  end
-
-  def test_valid_horizontal_placement_length_three?
-    @board.valid_placement?(@cruiser, ["A2", "A3", "A4"])
-    # @coordinates.convert_coord_alpha
-    # @coordinates.convert_coord_int
-    assert_equal true, @board.valid_horizontal_placement_length_three?
-
-    # assert_equal "", @board.valid_horizontal_placement_length_two?
-
   end
 
 end
