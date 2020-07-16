@@ -224,9 +224,9 @@ class BoardTest < Minitest::Test
     @board.valid_placement?(@cruiser, ["A2", "A3", "A4"])
     # @coordinates.convert_coord_alpha
     # @coordinates.convert_coord_int
-    assert_equal "", @board.valid_horizontal_placement_length_three?
+    assert_equal true, @board.valid_horizontal_placement_length_three?
 
-    assert_equal "", @board.valid_horizontal_placement_length_two?
+    # assert_equal "", @board.valid_horizontal_placement_length_two?
 
   end
 
