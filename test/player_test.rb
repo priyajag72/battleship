@@ -42,12 +42,12 @@ class PlayerTest < Minitest::Test
     assert_equal [@cruiser2, @submarine2], @player2.ships
   end
 
-  def test_player_can_place_ship
-    @player1.add_ship(@cruiser1)
-    @player1.add_ship(@submarine1)
-    @player2.add_ship(@cruiser2)
-    @player2.add_ship(@submarine2)
-    # Tested in pry. Is working currently before auto generation and user error.
+  def test_it_can_auto_generate_coordinates_by_ship_length
+    board = Board.new
+    board.generate_cells
+    auto = Player.new(:auto, board)
+    cruiser = Ship.new("Cruiser", 3)
+    assert_equal 3, auto.coords_by_ship_length(cruiser)
   end
 
   def test_it_can_tell_all_ships_are_placed
@@ -90,6 +90,11 @@ class PlayerTest < Minitest::Test
     assert_equal true, @player1.all_ships_placed?
     assert_equal false, @player2.all_ships_placed?
 
+  end
+
+  def test_if_the_cell_was_fired_upon
+    @player1.board.cells["A1"].fire_upon
+    assert_equal true, @player1.cell_fired_upon?("A1")
   end
 
 end
