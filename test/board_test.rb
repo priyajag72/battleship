@@ -164,7 +164,6 @@ class BoardTest < Minitest::Test
 
 
   def test_it_cannot_place_diagonal_coordinates
-    # skip
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
@@ -176,8 +175,7 @@ class BoardTest < Minitest::Test
   end
 
 
-  def test_correct_placement_of_ships_in_coordinates
-    # skip
+  def test_correct_placement_of_ships_for_number_of_coordinates
     board = Board.new
     board.generate_cells
     cruiser = Ship.new("Cruiser", 3)
@@ -220,6 +218,16 @@ class BoardTest < Minitest::Test
     @board.place(@cruiser, ["A1", "A2", "A3"])
     assert_equal expected1, @board.render
     assert_equal expected2, @board.render(true)
+  end
+
+  def test_valid_horizontal_placement_length_three?
+    @board.valid_placement?(@cruiser, ["A2", "A3", "A4"])
+    # @coordinates.convert_coord_alpha
+    # @coordinates.convert_coord_int
+    assert_equal "", @board.valid_horizontal_placement_length_three?
+
+    assert_equal "", @board.valid_horizontal_placement_length_two?
+
   end
 
 end
