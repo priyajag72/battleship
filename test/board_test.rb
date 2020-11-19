@@ -49,7 +49,7 @@ class BoardTest < Minitest::Test
     assert_equal cruiser, cell_1.ship
     assert_equal cruiser, cell_2.ship
     assert_equal cruiser, cell_3.ship
-    assert_equal nil, cell_4.ship
+    assert_nil cell_4.ship
   end
 
   def test_it_can_avoid_ship_overlap_placement
